@@ -1,0 +1,111 @@
+*{
+    font-family: 'Lato', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: rgb(94, 94, 94);
+}
+
+
+.row{
+    justify-content: center;
+}
+
+
+/*-----Background da pagina-----*/
+.container-fluid-checkout{
+    background-color: white;
+    text-align: center;
+}
+
+/*-----Título da página-----*/
+.title{
+    background-color: white;
+    text-align: center;
+    justify-items: center;
+
+    
+}
+
+.title p{
+    color: #056608;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+
+.payment{
+    justify-self: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+/*-----Radio da forma de pagamento-----*/
+.itemRadio{
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.input-group{
+    justify-content: center;
+}
+
+.img-custom{
+    width: 60px;
+    height: 80px;
+    padding: 10px;
+}
+
+.teste{
+    position: relative;
+    justify-items: left;
+    padding: 0px;
+    margin: 0px;
+    justify-content: flex-start;
+}
+
+/*-----Botão finalizar compra-----*/
+.btn-finalizar-compra{
+    font-weight: bold; 
+    color: #208023;
+    background-color: white;
+    border: 3px solid #208023;
+    padding: 10px 60px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+}
+
+.btn-finalizar-compra:hover{
+    color: white;
+    font-weight: bold;
+    background-color: #208023;
+    border: 3px solid #208023;
+    padding: 10px 60px;
+    border-radius: 25px;
+
+}
+
+/*-----Resumo do Pedido-----*/
+.tableItemPedido{
+    font-size: 14px;
+    background-color: #F5F5DC;
+    
+}
+
+.table-checkout{
+    border: 2px solid gray;
+}
+
+.tableDescontoPedido{
+    font-size: 14px;
+    background-color: #F5F5DC;
+}
+
+.tableTotalPedido{
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #F5F5DC;
+}
