@@ -241,7 +241,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href="./finished.php"><button type="submit" class="btn-finalizar-compra col-12">Confirmar</button></a>
+                            <a href="#/finished"><button type="submit" class="btn-finalizar-compra col-12">Confirmar</button></a>
                         </div>
                     </div>
                 </div>
