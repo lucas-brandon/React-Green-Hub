@@ -1,0 +1,65 @@
+/*ajustando a fonte*/
+
+*{
+    font-family: 'Lato', sans-serif;
+  }
+
+/*titulo*/
+.tituloFinished{
+  font-size: 30px;
+  color: #056608;
+}
+
+.containerFinished{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/*fundo*/
+
+.testeFinished{
+     background-color: #f5f5dc;
+     border: solid #f5f5dc;
+     border-radius: 30px;
+     margin-left: 10%;
+     margin-right: 10%;
+     margin-bottom: 80px;
+   }
+
+/*mensagens*/
+
+.itemFinished{
+  display: flex;
+  justify-content: center;
+}
+
+#item1{
+  font-size: 26px;
+  color: #056608;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#item2{
+  font-size: 26px;
+  color: #E64800;
+  margin-bottom: 40px;
+}
+
+#item3 , #item4{
+  font-size: 20px;
+}
+
+/*botao*/
+
+.botaoPedidos{
+  color: white;
+  background-color: #056608;
+  border-color: #056608;
+  border: 1px solid;
+  padding: .375rem 1.75rem;
+  font-size: 20px;
+  border-radius: 4.25rem;
+  margin-top: 40px;
+  margin-bottom: 100px;
+}

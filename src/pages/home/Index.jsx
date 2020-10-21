@@ -12,17 +12,17 @@ export default class Index extends Component {
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <a href="./detalhesDoProduto.php" class="a-ps"> <img src="https://evolutionnutritionlab.com.br/media/wysiwyg/BANNER_ONE_MOBILE.png" width="1253px" height="250px" class="d-block w-100"></img></a>
+                    <a href="#/detalhesDoProduto" class="a-ps"> <img src="https://evolutionnutritionlab.com.br/media/wysiwyg/BANNER_ONE_MOBILE.png" width="1253px" height="250px" class="d-block w-100"></img></a>
                 </div>
                 <div class="carousel-item">
-                    <a href="./detalhesDoProduto.php" class="a-ps"> <img src="https://images.tcdn.com.br/img/img_prod/798964/1591900464_banner.jpg" width="1253px" height="250px" class="d-block w-100"></img></a>
+                    <a href="#/detalhesDoProduto" class="a-ps"> <img src="https://images.tcdn.com.br/img/img_prod/798964/1591900464_banner.jpg" width="1253px" height="250px" class="d-block w-100"></img></a>
                 </div>
                 <div class="carousel-item">
-                    <a href="./detalhesDoProduto.php" class="a-ps"> <img src="https://evolutionnutritionlab.com.br/media/wysiwyg/BANNERS_SITE_-_DESKTOP_-_KIT_IMUNIDADE.png" width="1253px" height="250px" class="d-block w-100"></img></a>
+                    <a href="#/detalhesDoProduto" class="a-ps"> <img src="https://evolutionnutritionlab.com.br/media/wysiwyg/BANNERS_SITE_-_DESKTOP_-_KIT_IMUNIDADE.png" width="1253px" height="250px" class="d-block w-100"></img></a>
 
                 </div>
                 <div class="carousel-item">
-                    <a href="./detalhesDoProduto.php" class="a-ps"> <img src="https://evolutionnutritionlab.com.br/media/wysiwyg/Hair_Skin_Nails_Mobile.jpg" width="1253px" height="250px" class="d-block w-100"></img>
+                    <a href="#/detalhesDoProduto" class="a-ps"> <img src="https://evolutionnutritionlab.com.br/media/wysiwyg/Hair_Skin_Nails_Mobile.jpg" width="1253px" height="250px" class="d-block w-100"></img>
                     </a>
                 </div>
             </div>
@@ -38,7 +38,7 @@ export default class Index extends Component {
                     <div class="card-body">
                         <h5 class="valor">R$39:90</h5>
                         <p><mark>NomeProduto</mark></p>
-                        <a href="./detalhesDoProduto.php" class="btn-m">Ver Produto</a>
+                        <a href="#/detalhesDoProduto" class="btn-m">Ver Produto</a>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@ export default class Index extends Component {
                     <div class="card-body">
                         <h5 class="valor">R$39:90</h5>
                         <p><mark>NomeProduto</mark></p>
-                        <a href="./detalhesDoProduto.php" class="btn-m">Ver Produto</a>
+                        <a href="#/detalhesDoProduto" class="btn-m">Ver Produto</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ export default class Index extends Component {
                     <div class="card-body">
                         <h5 class="valor">R$39:90</h5>
                         <p><mark>NomeProduto</mark></p>
-                        <a href="./detalhesDoProduto.php" class="btn-m">Ver Produto</a>
+                        <a href="#/detalhesDoProduto" class="btn-m">Ver Produto</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@ export default class Index extends Component {
                     <div class="card-body">
                         <h5 class="valor">R$39:90</h5>
                         <p><mark>NomeProduto</mark></p>
-                        <a href="./detalhesDoProduto.php" class="btn-m">Ver Produto</a>
+                        <a href="#/detalhesDoProduto" class="btn-m">Ver Produto</a>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@ export default class Index extends Component {
                     <div class="card-body">
                         <h5 class="valor">R$39:90</h5>
                         <p><mark>NomeProduto</mark></p>
-                        <a href="./detalhesDoProduto.php" class="btn-m">Ver Produto</a>
+                        <a href="#/detalhesDoProduto" class="btn-m">Ver Produto</a>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@ export default class Index extends Component {
                     <div class="card-body">
                         <h5 class="valor">R$39:90</h5>
                         <p><mark>NomeProduto</mark></p>
-                        <a href="./detalhesDoProduto.php" class="btn-m">Ver Produto</a>
+                        <a href="#/detalhesDoProduto" class="btn-m">Ver Produto</a>
                     </div>
                 </div>
             </div>

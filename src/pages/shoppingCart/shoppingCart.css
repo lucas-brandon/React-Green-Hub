@@ -1,0 +1,184 @@
+.shopping_cart{
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* 
+.container-fluid{
+    background-color: white;
+    text-align: center;
+} */
+
+/*-----Título da página-----*/
+.title{
+    background-color: white;
+    text-align: center;
+
+    
+}
+
+.title p{
+    color: #056608;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+
+/*-----Títulos das colunas do carrinho-----*/
+.cart-header{
+    background-color: #056608;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 26px;
+    
+}
+
+/*-----Item-----*/
+.cart-item{
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    background-color: #F5F5DC;
+    border-top: 1px dotted #208023;
+    border-bottom: 1px dotted #208023;
+    margin-top: 5px;
+    
+}
+
+
+.img-custom{
+    width: 60px;
+    height: 80px;
+}
+
+.item-main{
+    color: #5A6978;
+    font-size: 26px;
+    font-weight: bold;
+    align-content: center;
+}
+
+.item-desc-column{
+    display: inline-flex;
+    color: #5A6978;
+    font-size: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+    
+}
+
+/*-----Botões relacionados com a quantidade de produtos-----*/
+.input-group{
+    justify-content: center;
+    font-size: 26px;
+}
+
+.color-qtd{
+    border: 1px solid #208023;
+    color: #5A6978;
+    text-align: center;
+}
+
+#btn-minus{
+    width: 30px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+#btn-plus{
+    width: 30px;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+}
+
+#btn-minus:hover, #btn-plus:hover{
+    border: 1px solid #208023;
+    color: white;
+    background-color: #208023;
+    cursor: pointer;
+}
+
+.input{
+    width: 40px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    
+}
+
+/*-----Botão de Cancelar Personalizado-----*/
+.btn-cart-cancel{
+    width: 30px;
+    height: 30px;
+}
+
+.btn-cart-cancel:hover{
+    cursor: pointer;
+}
+
+/*-----Parte do preço total do carrinho-----*/
+.coluna{
+    flex-direction: column;
+}
+.cart-total{
+    color: #056366;
+    font-size: 30px;
+    font-weight: bold;
+    align-content: center;
+}
+
+/*-----Botão finalizar compra-----*/
+.btn-finalizar-compra{
+    font-weight: bold; 
+    color: #208023;
+    background-color: white;
+    border: 3px solid #208023;
+    padding: 10px 60px;
+    border-radius: 25px;
+    cursor: pointer;
+
+}
+
+.btn-finalizar-compra:hover{
+    color: white;
+    font-weight: bold;
+    background-color: #208023;
+    border: 3px solid #208023;
+    padding: 10px 60px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+/*--------Responsivo small---------*/
+@media (max-width: 768px){
+    .cart-header .col-sm-12{
+        display: none;
+    }
+
+    .item-main{
+        font-size: 18px;
+    }
+
+    .input-group{
+        font-size: 18px;
+    }
+
+    .item-desc-column{
+        display: none;
+    }
+
+    .item-price-total{
+        display: none;
+    }
+}
