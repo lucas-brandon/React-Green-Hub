@@ -1,0 +1,124 @@
+body {
+    background-color: #fff;
+}
+
+
+.a-ps {
+    color: gray !important;
+}
+
+.a-ps:link {
+    color: gray;
+}
+
+.a-ps:visited {
+    text-decoration: none
+}
+
+.a-ps:hover {
+    background-color: #25a52a;
+    border-radius: 60rem;
+    color: honeydew !important;
+}
+
+a:active {
+    text-decoration: none
+}
+
+
+/*top barr*/
+
+.top-bar {
+    position: relative;
+    border-bottom: solid 2px #056608;
+}
+
+.top-bar-item {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*Carosel*/
+
+.carousel-c {
+    width: 1253px;
+    height: 250px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index:1;
+}
+
+
+
+
+/*Botton barr*/
+
+.botton-barr {
+    max-height: 280px;
+    height: auto;
+    border: #056608 solid 10px;
+    background-color: rgb(145, 192, 145);
+}
+
+
+/*card*/
+
+.card-m:hover {
+    border: #056608 dotted 2px;
+}
+
+.card-img-top {
+    margin-top: 10px;
+    max-width: 280px;
+    max-height: 280px;
+    width: auto;
+    height: auto;
+}
+
+.card-m {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #F5F5DC;
+    align-items: center;
+    text-align: center;
+    border-radius: 2rem;
+}
+
+.valor {
+    color: #E64800!important;
+}
+
+mark {
+    color: gray;
+}
+
+
+/*botton*/
+
+.btn-m {
+    display: inline-block;
+    font-weight: 400;
+    color: #056608 !important;
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    border: 2px solid #056608;
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .60rem;
+}
+
+.btn-m:hover {
+    color: white !important;
+    background-color: #056608;
+}

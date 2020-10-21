@@ -1,0 +1,52 @@
+/*Footer*/
+body {
+    background-color: #fff;
+}
+
+.logo {
+    max-width: 118px;
+    max-height: 104px;
+    width: auto;
+    height: auto;
+    margin: 5px;
+}
+
+
+footer {
+    background-color: #F5F5DC;
+    color: gray;
+    margin-top: 3px;
+    max-height: 110px;
+}
+
+.footer {
+    background-color: #F5F5DC;
+    border-top: 1px solid #056608;
+    text-align: center;
+}
+
+.midia-icon {
+    max-width: 30px;
+    max-height: 30px;
+    width: auto relative;
+    height: auto relative;
+}
+
+.pay-icon {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto relative;
+    height: auto relative;
+}
+
+.list-group-item {
+    background-color: #F5F5DC !important;
+    border: none !important;
+}
+
+h5 {
+    color: #056608;
+    size: auto relative;
+    margin-top: 5px;
+}
+
