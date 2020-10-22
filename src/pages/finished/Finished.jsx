@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './finished.css';
+import Titulo from '../../template/titulo/titulo';
 
 export default class Finished extends Component {
 
@@ -7,9 +8,7 @@ export default class Finished extends Component {
     render() {
         return (
             <>
-<div class="containerFinished">
-        <p class="text-center tituloFinished">Compra finalizada com sucesso!</p>
-    </div>
+        <Titulo name="Compra finalizada com sucesso!"/>
             
     <div class="testeFinished">
         <div class="text-center" id="item1">Anote o número do pedido!</div>

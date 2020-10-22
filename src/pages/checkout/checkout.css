@@ -2,7 +2,6 @@
     font-family: 'Lato', sans-serif;
     margin: 0px;
     padding: 0px;
-    color: rgb(94, 94, 94);
 }
 
 
@@ -15,22 +14,6 @@
 .container-fluid-checkout{
     background-color: white;
     text-align: center;
-}
-
-/*-----Título da página-----*/
-.title{
-    background-color: white;
-    text-align: center;
-    justify-items: center;
-
-    
-}
-
-.title p{
-    color: #056608;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 30px;
 }
 
 .payment{

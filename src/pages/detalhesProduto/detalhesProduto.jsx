@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './detalhesProduto.css';
+import Titulo from '../../template/titulo/titulo';
 
 import axios from 'axios';
 
@@ -33,7 +34,7 @@ export default class DetalhesProduto extends Component {
 
         return (
             <>
-                <h3 class="tituloCard">Detalhes do produto</h3>
+                <Titulo name="Detalhes do Produto" />
                 <div class="cartao">
                     <div class="row">
                         <div class="col-12 col-md-4">
