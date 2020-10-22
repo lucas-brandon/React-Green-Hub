@@ -1,0 +1,22 @@
+a:active {
+    text-decoration: none
+}
+
+
+.a-ps {
+    color: gray !important;
+}
+
+.a-ps:link {
+    color: gray;
+}
+
+.a-ps:visited {
+    text-decoration: none
+}
+
+.a-ps:hover {
+    background-color: #25a52a;
+    border-radius: 60rem;
+    color: honeydew !important;
+}
