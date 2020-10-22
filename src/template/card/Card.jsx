@@ -8,8 +8,9 @@ export default props => {
                 <div class="card-m">
                     <img src={props.img} class="card-img-top" alt="..."></img>
                     <div class="card-body">
-                        <h5 class="valor">{props.valor}</h5>
+                        <h5 class="valor">R$ {props.valor}</h5>
                         <p><mark>{props.nome}</mark></p>
+                        <p><mark>{props.marca}</mark></p>
                         <a href={props.link} class="btn-m">{props.msg}</a>
                     </div>
                 </div>

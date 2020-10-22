@@ -1,8 +1,36 @@
 import React, {Component} from 'react';
 import './detalhesProduto.css';
 
+import axios from 'axios';
+
+const URL_PRODUTO_BUSCAR = 'http://modelagem.test/api/produtos/buscar/';
+
 export default class DetalhesProduto extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            id_produto: 0,
+            produto: undefined
+        }
+    }
+
+    componentDidMount(){
+        this.getProduto();
+    }
+
+    getProduto = () => {
+        axios.get(`${URL_PRODUTO_BUSCAR}`+this.props.params.id)
+        .then(resp => this.setState({produto: resp.data}))
+
+        axios.get(`${URL_PRODUTO_BUSCAR}`+this.props.params.id)
+        .then(resp => console.log('teste\n\n\n\n\n'+`${URL_PRODUTO_BUSCAR}`+this.props.params.id))
+    }
+
     render() {
+        const produto = new Object(this.state.produto);
+        console.log("produto:\n\n\n\n\n\n\n"+produto.nome_produto);
+
         return (
             <>
                 <h3 class="tituloCard">Detalhes do produto</h3>
@@ -13,14 +41,14 @@ export default class DetalhesProduto extends Component {
                         </div>
                         <div class="col-12 col-md-8">
                             <div class="card-body">
-                                <p class="marcaItem">Marca do item</p>
-                                <a class="a-detalhes" href="./detalhesDoProduto.php"><h3 class="nomeItem">nome Item</h3></a>
-                                <h4 class="preco">R$ 39.90
+                                <p class="marcaItem">{produto.nm_marca}</p>
+                                <a class="a-detalhes" href="./detalhesDoProduto.php"><h3 class="nomeItem">{produto.nome_produto}</h3></a>
+                                <h4 class="preco">R$ {produto.valor}
                                     <button type="submit" class="retirar">-</button>
                                     <input class="quantidade" placeholder="1"/>
                                     <button type="submit" class="adicionar">+</button>
                                 </h4>
-                                <p class="descricaoItem">Descrição do item.</p>
+                                <p class="descricaoItem">{produto.ds_produto}</p>
                                 <a href="./shopping_cart.php"><button type="submit" class="comprar">Comprar</button></a>
                             </div>
                         </div>
