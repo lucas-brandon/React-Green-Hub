@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './checkout.css';
 import './checkout.js';
+import Titulo from '../../template/titulo/titulo';
 
 export default class Checkout extends Component {
 
@@ -8,21 +9,9 @@ export default class Checkout extends Component {
     render() {
         return (
             <>
-    <div class="container-fluid container-fluid-checkout">
-        <div class="row title">
-            <div class="col-12">
-                <p>Checkout</p>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid container-fluid-checkout">
-        <div class="row title">
-            <div class="col-12">
-                <p>Informações</p>
-            </div>
-        </div>
-    </div>
-    
+    <Titulo name="Checkout"/>
+
+    <Titulo name="Informações"/>
 
     <section class="container-fluid container-fluid-checkout col-12">
         <div class="row">
