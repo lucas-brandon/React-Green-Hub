@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './contact.css';
+import Titulo from '../../template/titulo/titulo';
 //import './shoppingCart.js';
 
 export default class Contact extends Component {
@@ -8,9 +9,7 @@ export default class Contact extends Component {
     render() {
         return (
             <>
-            <div class="containerContact">
-                <p class="text-center tituloContact">Formulário de contato</p>
-                    </div>
+            <Titulo name="Formulário de Contato"/>
                     
                     <form name="formulario">
                         {/*container retangular*/}

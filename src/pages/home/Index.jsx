@@ -1,9 +1,33 @@
 import React, { Component } from "react";
 import "./index.css";
 import GridCard from "../../template/card/gridCard";
+import axios from 'axios';
+
+const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
 
 export default class Index extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            produtos: []
+        }
+    }
+
+    componentDidMount(){
+        this.getProdutos();
+    }
+
+    getProdutos = () => {
+        axios.get(`${URL_PRODUTO_LISTA}`)
+        .then(resp => this.setState({produtos: resp.data}))
+    }
+
+
   render() {
+    const produtos = new Object(this.state.produtos);
+    console.log(produtos);
+
     return (
       <>
         {/* Caursel  */}
@@ -60,7 +84,7 @@ export default class Index extends Component {
 
         {/*<!--Cards-->*/}
         <div className="container">
-          <GridCard />
+          <GridCard produtos={produtos}/>
 
           <GridCard />
         </div>

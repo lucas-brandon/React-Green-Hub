@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import './profile.css';
+import Titulo from '../../template/titulo/titulo';
 
 export default class Profile extends Component {
     render() {
         return (
             <>
 
-            <div class="containerProfile">
-                <p class="text-center tituloProfile">Dados Pessoais</p>
-            </div>
+            <Titulo name="Perfil" />
+
             <div class="container col-12">
                 <div class="container">
                     <div class="row">
@@ -30,9 +30,9 @@ export default class Profile extends Component {
                     </div>
                 </div>
             </div>
-            <div class="containerProfile">
-                <p class="text-center tituloProfile">Endereços</p>
-            </div>
+
+           <Titulo name="Endereços" />
+
             <div class="container col-12">
                 <div class="row">
                     <div class="container col-12 mx-12">
@@ -77,9 +77,8 @@ export default class Profile extends Component {
                 </div>
             </div>
         
-            <div class="containerProfile">
-                <p class="text-center tituloProfile">Pedidos</p>
-            </div>
+            <Titulo name="Pedidos" />
+
             <div class="container col-12">
                 <div class="row">
                     <div class="container col-12 mx-12">
@@ -147,9 +146,7 @@ export default class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="containerProfile">
-                    <p class="text-center tituloProfile">Cartões</p>
-                </div>
+                <Titulo name="Cartões" />
                 <div class="container col-12">
                     <div class="row">
                         <div class="container col-12 mx-12">
