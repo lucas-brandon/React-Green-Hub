@@ -1,127 +1,82 @@
-import React, {Component} from 'react';
-import './shoppingCart.css';
-import './shoppingCart.js';
+import React, { Component } from "react";
+import "./shoppingCart.css";
+import "./shoppingCart.js";
 
+import ItemCart from "../../template/carrinho/itemCarrinho";
+import Finalizar from "../../template/carrinho/finalizarCompra";
 export default class ShoppingCart extends Component {
+  AddCarrinho(produto, qtd, valor, posicao) {
+    localStorage.setItem("produto" + posicao, produto);
+    localStorage.setItem("qtd" + posicao, qtd);
+    valor = valor * qtd;
+    localStorage.setItem("valor" + posicao, valor);
+    alert("Produto adicionado ao carrinho!");
+  }
+
+//   var total = 0; // variável que retorna o total dos produtos que estão na LocalStorage.
+//  var i = 0;     // variável que irá percorrer as posições
+//  var valor = 0; // variável que irá receber o preço do produto convertido em Float.
+ 
+//  for(i=1; i<=99; i++) // verifica até 99 produtos registrados na localStorage
+//  {
+// 	 var prod = localStorage.getItem("produto" + i + ""); // verifica se há recheio nesta posição. 
+// 	 if(prod != null) 
+// 	 {	
+// 		 // exibe os dados da lista dentro da div itens
+// 		 document.getElementById("itens").innerHTML += localStorage.getItem("qtd" + i) + " x ";
+// 		 document.getElementById("itens").innerHTML += localStorage.getItem("produto" + i);
+// 		 document.getElementById("itens").innerHTML += " ";
+// 		 document.getElementById("itens").innerHTML += "R$: " + localStorage.getItem("valor" + i) + "<hr>";
+		 
+// 		 // calcula o total dos recheios
+// 		 valor = parseFloat(localStorage.getItem("valor" + i)); // valor convertido com o parseFloat()
+// 		 total = (total + valor); // arredonda para 2 casas decimais com o .toFixed(2)
+// 	 }
+//  } 
+//  // exibe o total dos recheios
+//  document.getElementById("total").innerHTML = total.toFixed(2); 
+
+// <button type="button" onclick=" localStorage.clear(); location.reload();"> Limpar carrinho </button>
 
 
-    render() {
-        return (
-            <>
-            <div class="shopping_cart">
-                <div class="container-fluid">
-                    <div class="row title">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <p>Carrinho</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="row cart-header">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                            <span>Produto</span>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <span>Preço</span>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                            <span>Quantidade</span>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <span>Total</span>
-                        </div>
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-                            <span></span>
-                        </div>
-                    </div>
-
-                    {/*div para mensagem quando não existe item no carrinho*/}
-                    {/*
-                    <div class="row cart-item">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <span>Nenhum produto no carrinho.</span>
-                        </div>
-                    </div>
-                    */}
-
-                    {/*div para item do carrinho*/}
-                    <div id = "item" class="row cart-item">
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-                            <img class="img-custom" src="images/omega3.png" alt="Omega 3"></img>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                            <span id="item-name" class="item-main">Nome Produto</span><br></br>
-                            <span id="item-desc" class="item-desc-column">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales tempor sapien id euismod. Integer nec erat vitae libero efficitur imperdiet.</span>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6">
-                            <span id="item-price" class="item-main">R$: <span class="itemValue">39.90</span></span>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button id="btn-minus" class="color-qtd btn-minus" type="button">-</button>
-                                </div>
-                                <input type="text" class="input color-qtd" placeholder="" aria-label="" maxlength="2" size="2" value="1"></input>
-                                <div class="input-group-prepend">
-                                    <button id="btn-plus" class="color-qtd btn-plus" type="button">+</button>
-                                </div>
-                            
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <span id="item-price-total" class="item-main item-price-total" style={{color: '#056608'}}>R$: <span class="itemTotalValue">39.90</span></span>
-                        </div>
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-                            <img id="btn-cancel" class="btn-cart-cancel img-custom" src="images/cancel-icon.svg" alt="cancel-icon"></img>
-                        </div>
-                    </div>
-                    {/*fim da div para item do carrinho*/}
-
-                    {/*div para item do carrinho*/}
-                    <div class="row cart-item">
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-                            <img class="img-custom" src="images/omega3.png" alt="Omega 3"></img>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                            <span id="item-name" class="item-main">Nome Produto</span><br></br>
-                            <span id="item-desc" class="item-desc-column">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales tempor sapien id euismod. Integer nec erat vitae libero efficitur imperdiet.</span>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6">
-                            <span id="item-price" class="item-main">R$: <span class="itemValue">39.90</span></span>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button id="btn-minus" class="color-qtd btn-minus" type="button">-</button>
-                                </div>
-                                <input type="text" class="input color-qtd" placeholder="" aria-label="" maxlength="2" size="2" value="1" disabled></input>
-                                <div class="input-group-prepend">
-                                    <button id="btn-plus" class="color-qtd btn-plus" type="button">+</button>
-                                </div>
-                            
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <span id="item-price-total" class="item-main item-price-total" style={{color: '#056608'}}>R$: <span class="itemTotalValue">39.90</span></span>
-                        </div>
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-                            <img id="btn-cancel" class="btn-cart-cancel img-custom" src="images/cancel-icon.svg" alt="cancel-icon"></img>
-                        </div>
-                    </div>
-                    {/*fim da div para item do carrinho*/}
-
-                    {/*div para finalizar compra do carrinho*/}
-                    <div class="row cart-item">
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12"></div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                            <span id="cart-price-total" class="cart-total col-12">Total: R$: <span id="totalValue">39.90</span></span>
-                            <a href="#/checkout"><button type="submit" class="btn-finalizar-compra col-12">Finalizar Compra</button></a>
-                        </div>
-                    </div>
-                    {/*fim da div para finalizar compra do carrinho*/}
-                </div>
+  render() {
+    return (
+      <>
+        <div class="shopping_cart">
+          <div class="container-fluid">
+            <div class="row title">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <p>Carrinho</p>
+              </div>
             </div>
-            </>
-        )
-    }
+          </div>
+          <div class="container-fluid">
+            <div class="row cart-header">
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <span>Produto</span>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                <span>Preço</span>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <span>Quantidade</span>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                <span>Total</span>
+              </div>
+              <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
+                <span></span>
+              </div>
+            </div>
+
+            <ItemCart />
+            <ItemCart />
+            <Finalizar/>
+
+                 
+          </div>
+        </div>
+      </>
+    );
+  }
 }
