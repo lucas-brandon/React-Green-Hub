@@ -15,6 +15,8 @@ export default props => (
         <Route path='/shopping_cart' component={ShoppingCart}></Route>
         <Route path='/checkout' component={Checkout}></Route>
         <Route path='/finished' component={Finished}></Route>
+        {/*}
         <Redirect from='*' to='/home'></Redirect>
+        */}
     </Router>
 )
