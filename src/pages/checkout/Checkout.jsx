@@ -6,6 +6,37 @@ import Titulo from '../../template/titulo/titulo';
 export default class Checkout extends Component {
 
 
+    constructor(props){
+        super(props)
+        this.state = {
+            produto: [],
+            cliente_id: null,
+            status_pedido_id: null,
+            ds_status: null, 
+            pagamento_id: null,
+            nr_pedido: null,
+            dt_pedido: null,
+            valor: null
+        }
+    }
+
+    handleChange = (event) => {
+        console.log(event.target.value);
+    }
+
+    componentDidMount(){
+        //this.getProduto();
+    }
+
+    getProduto = () => {
+        axios.get(`${URL_PRODUTO_BUSCAR}`+this.props.params.id)
+        .then(resp => this.setState({produto: resp.data}))
+
+        axios.get(`${URL_PRODUTO_BUSCAR}`+this.props.params.id)
+        .then(resp => console.log('teste\n\n\n\n\n'+`${URL_PRODUTO_BUSCAR}`+this.props.params.id))
+    }
+
+
     render() {
         return (
             <>
@@ -21,7 +52,7 @@ export default class Checkout extends Component {
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <label for="firstName">Nome*</label>
-                            <input id="firstName" type="text" class="form-control" required></input>
+                            <input id="firstName" type="text" class="form-control" onClick={this.nome()} required></input>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
