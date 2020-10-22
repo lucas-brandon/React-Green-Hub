@@ -24,5 +24,6 @@ export default props => (
         <Route path='/detalhesProduto' component={DetalhesProduto}></Route>
         <Route path='/profile' component={Profile}></Route>
         <Redirect from='*' to='/home'></Redirect>
+    
     </Router>
 )
