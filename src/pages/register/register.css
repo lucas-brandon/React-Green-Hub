@@ -1,0 +1,36 @@
+*{
+    font-family: 'Lato', sans-serif;
+  }
+
+  label{
+    font-size: 16px;
+  }
+
+  .tituloRegister{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    color: #056608;
+  }
+
+.botaoRegister{
+  color: #056608;
+  border-color: #056608;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid;
+  background-color: transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: 4.25rem;
+}
+
+.botaoRegister:hover{
+    color: #ffffff;
+    background-color: #056608;
+    cursor: pointer;
+}
+
+form{
+    margin-bottom: 100px;
+}
