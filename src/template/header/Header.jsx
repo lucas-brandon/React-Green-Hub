@@ -8,20 +8,20 @@ export default props => {
         <div class="row top-bar align-content-center">
             <div class="col-4 col-md-2 mx-auto  top-bar-item">
                 <a href="./index.php" class="a-ps a-custom">
-                    <img class="logo" src="images/logo.png" alt="Logo"></img>
+                    <img class="logo" src="../images/logo.png" alt="Logo"></img>
                 </a>
             </div>
             <div class="col-8 col-md-4 mx-auto  search top-bar-item">
                 <input class="form-control form-control-custom" type="search" placeholder="Search " aria-label="Search"></input>
                 <a href="./detalhesDoProduto.php" class=" a-custom">
-                    <img src="images/search.png" id="search" style={{width: '20px', height: '20px'}}></img>
+                    <img src="../images/search.png" id="search" style={{width: '20px', height: '20px'}}></img>
                 </a>
             </div>
             <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                 <ul class="list-unstyled">
                     <li>
                         <a href="login2.php" class="a-ps a-custom">
-                            <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img> Entre
+                            <img src="../images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img> Entre
                         </a>
                     </li>
                     <li>
@@ -43,7 +43,7 @@ export default props => {
         
         <ul class="nav-m row">
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="categoria.php" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
+                <a href="#/Categorias" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
             </li>
             <li class="col-12 col-md-4 nav-item nav-item-custom">
                 <a href="categoria.php" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
