@@ -1,0 +1,65 @@
+/*ajustando a fonte*/
+
+*{
+    font-family: 'Lato', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*Botões da página*/
+.btnAlterar{
+    color: #056608;
+    border-color: #056608;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid;
+    background-color: transparent;
+    padding: .30rem .80rem;
+    font-size: 16px;
+    border-radius: .55rem;
+    margin-top: 5px;
+}
+  
+.btnAlterar:hover{
+    color: #ffffff;
+    background-color: #056608;
+    cursor: pointer;
+}
+
+.btnCardExcluir{
+    color: #E64800;
+    border-color: #E64800;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid;
+    background-color: transparent;
+    padding: .30rem .80rem;
+    font-size: 16px;
+    border-radius: .55rem;
+    margin-top: 5px;
+}
+  
+.btnCardExcluir:hover{
+    color: #ffffff;
+    background-color: #E64800;
+    cursor: pointer;
+}
+
+.btnCardAdd{
+    color: #ffffff;
+    border-color: #056608;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid;
+    background-color: #056608;
+    padding: .30rem .80rem;
+    font-size: 16px;
+    border-radius: .55rem;
+    margin-top: 5px;
+}
+
+.end{
+    margin-bottom: 130px;
+}

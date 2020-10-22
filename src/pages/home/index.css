@@ -67,39 +67,6 @@ a:active {
 
 /*card*/
 
-.card-m:hover {
-    border: #056608 dotted 2px;
-}
-
-.card-img-top {
-    margin-top: 10px;
-    max-width: 280px;
-    max-height: 280px;
-    width: auto;
-    height: auto;
-}
-
-.card-m {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #F5F5DC;
-    align-items: center;
-    text-align: center;
-    border-radius: 2rem;
-}
-
-.valor {
-    color: #E64800!important;
-}
-
-mark {
-    color: gray;
-}
 
 
 /*botton*/

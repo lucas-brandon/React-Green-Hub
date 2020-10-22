@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import "./categorias.css";
+{/*import axios from 'axios';*/}
+
+const API = 'http://localhost:8081/categorias'
 
 export default class Index extends Component {
+
   render() {
     return (
       <div className="row">
