@@ -2,23 +2,13 @@ body {
     background-color: #fff;
 }
 
-
-.a-ps {
-    color: gray !important;
-}
-
-.a-ps:link {
-    color: gray;
-}
-
-.a-ps:visited {
-    text-decoration: none
-}
-
-.a-ps:hover {
-    background-color: #25a52a;
-    border-radius: 60rem;
-    color: honeydew !important;
+.carousel-c {
+    width: 1253px;
+    height: 250px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index:1;
 }
 
 a:active {
@@ -40,21 +30,6 @@ a:active {
     justify-content: center;
 }
 
-
-/*Carosel*/
-
-.carousel-c {
-    width: 1253px;
-    height: 250px;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    position: relative;
-    z-index:1;
-}
-
-
-
-
 /*Botton barr*/
 
 .botton-barr {
@@ -63,11 +38,6 @@ a:active {
     border: #056608 solid 10px;
     background-color: rgb(145, 192, 145);
 }
-
-
-/*card*/
-
-
 
 /*botton*/
 
