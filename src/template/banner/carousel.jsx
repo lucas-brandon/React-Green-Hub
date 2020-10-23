@@ -12,15 +12,15 @@ export default props => (
             </Images>
             <Images class="carousel-item"
                     link="#/detalhesDoProduto"
-                    img="https://images.tcdn.com.br/img/img_prod/798964/1591900464_banner.jpg">
+                    src="https://images.tcdn.com.br/img/img_prod/798964/1591900464_banner.jpg">
             </Images>
             <Images class="carousel-item"
                     link="#/detalhesDoProduto"
-                    img="https://evolutionnutritionlab.com.br/media/wysiwyg/BANNERS_SITE_-_DESKTOP_-_KIT_IMUNIDADE.png">
+                    src="https://evolutionnutritionlab.com.br/media/wysiwyg/BANNERS_SITE_-_DESKTOP_-_KIT_IMUNIDADE.png">
             </Images>
             <Images class="carousel-item"
                     link="#/detalhesDoProduto.php"
-                    img="https://evolutionnutritionlab.com.br/media/wysiwyg/Hair_Skin_Nails_Mobile.jpg">
+                    src="https://evolutionnutritionlab.com.br/media/wysiwyg/Hair_Skin_Nails_Mobile.jpg">
             </Images>
             </div>
         </div>

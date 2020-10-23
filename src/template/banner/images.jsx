@@ -7,7 +7,7 @@ export default props => (
           <a href={props.link} className="a-ps">
           {" "}
               <img
-              src={props.img}
+              src={props.src}
               width="1253px"
               height="250px"
               className="d-block w-100"
