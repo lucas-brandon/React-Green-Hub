@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./index.css";
 import GridCard from "../../template/card/gridCard";
 import axios from 'axios';
-
-const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
 import Carousel from '../../template/banner/carousel';
+const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
+
 
 export default class Index extends Component {
 
