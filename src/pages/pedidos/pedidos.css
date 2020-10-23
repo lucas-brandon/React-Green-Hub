@@ -1,0 +1,80 @@
+body{
+   
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.pedidos {
+    margin-top: 20px;
+}
+
+#historico{
+    color:darkgreen;
+    text-align: center;
+    background-color:white ;
+    height:100px;
+    max-width: auto;
+}
+
+#lista{
+    background-color: darkgreen;
+    color:white;
+    height: 60px;
+}
+    
+    #produto1{
+    background-color:white;
+    color:gray;
+    height: 60px;
+    
+    }
+    
+p{
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+
+
+ 
+.page-link{
+   
+    border-color: #056608 !important;
+    border-radius: 10px;
+    color: #056608!important;
+    
+    background-color:#F5F5DC;
+    
+    
+
+}
+
+.page-item{
+    align-content: center;
+    align-items:center ;
+}
+
+
+#paginas{
+    
+    text-align:center;
+    align-items: center;
+    align-content: center;
+}
+
+
+@media screen and (max-width:576px) {
+    .container-btn {
+        flex-direction: column-reverse;
+        justify-content:center
+    }
+
+
+
+
+}
