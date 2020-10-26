@@ -26,11 +26,23 @@ export default class DetalhesProduto extends Component {
 
         axios.get(`${URL_PRODUTO_BUSCAR}`+this.props.params.id)
         .then(resp => console.log('teste\n\n\n\n\n'+`${URL_PRODUTO_BUSCAR}`+this.props.params.id))
+
+        console.log('resp data\n\n\n\n\n');
+        axios.get(`${URL_PRODUTO_BUSCAR}`+this.props.params.id)
+        .then(resp => console.log(resp.data))
+
     }
 
     render() {
         const produto = new Object(this.state.produto);
         console.log("produto:\n\n\n\n\n\n\n"+produto.nome_produto);
+
+        let valor = JSON.stringify(produto.valor);
+        valor = parseFloat(valor).toFixed(2);
+        valor = valor.toString();
+
+        valor = valor.replace(".", ",");
+        
 
         return (
             <>
@@ -43,14 +55,14 @@ export default class DetalhesProduto extends Component {
                         <div class="col-12 col-md-8">
                             <div class="card-body">
                                 <p class="marcaItem">{produto.nm_marca}</p>
-                                <a class="a-detalhes" href="./detalhesDoProduto.php"><h3 class="nomeItem">{produto.nome_produto}</h3></a>
-                                <h4 class="preco">R$ {produto.valor}
+                                <a class="a-detalhes" href="#/detalhesDoProduto"><h3 class="nomeItem">{produto.nome_produto}</h3></a>
+                                <h4 class="preco">R$ {valor}
                                     <button type="submit" class="retirar">-</button>
                                     <input class="quantidade" placeholder="1"/>
                                     <button type="submit" class="adicionar">+</button>
                                 </h4>
                                 <p class="descricaoItem">{produto.ds_produto}</p>
-                                <a href="./shopping_cart.php"><button type="submit" class="comprar">Comprar</button></a>
+                                <a href="#/shopping_cart"><button type="submit" class="comprar">Comprar</button></a>
                             </div>
                         </div>
                     </div>

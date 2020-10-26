@@ -53,7 +53,7 @@ export default class Checkout extends Component {
     changeClienteNome = (event) => {
         this.setState({cliente_nome_1: event.target.value})
 
-        this.getCliente();
+        //this.getCliente();
     }
 
     changeClienteSobrenome = (event) => {
@@ -121,8 +121,9 @@ export default class Checkout extends Component {
     //-----------GET-----------
 
     getCliente = () => {
-        axios.get(`${URL}` + this.state.cliente_nome_1)
-        .then(resp => console.log(resp.data.id));
+        console.log("\n\n\n\n\nnome cliente antes: \n"+`${URL_CLIENTE_GET}`+this.state.cliente_nome_1)
+        axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
+        .then(resp => console.log("\n\n\n\n\nid cliente: "+resp.data));
 
 
         //axios.get(`${URL}`+this.state.cliente_nome_1)
@@ -157,7 +158,9 @@ export default class Checkout extends Component {
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <label for="firstName">Nome*</label>
-                            <input id="firstName" type="text" class="form-control" onChange={this.changeClienteNome} required></input>
+                            <input id="firstName" type="text" class="form-control" onChange={this.changeClienteNome}
+                            on
+                            onMouseOut={this.changeClienteNome} required></input>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
@@ -374,7 +377,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href="#/finished"><button type="submit" class="btn-finalizar-compra col-12">Confirmar</button></a>
+                            <a href="#/finished"><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>
