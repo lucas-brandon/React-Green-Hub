@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import "./shoppingCart.css";
-import "./shoppingCart.js";
 
 import ItemCart from "../../template/carrinho/itemCarrinho";
 import Finalizar from "../../template/carrinho/finalizarCompra";
@@ -13,10 +11,12 @@ export default class ShoppingCart extends Component {
     alert("Produto adicionado ao carrinho!");
   }
 
-//   var total = 0; // variável que retorna o total dos produtos que estão na LocalStorage.
-//  var i = 0;     // variável que irá percorrer as posições
-//  var valor = 0; // variável que irá receber o preço do produto convertido em Float.
- 
+    this.state(cartCopy);
+
+    let cartString = JSON.stringify(cartCopy);
+    localStorage.setItem("produtos", cartString);
+  };
+
 //  for(i=1; i<=99; i++) // verifica até 99 produtos registrados na localStorage
 //  {
 // 	 var prod = localStorage.getItem("produto" + i + ""); // verifica se há recheio nesta posição. 
@@ -36,7 +36,6 @@ export default class ShoppingCart extends Component {
 //  // exibe o total dos recheios
 //  document.getElementById("total").innerHTML = total.toFixed(2); 
 
-// <button type="button" onclick=" localStorage.clear(); location.reload();"> Limpar carrinho </button>
 
 
   render() {
@@ -72,8 +71,6 @@ export default class ShoppingCart extends Component {
             <ItemCart />
             <ItemCart />
             <Finalizar/>
-
-                 
           </div>
         </div>
       </>
