@@ -1,42 +1,45 @@
 import React, { Component } from "react";
 
+import "./shoppingCart.css";
+//import "./shoppingCart.js";
 import ItemCart from "../../template/carrinho/itemCarrinho";
 import Finalizar from "../../template/carrinho/finalizarCompra";
+
+import axios from "axios";
+import itemCarrinho from "../../template/carrinho/itemCarrinho";
+const URL_PRODUTO_BUSCAR = "http://modelagem.test/api/produtos/buscar/";
+
 export default class ShoppingCart extends Component {
-  AddCarrinho(produto, qtd, valor, posicao) {
-    localStorage.setItem("produto" + posicao, produto);
-    localStorage.setItem("qtd" + posicao, qtd);
-    valor = valor * qtd;
-    localStorage.setItem("valor" + posicao, valor);
-    alert("Produto adicionado ao carrinho!");
+  constructor(props) {
+    super(props);
+    this.state = {
+      produtos: [],
+      total: [],
+    };
   }
-
-    this.state(cartCopy);
-
-    let cartString = JSON.stringify(cartCopy);
-    localStorage.setItem("produtos", cartString);
+  componentDidMount() {
+    this.loadProducts();
+  }
+  loadProducts = () => {
+    let localCart = localStorage.getItem("produtos");
+    localCart = JSON.parse(localCart);
+    this.setState({ produtos: localCart });
+    console.log("carrinho teste");
+    console.log(localCart);
   };
 
-//  for(i=1; i<=99; i++) // verifica até 99 produtos registrados na localStorage
-//  {
-// 	 var prod = localStorage.getItem("produto" + i + ""); // verifica se há recheio nesta posição. 
-// 	 if(prod != null) 
-// 	 {	
-// 		 // exibe os dados da lista dentro da div itens
-// 		 document.getElementById("itens").innerHTML += localStorage.getItem("qtd" + i) + " x ";
-// 		 document.getElementById("itens").innerHTML += localStorage.getItem("produto" + i);
-// 		 document.getElementById("itens").innerHTML += " ";
-// 		 document.getElementById("itens").innerHTML += "R$: " + localStorage.getItem("valor" + i) + "<hr>";
-		 
-// 		 // calcula o total dos recheios
-// 		 valor = parseFloat(localStorage.getItem("valor" + i)); // valor convertido com o parseFloat()
-// 		 total = (total + valor); // arredonda para 2 casas decimais com o .toFixed(2)
-// 	 }
-//  } 
-//  // exibe o total dos recheios
-//  document.getElementById("total").innerHTML = total.toFixed(2); 
+  exibirProdutos = () => {
+    let localCart = localStorage.getItem("produtos");
+    localCart = JSON.parse(localCart);
 
 
+
+    const path = "#/detalhesProduto/";
+
+    return localCart.map(item => (
+        <itemCarrinho/>
+         ))
+}
 
   render() {
     return (
@@ -70,7 +73,7 @@ export default class ShoppingCart extends Component {
 
             <ItemCart />
             <ItemCart />
-            <Finalizar/>
+            <Finalizar />
           </div>
         </div>
       </>
