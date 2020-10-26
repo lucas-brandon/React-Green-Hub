@@ -1,29 +1,33 @@
 import React, { Component } from "react";
 import "./index.css";
 import GridCard from "../../template/card/gridCard";
-import axios from 'axios';
-import Carousel from '../../template/banner/carousel';
-const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
-
+import axios from "axios";
+import Carousel from "../../template/banner/carousel";
+const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
 
 export default class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      produtos: [],
+    };
+    // let produtos = [];
+    // let produtosJson = JSON.stringify(produtos);
+    // localStorage.setItem("produtos", produtosJson);
+    // alert("teste, constructor")
+  }
 
-    constructor(props){
-        super(props)
-        this.state = {
-            produtos: []
-        }
-    }
+  componentDidMount() {
+    this.getProdutos();
+  }
 
-    componentDidMount(){
-        this.getProdutos();
-    }
-
-    getProdutos = () => {
-        axios.get(`${URL_PRODUTO_LISTA}`)
-        .then(resp => this.setState({produtos: resp.data}))
-    }
-
+  getProdutos = () => {
+    axios
+      .get(`${URL_PRODUTO_LISTA}`)
+      .then((resp) => this.setState({ produtos: resp.data }));
+      console.log('teste2')
+      console.log(localStorage.getItem('produtos'))
+  };
 
   render() {
     const produtos = new Object(this.state.produtos);
@@ -31,11 +35,11 @@ export default class Index extends Component {
 
     return (
       <>
-        <Carousel name="container carousel-c"/>
+        <Carousel name="container carousel-c" />
 
         {/*<!--Cards-->*/}
         <div className="container">
-          <GridCard produtos={produtos}/>
+          <GridCard produtos={produtos} />
 
           <GridCard />
         </div>
