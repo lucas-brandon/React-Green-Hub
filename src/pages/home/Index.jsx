@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./index.css";
 import GridCard from "../../template/card/gridCard";
-import axios from "axios";
-import Carousel from "../../template/banner/carousel";
-const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
+import axios from 'axios';
+import Carousel from '../../template/banner/carousel';
+import Banner from '../../template/banner/banner';
+const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
+
 
 export default class Index extends Component {
   constructor(props) {
@@ -11,10 +13,7 @@ export default class Index extends Component {
     this.state = {
       produtos: [],
     };
-    // let produtos = [];
-    // let produtosJson = JSON.stringify(produtos);
-    // localStorage.setItem("produtos", produtosJson);
-    // alert("teste, constructor")
+
   }
 
   componentDidMount() {
@@ -25,8 +24,7 @@ export default class Index extends Component {
     axios
       .get(`${URL_PRODUTO_LISTA}`)
       .then((resp) => this.setState({ produtos: resp.data }));
-      console.log('teste2')
-      console.log(localStorage.getItem('produtos'))
+      
   };
 
   render() {
@@ -34,25 +32,21 @@ export default class Index extends Component {
     console.log(produtos);
 
     return (
+  
       <>
         <Carousel name="container carousel-c" />
 
         {/*<!--Cards-->*/}
         <div className="container">
           <GridCard produtos={produtos} />
+          
 
           <GridCard />
         </div>
 
         {/*<!-- Banner bottom -->*/}
-        <div className=" botton-barr col12">
-          <img
-            src="https://evolutionnutritionlab.com.br/media/wysiwyg/Hair_Skin_Nails_Mobile.jpg"
-            width="1253px"
-            height="250px"
-            className="d-block w-100"
-          ></img>
-        </div>
+        <Banner name="botton-barr col12" />
+        
         <script
           src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
           integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
