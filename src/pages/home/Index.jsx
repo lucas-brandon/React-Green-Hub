@@ -30,12 +30,14 @@ export default class Index extends Component {
     console.log(produtos);
 
     return (
+  
       <>
         <Carousel name="container carousel-c" />
 
         {/*<!--Cards-->*/}
         <div className="container">
           <GridCard produtos={produtos} />
+          
 
           <GridCard />
         </div>

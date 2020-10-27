@@ -53,7 +53,7 @@ export default class Checkout extends Component {
     changeClienteNome = (event) => {
         this.setState({cliente_nome_1: event.target.value})
 
-        this.getCliente();
+        //this.getCliente();
     }
 
     changeClienteSobrenome = (event) => {
@@ -99,6 +99,7 @@ export default class Checkout extends Component {
     //-----------Tipo de Pagamento-----------
     changeTipoPagamento = (event) => {
         this.setState({tipo_pagamento: event.target.value})
+        console.log("select pagamento: \n\n"+event.target.value)
     }
 
     //-----------Cartão-----------
@@ -121,8 +122,15 @@ export default class Checkout extends Component {
     //-----------GET-----------
 
     getCliente = () => {
-        axios.get(`${URL}` + this.state.cliente_nome_1)
-        .then(resp => console.log(resp.data.id));
+        console.log("\n\n\n\n\nnome cliente antes: \n"+`${URL_CLIENTE_GET}`+this.state.cliente_nome_1);
+
+        axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
+        .then(resp => console.log("\n\n\n\n\nid cliente: "+resp.data.id));
+
+        axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
+        .then(resp => this.setState({cliente_id: resp.data.id,
+                                     cliente_nome_1: resp.data.nome,
+                                     cliente_nome_2: resp.data.sobrenome}));
 
 
         //axios.get(`${URL}`+this.state.cliente_nome_1)
@@ -141,6 +149,16 @@ export default class Checkout extends Component {
         //.then(resp => console.log('teste\n\n\n\n\n'+`${URL_PRODUTO_BUSCAR}`+this.props.params.id))
     }
 
+    //-----------POST-----------
+    postPedido = () => {
+
+        axios.post(URL, { description: this.state.description, done: false })
+        .then(resp => {
+            alert(`${this.state.description} cadastrado com sucesso`);
+            this.refresh();
+        })
+    }
+
 
     render() {
         return (
@@ -157,7 +175,9 @@ export default class Checkout extends Component {
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <label for="firstName">Nome*</label>
-                            <input id="firstName" type="text" class="form-control" onChange={this.changeClienteNome} required></input>
+                            <input id="firstName" type="text" class="form-control" onChange={this.changeClienteNome}
+                            on
+                            onMouseOut={this.changeClienteNome} required></input>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
@@ -271,28 +291,28 @@ export default class Checkout extends Component {
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão master card" name="payOption"></input>
+                                onClick={this.changeTipoPagamento}aria-label="opção de cartão master card" name="payOption" value="Cartão de crédito MasterCard"></input>
                             </div>
                             <img class="img-custom"src="images/mc_vrt_pos.svg" alt="master card"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão visa" name="payOption"></input>
+                                onClick={this.changeTipoPagamento}aria-label="opção de cartão visa" name="payOption" value="Cartão de crédito Visa"></input>
                             </div>
                             <img class="img-custom"src="images/visa.svg" alt="visa"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão american express" name="payOption"></input>
+                                onChange={this.changeTipoPagamento}aria-label="opção de cartão american express" name="payOption" value="Cartão de crédito American Express"></input>
                             </div>
                             <img class="img-custom"src="images/american-express.svg" alt="american express'"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption"></input>
+                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="Cartão de crédito Diners Club"></input>
                             </div>
                             <img class="img-custom"src="images/diners-club.svg" alt="diners club"></img>
                         </div>
@@ -374,7 +394,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href="#/finished"><button type="submit" class="btn-finalizar-compra col-12">Confirmar</button></a>
+                            <a href="#/finished"><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>

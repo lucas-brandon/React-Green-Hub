@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./detalhesProduto.css";
 import Titulo from "../../template/titulo/titulo";
-import {Link} from 'react-router'
+import { Link } from "react-router";
 
 import axios from "axios";
 
@@ -35,8 +35,9 @@ export default class DetalhesProduto extends Component {
     //   );
   };
   changeEstado = (event) => {
-    this.setState({quantidade: event.target.value})
-  }
+    this.setState({ quantidade: event.target.value });
+  };
+
   addItem = () => {
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);
@@ -47,31 +48,47 @@ export default class DetalhesProduto extends Component {
     //assuming we have an ID field in our item
     let id = this.props.params.id;
 
+    let existingItem;
     //look for item in cart array
-    let existingItem = cartCopy.find((cartItem) => cartItem.id === id);
-
+    if (cartCopy) {
+      existingItem = cartCopy.find((cartItem) => cartItem.id === id);
+    }
+    
     //if item already exists
     if (existingItem) {
       existingItem.qtd_item += this.state.quantidade; //update item
     } else {
-      //if item doesn't exist, simply add it
+      if (!cartCopy) {
+        cartCopy = [];
+      }
       cartCopy.push({
+        
         id: this.props.params.id,
-        qtd_item: this.state.quantidade,
+        qtd_item: this.state.qtd_item,
+        nome_produto: this.state.produto.nome_produto,
+        ds_produto: this.state.produto.ds_produto,
+        preco_valor: this.state.produto.preco_valor,
+       
       });
+      //if item doesn't exist, simply add it
     }
 
-      //make cart a string and store in local space
-     let stringCart = JSON.stringify(cartCopy);
-     localStorage.setItem("produtos", stringCart);
-     console.log("teste");
-     console.log(stringCart);
-}
+    //make cart a string and store in local space
+    let stringCart = JSON.stringify(cartCopy);
+    localStorage.setItem("produtos", stringCart);
+    console.log("teste");
+    console.log(stringCart);
+  };
 
   render() {
     const produto = new Object(this.state.produto);
-   // console.log("produto:\n\n\n\n\n\n\n" + produto.nome_produto);
-    
+    // console.log("produto:\n\n\n\n\n\n\n" + produto.nome_produto);
+
+    let valor = JSON.stringify(produto.valor);
+    valor = parseFloat(valor).toFixed(2);
+    valor = valor.toString();
+
+    valor = valor.replace(".", ",");
 
     return (
       <>
@@ -93,22 +110,22 @@ export default class DetalhesProduto extends Component {
                   <h3 class="nomeItem">{produto.nome_produto}</h3>
                 </a>
                 <h4 class="preco">
-                  R$ {produto.valor}
+                  R$ {valor}
                   <button type="submit" class="retirar">
                     -
                   </button>
-                  <input onChange={this.changeEstado} class="quantidade" placeholder="1" />
+                  <input
+                    onChange={this.changeEstado}
+                    class="quantidade"
+                    placeholder="1"
+                  />
                   <button type="submit" class="adicionar">
                     +
                   </button>
                 </h4>
                 <p class="descricaoItem">{produto.ds_produto}</p>
-                <Link to={`/shoppingCart/`}> 
-                  <button
-                    type="submit"
-                    class="comprar"
-                    onClick={this.addItem}
-                  >
+                <Link to={`/shoppingCart/`}>
+                  <button type="submit" class="comprar" onClick={this.addItem}>
                     Comprar
                   </button>
                 </Link>
