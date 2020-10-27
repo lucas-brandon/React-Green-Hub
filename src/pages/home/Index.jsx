@@ -1,17 +1,11 @@
 import React, { Component } from "react";
 import "./index.css";
 import GridCard from "../../template/card/gridCard";
-<<<<<<< HEAD
-import axios from "axios";
-import Carousel from "../../template/banner/carousel";
-const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
-=======
 import axios from 'axios';
 import Carousel from '../../template/banner/carousel';
 import Banner from '../../template/banner/banner';
 const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
 
->>>>>>> a5faf194479e4762e83254efd1b722644d6add31
 
 export default class Index extends Component {
   constructor(props) {
