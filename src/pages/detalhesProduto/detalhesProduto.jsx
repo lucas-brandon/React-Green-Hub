@@ -41,27 +41,20 @@ export default class DetalhesProduto extends Component {
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);
 
-    //create a copy of our cart state, avoid overwritting existing state
     let cartCopy = localCart;
 
-    //assuming we have an ID field in our item
     let id = this.props.params.id;
 
-    //look for item in cart array
     let existingItem = cartCopy.find((cartItem) => cartItem.id === id);
 
-    //if item already exists
     if (existingItem) {
       existingItem.qtd_item += this.state.quantidade; //update item
     } else {
-      //if item doesn't exist, simply add it
       cartCopy.push({
         id: this.props.params.id,
         qtd_item: this.state.quantidade,
       });
     }
-
-      //make cart a string and store in local space
      let stringCart = JSON.stringify(cartCopy);
      localStorage.setItem("produtos", stringCart);
      console.log("teste");
@@ -70,9 +63,6 @@ export default class DetalhesProduto extends Component {
 
   render() {
     const produto = new Object(this.state.produto);
-   // console.log("produto:\n\n\n\n\n\n\n" + produto.nome_produto);
-    
-
     return (
       <>
         <Titulo name="Detalhes do Produto" />
