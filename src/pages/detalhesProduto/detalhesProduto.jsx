@@ -37,32 +37,7 @@ export default class DetalhesProduto extends Component {
   changeEstado = (event) => {
     this.setState({quantidade: event.target.value})
   }
-  /*
-  anotações
 
-  douglas:
-  tcc itb - tecnico
-  sabia do que estava falando;
-  falou com os professores e turma do segundo ano
-  nervosismo
-
-  quer aprender uma tecnica
-
-  ------> 
-
-  mateus:
-
-  tcc - tecnico
-  alunos/professores
-
-  nervosismo
-
-  ---------
-  confiança na apresentação
-  preparação inicial
-
-
-  */
   addItem = () => {
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);
