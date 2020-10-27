@@ -43,14 +43,14 @@ export default class DetalhesProduto extends Component {
                         <div class="col-12 col-md-8">
                             <div class="card-body">
                                 <p class="marcaItem">{produto.nm_marca}</p>
-                                <a class="a-detalhes" href="./detalhesDoProduto.php"><h3 class="nomeItem">{produto.nome_produto}</h3></a>
+                                <a class="a-detalhes" href="#/detalhesProduto"><h3 class="nomeItem">{produto.nome_produto}</h3></a>
                                 <h4 class="preco">R$ {produto.valor}
                                     <button type="submit" class="retirar">-</button>
                                     <input class="quantidade" placeholder="1"/>
                                     <button type="submit" class="adicionar">+</button>
                                 </h4>
                                 <p class="descricaoItem">{produto.ds_produto}</p>
-                                <a href="./shopping_cart.php"><button type="submit" class="comprar">Comprar</button></a>
+                                <a href="#/shopping_cart"><button type="submit" class="comprar">Comprar</button></a>
                             </div>
                         </div>
                     </div>

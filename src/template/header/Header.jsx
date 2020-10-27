@@ -7,13 +7,13 @@ export default props => {
         <header class="container-fluid headerCustom">
         <div class="row top-bar align-content-center">
             <div class="col-4 col-md-2 mx-auto  top-bar-item">
-                <a href="#/index" class="a-ps a-custom">
+                <a href="#/home" class="a-ps a-custom">
                     <img class="logo" src="images/logo.png" alt="Logo"></img>
                 </a>
             </div>
             <div class="col-8 col-md-4 mx-auto  search top-bar-item">
                 <input class="form-control form-control-custom" type="search" placeholder="Search " aria-label="Search"></input>
-                <a href="#/detalhesDoProduto" class=" a-custom">
+                <a href="#/detalhesProduto/{id}" class=" a-custom">
                     <img src="images/search.png" id="search" style={{width: '20px', height: '20px'}}></img>
                 </a>
             </div>
