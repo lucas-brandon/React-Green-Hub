@@ -12,7 +12,7 @@ export default props => {
                 </div>
 
                 <div class="col-8 col-md-3 mx-auto footer">
-                    <h5 class="h5-custom">Atendimento</h5>
+                    <a href="#/contact"><h5 class="h5-custom">Atendimento</h5></a>
                     <ul style={{listStyle: 'none'}} class="contato">
                         <li><img class="contato-icon midia-icon" src="images/24h.png"></img> Telefone: 115567-3490
                         </li>

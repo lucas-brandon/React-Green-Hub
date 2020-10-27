@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import "./index.css";
 import GridCard from "../../template/card/gridCard";
+<<<<<<< HEAD
 import axios from "axios";
 import Carousel from "../../template/banner/carousel";
 const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
+=======
+import axios from 'axios';
+import Carousel from '../../template/banner/carousel';
+import Banner from '../../template/banner/banner';
+const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
+
+>>>>>>> a5faf194479e4762e83254efd1b722644d6add31
 
 export default class Index extends Component {
   constructor(props) {
@@ -43,14 +51,8 @@ export default class Index extends Component {
         </div>
 
         {/*<!-- Banner bottom -->*/}
-        <div className=" botton-barr col12">
-          <img
-            src="https://evolutionnutritionlab.com.br/media/wysiwyg/Hair_Skin_Nails_Mobile.jpg"
-            width="1253px"
-            height="250px"
-            className="d-block w-100"
-          ></img>
-        </div>
+        <Banner name="botton-barr col12" />
+        
         <script
           src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
           integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
