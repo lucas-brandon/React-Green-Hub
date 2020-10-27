@@ -39,6 +39,13 @@ export default class DetalhesProduto extends Component {
   };
 
   addItem = () => {
+
+    let valor = JSON.stringify(this.state.produto.valor);
+    valor = parseFloat(valor).toFixed(2);
+    valor = valor.toString();
+
+    valor = valor.replace(".", ",");
+
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);
 
@@ -67,7 +74,7 @@ export default class DetalhesProduto extends Component {
         qtd_item: this.state.qtd_item,
         nome_produto: this.state.produto.nome_produto,
         ds_produto: this.state.produto.ds_produto,
-        preco_valor: this.state.produto.preco_valor,
+        preco_valor: valor,
        
       });
       //if item doesn't exist, simply add it
