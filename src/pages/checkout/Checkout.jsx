@@ -5,7 +5,10 @@ import Titulo from '../../template/titulo/titulo';
 import axios from 'axios';
 
 const URL_CLIENTE_GET = 'http://modelagem.test/api/clientes/buscarNome/';
-const URL_ENDERECO_POST = 'http://modelagem.test/api/endereco/salvar/';
+
+const URL_ENDERECO_POST = 'http://modelagem.test/api/endereco/salvar';
+
+const URL_ENDERECO_CLIENTE_POST = 'http://modelagem.test/api/enderecoCliente/salvar/';
 
 const URL_PAGAMENTO_POST = 'http://modelagem.test/api/pagamento/salvar/';
 
@@ -13,39 +16,39 @@ const URL_CARTAO_POST = 'http://modelagem.test/api/pagamento/salvar/';
 
 export default class Checkout extends Component {
 
-
     constructor(props){
         super(props)
         this.state = {
             produto: [],
-            cliente_id: null,
-            cliente_nome_1: null,
-            cliente_nome_2: null,
-            status_pedido_id: null,
-            ds_status: null, 
-            pagamento_id: null,
-            nr_pedido: null,
-            dt_pedido: null,
-            valor: null,
-            teste: null,
+            cliente_id: 0,
+            cliente_nome_1: "",
+            cliente_nome_2: "",
+            status_pedido_id: 0,
+            ds_status: "", 
+            pagamento_id: 0,
+            nr_pedido: 0,
+            dt_pedido: "",
+            valor: 0,
+            teste: 0,
 
-            email: null,
-            telefone: null,
+            email: "",
+            telefone: "",
 
-            ds_endereco: null,
-            cep: null,
-            numero: null,
-            bairro: null,
-            cidade: null,
-            estado: null,
-            complemento: null,
+            endereco_id: 0,
+            ds_endereco: "",
+            cep: "",
+            numero: "",
+            bairro: "",
+            cidade: "",
+            estado: "",
+            complemento: "",
 
-            tipo_pagamento: null,
+            tipo_pagamento: "",
 
-            nr_cartao: null,
-            nome_cartao: null,
-            cd_seguranca: null,
-            dt_expiracao: null
+            nr_cartao: "",
+            nome_cartao: "",
+            cd_seguranca: "",
+            dt_expiracao: ""
 
         }
     }
@@ -90,6 +93,7 @@ export default class Checkout extends Component {
 
     changeEstado = (event) => {
         this.setState({estado: event.target.value})
+        //console.log("estado mudança: \n\n"+event.target.value)
     }
 
     changeComplemento = (event) => {
@@ -99,7 +103,7 @@ export default class Checkout extends Component {
     //-----------Tipo de Pagamento-----------
     changeTipoPagamento = (event) => {
         this.setState({tipo_pagamento: event.target.value})
-        console.log("select pagamento: \n\n"+event.target.value)
+        //console.log("select pagamento: \n\n"+event.target.value)
     }
 
     //-----------Cartão-----------
@@ -122,23 +126,26 @@ export default class Checkout extends Component {
     //-----------GET-----------
 
     getCliente = () => {
-        console.log("\n\n\n\n\nnome cliente antes: \n"+`${URL_CLIENTE_GET}`+this.state.cliente_nome_1);
+        //console.log("\n\n\n\n\nnome cliente antes: \n"+`${URL_CLIENTE_GET}`+this.state.cliente_nome_1);
 
-        axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
-        .then(resp => console.log("\n\n\n\n\nid cliente: "+resp.data.id));
-
-        axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
-        .then(resp => this.setState({cliente_id: resp.data.id,
-                                     cliente_nome_1: resp.data.nome,
-                                     cliente_nome_2: resp.data.sobrenome}));
-
-
+        //axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
+        //.then(resp => console.log("\n\n\n\n\nid cliente: "+resp.data.id));
+        
+        let self = this
+        axios.get(`${URL_CLIENTE_GET}` + self.state.cliente_nome_1)
+        .then( (resp) => {
+            let cliente_id = resp.data.id;
+            localStorage.setItem("cliente_id", resp.data.id);
+            self.postEndereco();
+            
+              
+        });
         //axios.get(`${URL}`+this.state.cliente_nome_1)
         //.then(resp => this.setState({cliente_id: resp.data.id}))
     }
 
     componentDidMount(){
-        this.getCliente();
+        //this.getCliente();
     }
 
     getProduto = () => {
@@ -150,13 +157,40 @@ export default class Checkout extends Component {
     }
 
     //-----------POST-----------
+    postEndereco = () => {
+        let self = this
+        axios.post(URL_ENDERECO_POST, { 
+            ds_endereco: this.state.ds_endereco,
+            cep: this.state.cep,
+            numero: this.state.numero,
+            bairro: this.state.bairro,
+            cidade: this.state.cidade,
+            estado: this.state.estado 
+            //complemento: this.state.complemento,
+        })
+        .then(resp => {
+
+            localStorage.setItem("endereco_id", resp.data.id);
+            self.postPedido();
+        });
+    }
     postPedido = () => {
 
-        axios.post(URL, { description: this.state.description, done: false })
-        .then(resp => {
-            alert(`${this.state.description} cadastrado com sucesso`);
-            this.refresh();
+        //console.log('configurando endereco cliente\n\n\n\n');     
+        
+        let localCartCliente = localStorage.getItem("cliente_id");
+        let localCartEndereco = localStorage.getItem("endereco_id");
+
+
+        axios.post(URL_ENDERECO_CLIENTE_POST, { 
+            cliente_id: localCartCliente,
+            endereco_id: localCartEndereco 
         })
+        .then(resp => {
+            //console.log("resposta\n\n\n\n\n\n\n")
+            console.log(resp)
+        });
+
     }
 
 
@@ -195,17 +229,22 @@ export default class Checkout extends Component {
                         </div>
 
                         <div class="col-md-4 col-sm-12">
-                            <label for="complement">Complemento</label>
-                            <input id="complement" type="text" onChange={this.changeComplemento}class="form-control"></input>
+                            <label for="complement">Numero</label>
+                            <input id="complement" type="text" onChange={this.changeNumEndereco}class="form-control"></input>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <label for="city">Cidade*</label>
                             <input id="city" type="text" 
                             onChange={this.changeCidade}class="form-control" required></input>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <label for="bairro">Bairro*</label>
+                            <input id="bairro" type="text" 
+                            onChange={this.changeBairro}class="form-control" required></input>
                         </div>
                         {/*
                         <div class="col-md-2 col-sm-12">
@@ -216,37 +255,37 @@ export default class Checkout extends Component {
                         <div class="col-md-2 col-sm-12">
                             <label for="state">Estado*</label>
                             <select class="form-control" id="state" onChange={this.changeEstado}required>    
-                                <option>AC</option>
-                                <option>AL</option>
-                                <option>AP</option>
-                                <option>AM</option>
-                                <option>BA</option>
-                                <option>CE</option>
-                                <option>ES</option>
-                                <option>GO</option>
-                                <option>MA</option>
-                                <option>MT</option>
-                                <option>MS</option>
-                                <option>MG</option>
-                                <option>PA</option>
-                                <option>PB</option>
-                                <option>PR</option>
-                                <option>PE</option>
-                                <option>PI</option>
-                                <option>RJ</option>
-                                <option>RN</option>
-                                <option>RS</option>
-                                <option>RO</option>
-                                <option>RR</option>
-                                <option>SC</option>
-                                <option>SP</option>
-                                <option>SE</option>
-                                <option>TO</option>
-                                <option>DF</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                                <option value="DF">DF</option>
                             </select>
                         </div>
 
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label for="cep">CEP*</label>
                             <input id="cep" type="text" 
                             onChange={this.changeCEP}class="form-control" placeholder="ex: 05339-900" required></input>
