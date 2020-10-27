@@ -11,10 +11,7 @@ export default class Index extends Component {
     this.state = {
       produtos: [],
     };
-    // let produtos = [];
-    // let produtosJson = JSON.stringify(produtos);
-    // localStorage.setItem("produtos", produtosJson);
-    // alert("teste, constructor")
+
   }
 
   componentDidMount() {
@@ -25,8 +22,7 @@ export default class Index extends Component {
     axios
       .get(`${URL_PRODUTO_LISTA}`)
       .then((resp) => this.setState({ produtos: resp.data }));
-      console.log('teste2')
-      console.log(localStorage.getItem('produtos'))
+      
   };
 
   render() {
