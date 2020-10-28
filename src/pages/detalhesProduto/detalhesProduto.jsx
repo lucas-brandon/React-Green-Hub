@@ -39,11 +39,6 @@ export default class DetalhesProduto extends Component {
   };
 
   addItem = () => {
-    let valor = JSON.stringify(this.state.produto.valor);
-    valor = parseFloat(valor).toFixed(2);
-    valor = valor.toString();
-
-    valor = valor.replace(".", ",");
 
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);
@@ -69,10 +64,10 @@ export default class DetalhesProduto extends Component {
       }
       cartCopy.push({
         id: this.props.params.id,
-        qtd_item: this.state.qtd_item,
+        qtd_item: this.state.quantidade,
         nome_produto: this.state.produto.nome_produto,
         ds_produto: this.state.produto.ds_produto,
-        preco_valor: valor,
+        preco_valor: this.state.produto.valor,
       });
       //if item doesn't exist, simply add it
     }
@@ -80,8 +75,7 @@ export default class DetalhesProduto extends Component {
     //make cart a string and store in local space
     let stringCart = JSON.stringify(cartCopy);
     localStorage.setItem("produtos", stringCart);
-    console.log("teste");
-    console.log(stringCart);
+  
   };
 
   render() {

@@ -29,6 +29,7 @@ export default class Index extends Component {
 
   render() {
     const produtos = new Object(this.state.produtos);
+    console.log('teste');
     console.log(produtos);
 
     return (
@@ -39,6 +40,7 @@ export default class Index extends Component {
         {/*<!--Cards-->*/}
         <div className="container">
           <GridCard produtos={produtos} />
+
           
 
           <GridCard />
