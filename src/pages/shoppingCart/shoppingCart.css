@@ -38,39 +38,7 @@
 }
 
 /*-----Item-----*/
-.cart-item{
-    align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    text-align: center;
-    background-color: #F5F5DC;
-    border-top: 1px dotted #208023;
-    border-bottom: 1px dotted #208023;
-    margin-top: 5px;
-    
-}
 
-
-.img-custom{
-    width: 60px;
-    height: 80px;
-}
-
-.item-main{
-    color: #5A6978;
-    font-size: 26px;
-    font-weight: bold;
-    align-content: center;
-}
-
-.item-desc-column{
-    display: inline-flex;
-    color: #5A6978;
-    font-size: 10px;
-    text-align: justify;
-    text-justify: inter-word;
-    
-}
 
 /*-----Botões relacionados com a quantidade de produtos-----*/
 .input-group{

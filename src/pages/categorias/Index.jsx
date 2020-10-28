@@ -97,12 +97,12 @@ export default class Index extends Component {
                 />
               </div>
               <div className="nomeProdutoCartao col-12">
-                <a className="a-categoria" href="./detalhesDoProduto.php">
+                <a className="a-categoria" href="#/detalhesProduto/{id}">
                   <h3 className="nomeItem">nome Item</h3>
                 </a>
               </div>
               <div className="btnCartao col-12">
-                <a className="a-categoria" href="./shopping_cart.php">
+                <a className="a-categoria" href="#/shopping_cart">
                   <button type="submit" className="btnCartao comprar">
                     Comprar
                   </button>
@@ -124,7 +124,7 @@ export default class Index extends Component {
                 <h3 className="nomeItem">nome Item</h3>
               </div>
               <div className="btnCartao col-12">
-                <a className="a-categoria" href="./shopping_cart.php">
+                <a className="a-categoria" href="#/shopping_cart">
                   <button type="submit" className="btnCartao comprar">
                     Comprar
                   </button>
@@ -146,7 +146,7 @@ export default class Index extends Component {
                 <h3 className="nomeItem">nome Item</h3>
               </div>
               <div className="btnCartao col-12">
-                <a className="a-categoria" href="./shopping_cart.php">
+                <a className="a-categoria" href="#/shopping_cart">
                   <button type="submit" className="btnCartao comprar">
                     Comprar
                   </button>
@@ -168,7 +168,7 @@ export default class Index extends Component {
                 <h3 className="nomeItem">nome Item</h3>
               </div>
               <div className="btnCartao col-12">
-                <a className="a-categoria" href="./shopping_cart.php">
+                <a className="a-categoria" href="#/shopping_cart">
                   <button type="submit" className="btnCartao comprar">
                     Comprar
                   </button>
@@ -190,7 +190,7 @@ export default class Index extends Component {
                 <h3 className="nomeItem">nome Item</h3>
               </div>
               <div className="btnCartao col-12">
-                <a className="a-categoria" href="./shopping_cart.php">
+                <a className="a-categoria" href="#/shopping_cart">
                   <button type="submit" className="btnCartao comprar">
                     Comprar
                   </button>
@@ -212,11 +212,11 @@ export default class Index extends Component {
                 <h3 className="nomeItem">nome Item</h3>
               </div>
               <div className="btnCartao col-12">
-                <a className="a-categoria" href="./shopping_cart.php">
+                <a className="a-categoria" href="#/shopping_cart">
                   <button
                     type="submit"
                     className="btnCartao comprar"
-                    href="./shopping_cart.php"
+                    href="#/shopping_cart"
                   >
                     Comprar
                   </button>

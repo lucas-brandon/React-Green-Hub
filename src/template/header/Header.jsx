@@ -7,25 +7,25 @@ export default props => {
         <header class="container-fluid headerCustom">
         <div class="row top-bar align-content-center">
             <div class="col-4 col-md-2 mx-auto  top-bar-item">
-                <a href="./index.php" class="a-ps a-custom">
-                    <img class="logo" src="../images/logo.png" alt="Logo"></img>
+                <a href="#/home" class="a-ps a-custom">
+                    <img class="logo" src="images/logo.png" alt="Logo"></img>
                 </a>
             </div>
             <div class="col-8 col-md-4 mx-auto  search top-bar-item">
                 <input class="form-control form-control-custom" type="search" placeholder="Search " aria-label="Search"></input>
-                <a href="./detalhesDoProduto.php" class=" a-custom">
-                    <img src="../images/search.png" id="search" style={{width: '20px', height: '20px'}}></img>
+                <a href="#/detalhesProduto/{id}" class=" a-custom">
+                    <img src="images/search.png" id="search" style={{width: '20px', height: '20px'}}></img>
                 </a>
             </div>
             <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                 <ul class="list-unstyled">
                     <li>
                         <a href="#/login" class="a-ps a-custom">
-                            <img src="../images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img> Entre
+                            <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img> Entre
                         </a>
                     </li>
                     <li>
-                        <a href="register.php" class="a-ps a-custom">
+                        <a href="#/register" class="a-ps a-custom">
                             Cadastre-se</a>
                     </li>
                 </ul>
@@ -43,19 +43,19 @@ export default props => {
         
         <ul class="nav-m row">
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href='#/categorias' categoria="Categoria1" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
+                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
             </li>
             <li class="col-12 col-md-4 nav-item nav-item-custom">
-                <a href="categoria.php" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
+                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="categoria.php" class="nav-link nav-link-custom a-custom">Vitaminas</a>
+                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Vitaminas</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="categoria.php" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
+                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="categoria.php" class="nav-link nav-link-custom a-custom">Proteinas</a>
+                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Proteinas</a>
             </li>
         </ul>
     </nav>

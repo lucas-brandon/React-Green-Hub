@@ -30,6 +30,21 @@ a:active {
     justify-content: center;
 }
 
+
+/*Carosel*/
+
+.carousel-c {
+    /*width: 1253px;*/
+    height: 250px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index:1;
+}
+
+
+
+
 /*Botton barr*/
 
 .botton-barr {
