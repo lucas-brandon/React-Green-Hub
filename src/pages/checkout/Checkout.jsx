@@ -20,6 +20,7 @@ export default class Checkout extends Component {
         super(props)
         this.state = {
             produto: [],
+            pedidos: [],
             cliente_id: 0,
             cliente_nome_1: "",
             cliente_nome_2: "",
@@ -134,8 +135,20 @@ export default class Checkout extends Component {
         let self = this
         axios.get(`${URL_CLIENTE_GET}` + self.state.cliente_nome_1)
         .then( (resp) => {
+            let pedidoCart = localStorage.getItem("pedido");
+            pedidoCart = JSON.parse(pedidoCart);
+
+            if (!pedidoCart) {
+                pedidoCart = [];
+            }
+
             let cliente_id = resp.data.id;
-            localStorage.setItem("cliente_id", resp.data.id);
+            pedidoCart.push(cliente_id);
+
+            let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+
+            //localStorage.setItem("cliente_id", resp.data.id);
             self.postEndereco();
             
               
@@ -170,7 +183,78 @@ export default class Checkout extends Component {
         })
         .then(resp => {
 
-            localStorage.setItem("endereco_id", resp.data.id);
+            let pedidoCart = localStorage.getItem("pedido");
+            pedidoCart = JSON.parse(pedidoCart);
+
+            if (!pedidoCart) {
+                pedidoCart = [];
+            }
+
+            let endereco = [];
+
+            endereco.push({
+                endereco_id: resp.data.id,
+                ds_endereco: this.state.ds_endereco,
+                cep: this.state.cep,
+                numero: this.state.numero,
+                bairro: this.state.bairro,
+                cidade: this.state.cidade,
+                estado: this.state.estado 
+            });
+
+            pedidoCart.push(endereco);
+
+            let submitCart = JSON.stringify(pedidoCart);
+
+            localStorage.setItem("pedido", submitCart);
+
+            //localStorage.setItem("endereco_id", resp.data.id);
+            self.postCartao();
+        });
+    }
+    postCartao = () => {
+        let self = this
+        //let cliente = localStorage.getItem('cliente_id');
+
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        if (!pedidoCart) {
+            pedidoCart = [];
+        }
+
+        axios.post(URL_CARTAO_POST, { 
+            cliente_id: pedidoCart.cliente_id,
+            nr_cartao: this.state.nr_cartao,
+            nome: this.state.nome_cartao,
+            //cd_seguranca: this.state.cd_seguranca,
+            bandeira: this.state.tipo_pagamento,
+            validade: this.state.dt_expiracao
+            //complemento: this.state.complemento,
+        })
+        .then(resp => {
+
+            let cartao = []
+            cartao.push({
+                cliente_id: pedidoCart.cliente_id,
+                nr_cartao: this.state.nr_cartao,
+                nome_cartao: this.state.nome_cartao,
+                bandeira: this.state.tipo_pagamento,
+                //cd_seguranca: this.state.cd_seguranca,
+                validade: this.state.dt_expiracao
+            })
+
+            let pagamento = this.state.tipo_pagamento;
+
+
+
+            pedidoCart.push(cartao);
+            pedidoCart.push(pagamento);
+
+            let submitCart = JSON.stringify(pedidoCart);
+
+            localStorage.setItem("pedido", submitCart);
+
             self.postPedido();
         });
     }
@@ -181,10 +265,15 @@ export default class Checkout extends Component {
         let localCartCliente = localStorage.getItem("cliente_id");
         let localCartEndereco = localStorage.getItem("endereco_id");
 
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+
+
 
         axios.post(URL_ENDERECO_CLIENTE_POST, { 
-            cliente_id: localCartCliente,
-            endereco_id: localCartEndereco 
+            cliente_id: pedidoCart.cliente_id,
+            endereco_id: pedidoCart.endereco[0].endereco_id
         })
         .then(resp => {
             //console.log("resposta\n\n\n\n\n\n\n")
@@ -330,28 +419,28 @@ export default class Checkout extends Component {
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão master card" name="payOption" value="Cartão de crédito MasterCard"></input>
+                                onClick={this.changeTipoPagamento}aria-label="opção de cartão master card" name="payOption" value="MasterCard"></input>
                             </div>
                             <img class="img-custom"src="images/mc_vrt_pos.svg" alt="master card"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão visa" name="payOption" value="Cartão de crédito Visa"></input>
+                                onClick={this.changeTipoPagamento}aria-label="opção de cartão visa" name="payOption" value="Visa"></input>
                             </div>
                             <img class="img-custom"src="images/visa.svg" alt="visa"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão american express" name="payOption" value="Cartão de crédito American Express"></input>
+                                onChange={this.changeTipoPagamento}aria-label="opção de cartão american express" name="payOption" value="American Express"></input>
                             </div>
                             <img class="img-custom"src="images/american-express.svg" alt="american express'"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="Cartão de crédito Diners Club"></input>
+                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="Diners Club"></input>
                             </div>
                             <img class="img-custom"src="images/diners-club.svg" alt="diners club"></img>
                         </div>
