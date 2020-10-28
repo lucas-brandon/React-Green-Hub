@@ -21,6 +21,7 @@ window.onload = function(){
     for(let i = 0; i < btnMinus.length; i++){
         //console.log("valor: "+btnMinus[i]+" no indice: "+i);
         let input = btnMinus[i].parentNode.parentNode.getElementsByTagName("input");
+        input = parseInt(input)
         //console.log("valor: "+input[0]);
         btnMinus[i].addEventListener("click", function(){
             //input[0].setAttribute("value", "0");
@@ -36,6 +37,7 @@ window.onload = function(){
     for(let i = 0; i < btnPlus.length; i++){
         //console.log("valor: "+btnPlus[i]+" no indice: "+i);
         let input = btnPlus[i].parentNode.parentNode.getElementsByTagName("input");
+        input = parseInt(input)
         //console.log("valor: "+input[0]);
         btnPlus[i].addEventListener("click", function(){
             //input[0].setAttribute("value", "0");
@@ -48,6 +50,7 @@ window.onload = function(){
     //console.log("valor: "+btnPlus[i]+" no indice: "+i);
     for(let i = 0; i < btnCancel.length; i++){
         let input = btnCancel[i].parentNode.parentNode.getElementsByTagName("input");
+        input = parseInt(input)
         //console.log("valor: "+input[0]);
         btnCancel[i].addEventListener("click", function(){
             //input[0].setAttribute("value", "0");
@@ -57,6 +60,7 @@ window.onload = function(){
 
     //---------Adicionar eventos para somar valor do carrinho---------
     let inputValues = document.getElementsByClassName("input");
+    inputValues = parseInt(inputValues)
     console.log(inputValues);
     for(let i = 0; i < inputValues.length; i++){
         
