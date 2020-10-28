@@ -20,7 +20,7 @@ export default props => {
             <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                 <ul class="list-unstyled">
                     <li>
-                        <a href="login2.php" class="a-ps a-custom">
+                        <a href="#/login" class="a-ps a-custom">
                             <img src="../images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img> Entre
                         </a>
                     </li>
@@ -43,7 +43,7 @@ export default props => {
         
         <ul class="nav-m row">
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/Categorias" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
+                <a href='#/categorias' categoria="Categoria1" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
             </li>
             <li class="col-12 col-md-4 nav-item nav-item-custom">
                 <a href="categoria.php" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>

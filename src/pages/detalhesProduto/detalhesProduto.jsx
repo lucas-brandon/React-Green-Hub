@@ -25,7 +25,7 @@ export default class DetalhesProduto extends Component {
         .then(resp => this.setState({produto: resp.data}))
 
         axios.get(`${URL_PRODUTO_BUSCAR}`+this.props.params.id)
-        .then(resp => console.log('teste\n\n\n\n\n'+`${URL_PRODUTO_BUSCAR}`+this.props.params.id))
+        .then(resp => console.log('teste\n\n\n\n\n' + `${URL_PRODUTO_BUSCAR}`+this.props.params.id))
     }
 
     render() {
