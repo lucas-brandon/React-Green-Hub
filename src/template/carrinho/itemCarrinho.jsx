@@ -6,30 +6,25 @@ import "./itemCarrinho.css";
 export default (props) => {
   const [cont, setCont] = useState(1);
 
-  let total = cont * props.valor
-
  
-//   useEffect(() => {
-   
-//     let localCart = localStorage.getItem("produtos");
-//     localCart = JSON.parse(localCart);
-
-//     localCart.forEach((element) => {
-//       if (element.id === props.id) {
-//         element.preco_valorTotal = total;
-//       }
-//     });
-//     let stringCart = JSON.stringify(localCart);
-//     localStorage.setItem("produtos", stringCart);
-//     console.log()
-//     console.log(stringCart)
   
-// })
+  
+ let total = parseInt(props.valor) *cont
+total = JSON.stringify(total);
+ total = parseFloat(total).toFixed(2);
+ total = total.toString();
+
+ total = total.replace(".", ",");
+
+
+//  useEffect(() => {
+//   total = cont+1;
+//  })
 
   return (
     <div id="item" class="row cart-item">
       <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-        <img class="img-custom" src={props.img} alt="Omega 3"></img>
+        <img class="img-custom" src={props.img} alt="Omega 3" style={{width: "70px", height: "90px"}}></img>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
         <span id="item-name" class="item-main">
@@ -54,7 +49,7 @@ export default (props) => {
             class="color-qtd btn-minus"
             type="button"
           >
-           <img src="https://cdn.icon-icons.com/icons2/1244/PNG/512/1492790963-7remove_84188.png" style={{width: '35px', height: '35px'}} alt=""/>
+           <img src="https://cdn.icon-icons.com/icons2/1244/PNG/512/1492790963-7remove_84188.png" style={{width: '32px', height: '32px'}} alt=""/>
           </button>
         </div>
 
@@ -82,8 +77,9 @@ export default (props) => {
           R$:{total}
         </span>
       </div>
-      <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
+      <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12" >
         <img
+        onClick={props.onClick}
           id="btn-cancel"
           class="btn-cart-cancel img-custom"
           src="images/cancel-icon.svg"

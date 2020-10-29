@@ -17,7 +17,7 @@ export default props => {
 
             valor = valor.replace(".", ",");
         
-            return (
+            return ( 
             <Card divClass ="col-md-4 " img ={item.link_imagem}
             valor={valor} nome={item.nm_produto} marca={item.nm_marca} link={path+item.id} msg="Ver Produto" key={item.id}/>
             )
@@ -27,7 +27,7 @@ export default props => {
 
     return (
 
-        <div class="row mb-5">
+        <div class="row mb-5" >
             {exibirProdutos()}                
         </div>
     )

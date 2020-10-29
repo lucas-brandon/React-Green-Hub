@@ -4,9 +4,9 @@ import './card.css'
 
 export default props => {
     return (
-            <div class={props.divClass}>
+            <div class={props.divClass} style={{marginBottom:"50px"}}>
                 <div class="card-m">
-                    <img src={props.img} class="card-img-top" alt="..."></img>
+                    <img src={props.img} class="card-img-top" alt="..." style={{width: "175px", height: "200px", marginTop:"25px"}}></img>
                     <div class="card-body">
                         <h5 class="valor">R$ {props.valor}</h5>
                         <p><mark>{props.nome}</mark></p>

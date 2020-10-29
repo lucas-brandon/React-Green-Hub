@@ -18,7 +18,7 @@ export default props => (
         <Route path='/home' component={Home}></Route>
         <Route path='/categorias' component={Categorias}></Route>
         <Route path='/contact' component={Contact}></Route>
-        <Route path='/shoppingCart/' component={ShoppingCart}></Route>
+        <Route path='/shoppingCart' component={ShoppingCart}></Route>
         <Route path='/checkout' component={Checkout}></Route>
         <Route path='/finished' component={Finished}></Route>
         <Route path='/register' component={Register}></Route>

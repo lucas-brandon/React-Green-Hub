@@ -51,6 +51,9 @@ export default class DetalhesProduto extends Component {
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);
 
+    console.log("print do estado")
+    console.log(this.state)
+
     //create a copy of our cart state, avoid overwritting existing state
     let cartCopy = localCart;
 
@@ -80,6 +83,7 @@ export default class DetalhesProduto extends Component {
       });
       //if item doesn't exist, simply add it
     }
+    
     
     //make cart a string and store in local space
     let stringCart = JSON.stringify(cartCopy);

@@ -6,10 +6,7 @@ import ItemCart from "../../template/carrinho/itemCarrinho";
 import Finalizar from "../../template/carrinho/finalizarCompra";
 import Titulo from "../../template/titulo/titulo";
 import Indice from "../../template/indice/indice";
-import axios from "axios";
-import itemCarrinho from "../../template/carrinho/itemCarrinho";
-const URL_PRODUTO_BUSCAR = "http://modelagem.test/api/produtos/buscar/";
-const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
+
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -27,14 +24,15 @@ export default class ShoppingCart extends Component {
     localCart = JSON.parse(localCart);
     this.setState({ produtos: localCart });
   };
-
-  contador = () =>{}
+  
   exibirProdutos = () => {
     const list = this.state.produtos;
 
     if (list != null && list !== undefined) {
+     
       return list.map((id) => {
         return (
+            
           <ItemCart
             divClass="col-md-4 "
             img={id.imagem}
@@ -42,6 +40,7 @@ export default class ShoppingCart extends Component {
             descricao={id.ds_Produto}
             valor={id.preco_valor}
             key={id.id}
+            
           />
         );
       });
