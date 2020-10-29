@@ -1,17 +1,70 @@
 import React, { Component } from "react";
 import "./pedidos.css";
-import axios from 'axios';
+import ItemCart from "../../template/carrinho/itemPedido";
+import Finalizar from "../../template/carrinho/finalizarCompra";
+import Titulo from "../../template/titulo/titulo";
+import Indice from "../../template/indice/indice";
+import axios from "axios";
 
-//const URL_PRODUTO_LISTA = 'http://modelagem.test/api/produtos/listar';
+const URL_PEDIDOS_LISTA = 'http://modelagem.test/api/pedidos/listar';
 
 export default class Pedidos extends Component {
 
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
         this.state = {
-            produtos: []
-        }
+          pedidos: [],
+          total: [],
+        };
     }
+    componentDidMount() {
+        this.listarPedidos();
+    }
+    listarPedidos = () => {
+        axios.get(`${URL_PEDIDOS_LISTA}`)
+        .then((resp) => this.setState({ pedidos: resp.data }));
+        console.log("listar pedidos\n\n\n\n")
+    };
+    changeEstado = (event) => {
+        this.setState({ quantidade: event.target.value });
+    };
+
+    exibirPedidos = () => {
+        console.log("dentro da exibição de pedidos\n")
+        console.log(this.state.pedidos)
+        const list = this.state.pedidos
+        
+        
+        if (list != null && list !== undefined) {
+          
+          return list.map(item => {
+    
+            item.valor = parseFloat(item.valor).toFixed(2);
+            item.valor = item.valor.toString();
+    
+            item.valor = item.valor.replace(".", ",");
+
+            let status = "Em Andamento";
+            if(item.status_pedido_id == 1)
+            {
+                status = "Em Andamento"
+            }
+         
+            return (<><ItemCart
+              divClass="col-md-3 "
+              status= {status}
+              codigo={item.nr_pedido}
+              valor={item.valor}
+              data={item.dt_pedido}
+              key={item.id}
+            />
+            </>
+            )
+          });
+        } else {
+          return "Carrinho Vazio.";
+        }
+      };
 
 
     render() {
@@ -21,7 +74,7 @@ export default class Pedidos extends Component {
         return (
                 <>
 
-
+            {/*}
             <div class="container pedidos">
                 <div class="row">
                     <div class="col-12" id="historico">
@@ -96,7 +149,15 @@ export default class Pedidos extends Component {
             </div>
             </>
 
-
+            {*/}
+      <div class="shopping_cart">
+        <Titulo titulo="Pedidos" />
+        <Indice items={["Status", "Código", "Data", "Total"]} />
+        <div>
+          {this.exibirPedidos()}
+        </div>
+      </div>
+      </>
         )
     }
 }

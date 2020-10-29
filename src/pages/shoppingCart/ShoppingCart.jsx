@@ -66,7 +66,7 @@ export default class ShoppingCart extends Component {
   render() {
      return (
       <div class="shopping_cart">
-        <Titulo titulo="carrinho" />
+        <Titulo titulo="Carrinho" />
         <Indice items={["Produto", "Preço", "Quantidade", "Total"]} />
         <div>
           {this.exibirProdutos()}
