@@ -12,6 +12,7 @@ export default class DetalhesProduto extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      cliente: null,
       quantidade: 1,
       id_produto: 0,
       produto: undefined,
@@ -23,9 +24,19 @@ export default class DetalhesProduto extends Component {
   }
 
   getProduto = () => {
+
     axios
       .get(`${URL_PRODUTO_BUSCAR}` + this.props.params.id)
       .then((resp) => this.setState({ produto: resp.data }));
+
+    let cliente = localStorage.getItem("Cliente");
+    cliente = JSON.parse(cliente);
+  
+    console.log("existe cliente?\n\n"+cliente);
+
+    if (cliente) {
+      this.setState({ cliente: cliente })
+    }
 
     // axios
     //   .get(`${URL_PRODUTO_BUSCAR}` + this.props.params.id)
@@ -40,54 +51,112 @@ export default class DetalhesProduto extends Component {
   };
 
   addItem = () => {
-    console.log("teste");
-  console.log(this.state.produto);
-    let valor = JSON.stringify(this.state.produto.valor);
-    valor = parseFloat(valor).toFixed(2);
-    valor = valor.toString();
 
-    valor = valor.replace(".", ",");
+    let cliente = localStorage.getItem("Cliente");
+    cliente = JSON.parse(cliente);
 
-    let localCart = localStorage.getItem("produtos");
-    localCart = JSON.parse(localCart);
+    console.log("existe cliente?\n\n"+cliente)
 
-    console.log("print do estado")
-    console.log(this.state)
+    //if ((cliente)){
+      console.log("teste");
+      console.log(this.state.produto);
+      let valor = JSON.stringify(this.state.produto.valor);
+      valor = parseFloat(valor).toFixed(2);
+      valor = valor.toString();
 
-    //create a copy of our cart state, avoid overwritting existing state
-    let cartCopy = localCart;
+      valor = valor.replace(".", ",");
 
-    //assuming we have an ID field in our item
-    let id = this.props.params.id;
+      let localCart = localStorage.getItem("produtos");
+      localCart = JSON.parse(localCart);
 
-    let existingItem;
-    //look for item in cart array
-    if (cartCopy) {
-      existingItem = cartCopy.find((cartItem) => cartItem.id === id);
-    }
+      console.log("print do estado")
+      console.log(this.state)
 
-    //if item already exists
-    if (existingItem) {
-      existingItem.qtd_item += this.state.quantidade; //update item
-    } else {
-      if (!cartCopy) {
-        cartCopy = [];
+      //create a copy of our cart state, avoid overwritting existing state
+      let cartCopy = localCart;
+
+      //assuming we have an ID field in our item
+      let id = this.props.params.id;
+
+      let existingItem;
+      //look for item in cart array
+      if (cartCopy) {
+        existingItem = cartCopy.find((cartItem) => cartItem.id === id);
       }
-      cartCopy.push({
-        id: this.props.params.id,
-        qtd_item: this.state.quantidade,
-        nome_produto: this.state.produto.nome_produto,
-        ds_produto: this.state.produto.ds_produto,
-        preco_valor: valor,
-        imagem: this.state.produto.imagem,
-      });
-      //if item doesn't exist, simply add it
-    }
-    
-    
-    //make cart a string and store in local space
-    let stringCart = JSON.stringify(cartCopy);
-    localStorage.setItem("produtos", stringCart);
+
+      //if item already exists
+      if (existingItem) {
+        existingItem.qtd_item += this.state.quantidade; //update item
+      } else {
+        if (!cartCopy) {
+          cartCopy = [];
+        }
+        cartCopy.push({
+          id: this.props.params.id,
+          qtd_item: this.state.quantidade,
+          nome_produto: this.state.produto.nome_produto,
+          ds_produto: this.state.produto.ds_produto,
+          preco_valor: valor,
+          imagem: this.state.produto.imagem,
+        });
+        //if item doesn't exist, simply add it
+      }
+      
+      
+      //make cart a string and store in local space
+      let stringCart = JSON.stringify(cartCopy);
+      localStorage.setItem("produtos", stringCart);    
+    //}
+   /* 
+   console.log("teste");
+   console.log(this.state.produto);
+   let valor = JSON.stringify(this.state.produto.valor);
+   valor = parseFloat(valor).toFixed(2);
+   valor = valor.toString();
+
+   valor = valor.replace(".", ",");
+
+   let localCart = localStorage.getItem("produtos");
+   localCart = JSON.parse(localCart);
+
+   console.log("print do estado")
+   console.log(this.state)
+
+   //create a copy of our cart state, avoid overwritting existing state
+   let cartCopy = localCart;
+
+   //assuming we have an ID field in our item
+   let id = this.props.params.id;
+
+   let existingItem;
+   //look for item in cart array
+   if (cartCopy) {
+     existingItem = cartCopy.find((cartItem) => cartItem.id === id);
+   }
+
+   //if item already exists
+   if (existingItem) {
+     existingItem.qtd_item += this.state.quantidade; //update item
+   } else {
+     if (!cartCopy) {
+       cartCopy = [];
+     }
+     cartCopy.push({
+       id: this.props.params.id,
+       qtd_item: this.state.quantidade,
+       nome_produto: this.state.produto.nome_produto,
+       ds_produto: this.state.produto.ds_produto,
+       preco_valor: valor,
+       imagem: this.state.produto.imagem,
+     });
+     //if item doesn't exist, simply add it
+   }
+   
+   
+   //make cart a string and store in local space
+   let stringCart = JSON.stringify(cartCopy);
+   localStorage.setItem("produtos", stringCart);
+    */
   };
 
   
@@ -118,6 +187,7 @@ export default class DetalhesProduto extends Component {
                 </a>
                 <h4 class="preco">R$ {valor}</h4>
                 <p class="descricaoItem">{produto.ds_produto}</p>
+                
                 <Link to={`/shoppingCart/`}>
                   <button type="submit" class="comprar" onClick={this.addItem}>
                     Comprar
