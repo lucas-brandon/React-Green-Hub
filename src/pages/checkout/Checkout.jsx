@@ -355,11 +355,11 @@ export default class Checkout extends Component {
 
 
     render() {
-        let pedidoCart = localStorage.getItem("pedido");
+        let pedidoCart = localStorage.getItem("produtos");
         pedidoCart = JSON.parse(pedidoCart);
 
         let valorTotal = 0.0;
-        pedidoCart.produtos.forEach((produto, index) => {
+        pedidoCart.forEach((produto, index) => {
             valorTotal += produto.preco_valor;
         });
 
