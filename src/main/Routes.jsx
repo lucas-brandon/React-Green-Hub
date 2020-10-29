@@ -11,6 +11,7 @@ import Register from '../pages/register/register';
 import DetalhesProduto from '../pages/detalhesProduto/detalhesProduto';
 import Profile from '../pages/profile/profile';
 import Pedidos from '../pages/pedidos/Pedidos';
+import Login from '../pages/login/Login';
 //import About from '../about/About';
 
 export default props => (
@@ -25,6 +26,7 @@ export default props => (
         <Route path='/detalhesProduto/:id' component={DetalhesProduto}></Route>
         <Route path='/profile' component={Profile}></Route>
         <Route path='/pedidos' component={Pedidos}></Route>
+        <Route path='/login' component={Login}></Route>
         <Redirect from='*' to='/home'></Redirect>
     
     </Router>

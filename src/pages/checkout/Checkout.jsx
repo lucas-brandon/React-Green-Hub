@@ -16,6 +16,7 @@ const URL_CARTAO_POST = 'http://modelagem.test/api/cartao/cadastrar/';
 
 const URL_PEDIDO_POST = 'http://modelagem.test/api/pedidos/salvar';
 
+const URL_CONTATO_POST = 'http://modelagem.test/api/contato/salvar';
 
 
 export default class Checkout extends Component {
@@ -153,7 +154,7 @@ export default class Checkout extends Component {
             localStorage.setItem("pedido", submitCart);
 
             //localStorage.setItem("cliente_id", resp.data.id);
-            self.postEndereco();
+            self.postContato();
             
               
         });
@@ -174,6 +175,48 @@ export default class Checkout extends Component {
     }
 
     //-----------POST-----------
+    postContato = () => {
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        if (!pedidoCart) {
+            pedidoCart = {};
+        }
+
+        axios.post(URL_CONTATO_POST, { 
+            cliente_id: pedidoCart.cliente_id,
+            ds_contato: this.state.telefone,
+            tipo: "telefone"
+        })
+        .then(resp => {
+
+            pedidoCart.telefone =  { 
+                cliente_id: pedidoCart.cliente_id,
+                ds_contato: this.state.telefone,
+                tipo: "telefone"
+            };
+
+            axios.post(URL_CONTATO_POST, { 
+                cliente_id: pedidoCart.cliente_id,
+                ds_contato: this.state.email,
+                tipo: "email"
+            })
+            .then(resp => {
+                pedidoCart.email =  { 
+                    cliente_id: pedidoCart.cliente_id,
+                    ds_contato: this.state.email,
+                    tipo: "email"
+                };
+
+                let submitCart = JSON.stringify(pedidoCart);
+
+                localStorage.setItem("pedido", submitCart);
+                this.postEndereco();
+            })
+
+        });
+    }
+
     postEndereco = () => {
         let self = this
         axios.post(URL_ENDERECO_POST, { 
@@ -293,7 +336,7 @@ export default class Checkout extends Component {
             })
             .then(resp2 => {
                 console.log(resp2)
-                alert("finish");
+                //alert("finish");
             })
         });
 
@@ -301,11 +344,36 @@ export default class Checkout extends Component {
 
 
     render() {
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        let valorTotal = 0.0;
+        pedidoCart.produtos.forEach((produto, index) => {
+            valorTotal += produto.preco_valor;
+        });
+
+        let frete = 15;
+
+        let valorTotalFrete = valorTotal + frete;
+
+        valorTotal = parseFloat(valorTotal).toFixed(2);
+        valorTotal = valorTotal.toString();
+        valorTotal = valorTotal.replace(".", ",");
+
+        frete = parseFloat(frete).toFixed(2);
+        frete = frete.toString();
+        frete = frete.replace(".", ",");
+
+        valorTotalFrete = parseFloat(valorTotalFrete).toFixed(2);
+        valorTotalFrete = valorTotalFrete.toString();
+        valorTotalFrete = valorTotalFrete.replace(".", ",");
+
+
         return (
             <>
-    <Titulo name="Checkout"/>
+    <Titulo titulo="Checkout"/>
 
-    <Titulo name="Informações"/>
+    <Titulo titulo="Informações"/>
 
     <section class="container-fluid container-fluid-checkout col-12">
         <div class="row">
@@ -331,7 +399,7 @@ export default class Checkout extends Component {
                     <div class="row">
                         <div class="col-md-8 col-sm-12">
                             <label for="address">Endereço*</label>
-                            <input id="address" type="text" onChange={this.changeEndereco}class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
+                            <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
                         </div>
 
                         <div class="col-md-4 col-sm-12">
@@ -416,13 +484,7 @@ export default class Checkout extends Component {
                 {/*Fim das informações do cliente*/}
 
                 {/*Forma de pagamento*/}
-                <div class="container-fluid container-fluid-checkout">
-                    <div class="row title">
-                        <div class="col-12">
-                            <p>Forma de Pagamento</p>
-                        </div>
-                    </div>
-                </div>
+                <Titulo titulo="Forma de Pagamento"/>
                 <div class="container-fluid container-fluid-checkout">
                     <div class="input-group payment">
                         {/* 
@@ -443,21 +505,21 @@ export default class Checkout extends Component {
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão visa" name="payOption" value="Visa"></input>
+                                onClick={this.changeTipoPagamento} aria-label="opção de cartão visa" name="payOption" value="2"></input>
                             </div>
                             <img class="img-custom"src="images/visa.svg" alt="visa"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão american express" name="payOption" value="American Express"></input>
+                                onChange={this.changeTipoPagamento} aria-label="opção de cartão american express" name="payOption" value="3"></input>
                             </div>
                             <img class="img-custom"src="images/american-express.svg" alt="american express'"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="Diners Club"></input>
+                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="4"></input>
                             </div>
                             <img class="img-custom"src="images/diners-club.svg" alt="diners club"></img>
                         </div>
@@ -497,16 +559,10 @@ export default class Checkout extends Component {
                 {/*Fim da forma de pagamento*/}
 
                 {/*Resumo do Pedido*/}
-                <div class="container-fluid container-fluid-checkout">
-                    <div class="row title">
-                        <div class="col-12">
-                            <p>Resumo do Pedido</p>
-                        </div>
-                    </div>
-                </div>
+                <Titulo titulo="Resumo do Pedido"></Titulo>
                 <div class="conteainer-fluid">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-8">
                             <table class="table table-checkout">
                                 {/*
                                 <thead>
@@ -522,17 +578,17 @@ export default class Checkout extends Component {
                                 <tr class="tableItemPedido">
                                     <th scope="row"></th>
                                     <td>Itens</td>
-                                    <td>R$ 39,90</td>
+                                    <td>R$ {valorTotal}</td>
                                 </tr>
                                 <tr class="tableDescontoPedido">
                                     <th scope="row"></th>
-                                    <td>Descontos</td>
-                                    <td>R$ -9,90</td>
+                                    <td>Custo do Frete</td>
+                                    <td>R$ {frete}</td>
                                 </tr>
                                 <tr class="tableTotalPedido">
                                     <th scope="row"></th>
                                     <td>Total</td>
-                                    <td>R$ 30,00</td>
+                                    <td>R$ {valorTotalFrete}</td>
                                 </tr>
                                 </tbody>
                             </table>
