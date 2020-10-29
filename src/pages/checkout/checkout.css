@@ -74,7 +74,7 @@
 /*-----Resumo do Pedido-----*/
 .tableItemPedido{
     font-size: 14px;
-    background-color: #F5F5DC;
+    background-color:#edecd1;
     
 }
 
@@ -84,11 +84,11 @@
 
 .tableDescontoPedido{
     font-size: 14px;
-    background-color: #F5F5DC;
+    background-color: #edecd1;
 }
 
 .tableTotalPedido{
     font-size: 18px;
     font-weight: bold;
-    background-color: #F5F5DC;
+    background-color: #edecd1;
 }
