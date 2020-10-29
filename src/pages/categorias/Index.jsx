@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./categorias.css";
+import GridCard from "../../template/card/gridCard";
 {
   /*import axios from 'axios';*/
 }
 
-const API = "http://localhost:8081/categorias";
+
 
 export default class Index extends Component {
   render() {
@@ -88,143 +89,14 @@ export default class Index extends Component {
           </div>
         </div>
         <div className="cartoes row col-md-10 col-12">
-          <div className="col-md-4 col-12">
-            <div className="cartao">
-              <div className="imgCartao col-12">
-                <img
-                  src="https://www.gsuplementos.com.br/upload/banner/8aa81255b9340ba8f2eda4edf36ab633.jpg"
-                  className="cartao-img"
-                  alt="..."
-                />
-              </div>
-              <div className="nomeProdutoCartao col-12">
-                <a className="a-categoria" href="#/detalhesProduto/{id}">
-                  <h3 className="nomeItem">nome Item</h3>
-                </a>
-              </div>
-              <div className="btnCartao col-12">
-                <a className="a-categoria" href="#/shopping_cart">
-                  <button type="submit" className="btnCartao comprar">
-                    Comprar
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 col-12">
-            <div className="cartao">
-              <div className="imgCartao col-12">
-                <img
-                  src="https://www.gsuplementos.com.br/upload/banner/8aa81255b9340ba8f2eda4edf36ab633.jpg"
-                  k
-                  className="cartao-img"
-                  alt="..."
-                />
-              </div>
-              <div className="nomeProdutoCartao col-12">
-                <h3 className="nomeItem">nome Item</h3>
-              </div>
-              <div className="btnCartao col-12">
-                <a className="a-categoria" href="#/shopping_cart">
-                  <button type="submit" className="btnCartao comprar">
-                    Comprar
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 col-12">
-            <div className="cartao">
-              <div className="imgCartao col-12">
-                <img
-                  src="https://www.gsuplementos.com.br/upload/banner/8aa81255b9340ba8f2eda4edf36ab633.jpg"
-                  k
-                  className="cartao-img"
-                  alt="..."
-                />
-              </div>
-              <div className="nomeProdutoCartao col-12">
-                <h3 className="nomeItem">nome Item</h3>
-              </div>
-              <div className="btnCartao col-12">
-                <a className="a-categoria" href="#/shopping_cart">
-                  <button type="submit" className="btnCartao comprar">
-                    Comprar
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 col-12">
-            <div className="cartao">
-              <div className="imgCartao col-12">
-                <img
-                  src="https://www.gsuplementos.com.br/upload/banner/8aa81255b9340ba8f2eda4edf36ab633.jpg"
-                  k
-                  className="cartao-img"
-                  alt="..."
-                />
-              </div>
-              <div className="nomeProdutoCartao col-12">
-                <h3 className="nomeItem">nome Item</h3>
-              </div>
-              <div className="btnCartao col-12">
-                <a className="a-categoria" href="#/shopping_cart">
-                  <button type="submit" className="btnCartao comprar">
-                    Comprar
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 col-12">
-            <div className="cartao">
-              <div className="imgCartao col-12">
-                <img
-                  src="https://www.gsuplementos.com.br/upload/banner/8aa81255b9340ba8f2eda4edf36ab633.jpg"
-                  k
-                  className="cartao-img"
-                  alt="..."
-                />
-              </div>
-              <div className="nomeProdutoCartao col-12">
-                <h3 className="nomeItem">nome Item</h3>
-              </div>
-              <div className="btnCartao col-12">
-                <a className="a-categoria" href="#/shopping_cart">
-                  <button type="submit" className="btnCartao comprar">
-                    Comprar
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 col-12">
-            <div className="cartao">
-              <div className="imgCartao col-12">
-                <img
-                  src="https://www.gsuplementos.com.br/upload/banner/8aa81255b9340ba8f2eda4edf36ab633.jpg"
-                  k
-                  className="cartao-img"
-                  alt="..."
-                />
-              </div>
-              <div className="nomeProdutoCartao col-12">
-                <h3 className="nomeItem">nome Item</h3>
-              </div>
-              <div className="btnCartao col-12">
-                <a className="a-categoria" href="#/shopping_cart">
-                  <button
-                    type="submit"
-                    className="btnCartao comprar"
-                    href="#/shopping_cart"
-                  >
-                    Comprar
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
+        <div className="container">
+          {/*<!--Cards-->*/}
+          <GridCard produtos={""} />
+
+          
+
+          <GridCard />
+        </div>
         </div>
       </div>
     );
