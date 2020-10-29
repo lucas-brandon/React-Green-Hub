@@ -8,7 +8,7 @@ export default props => (
             <div className="carousel-inner">
             <Images class="carousel-item active"
             href="#/detalhesDoProduto"
-            src="https://evolutionnutritionlab.com.br/media/wysiwyg/BANNER_ONE_MOBILE.png">
+            src="https://i1.wp.com/crazykiwi.com.br/wp-content/uploads/2015/05/Oit%C3%AD_1.jpg">
             </Images>
             <Images class="carousel-item"
                     link="#/detalhesDoProduto"

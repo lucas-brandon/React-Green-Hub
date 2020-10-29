@@ -28,7 +28,7 @@ export default props => {
                 </ul>
             </div>
             <div class="col-6 col-md-3  mx-auto top-bar-item">
-                <a href="#/shoppingCart" class="a-ps a-custom"> <span class="badge badge-pill">2</span><br></br>
+                <a href="#/shoppingCart" class="a-ps a-custom"><br></br>
                     <img src="images/cesta.png" alt="Cesta do Carrinho" style={{width: '40px', height: '40px'}}></img>
                 </a>
             </div>

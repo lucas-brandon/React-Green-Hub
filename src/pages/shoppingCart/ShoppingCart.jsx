@@ -31,6 +31,7 @@ export default class ShoppingCart extends Component {
     if (list != null && list !== undefined) {
      
       return list.map((id) => {
+       
         return (
             
           <ItemCart
@@ -38,8 +39,9 @@ export default class ShoppingCart extends Component {
             img={id.imagem}
             nome={id.nome_produto}
             descricao={id.ds_Produto}
+            quantidade={id.qtd_item}
             valor={id.preco_valor}
-            key={id.id}
+            identificador={id.id}
             
           />
         );

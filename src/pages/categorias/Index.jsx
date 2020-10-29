@@ -13,7 +13,6 @@ export default class Index extends Component {
       };
 
     }
-
     componentDidMount() {
       this.getProdutos();
     }
@@ -115,6 +114,7 @@ export default class Index extends Component {
                   </div>
               </div>
           </div>
-        )
-    }
+        
+    );
+  }
 }
