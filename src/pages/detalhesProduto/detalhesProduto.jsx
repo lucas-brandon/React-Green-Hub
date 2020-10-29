@@ -57,7 +57,7 @@ export default class DetalhesProduto extends Component {
 
     console.log("existe cliente?\n\n"+cliente)
 
-    if ((cliente)){
+    //if ((cliente)){
       console.log("teste");
       console.log(this.state.produto);
       let valor = JSON.stringify(this.state.produto.valor);
@@ -106,7 +106,7 @@ export default class DetalhesProduto extends Component {
       //make cart a string and store in local space
       let stringCart = JSON.stringify(cartCopy);
       localStorage.setItem("produtos", stringCart);    
-    }
+    //}
    /* 
    console.log("teste");
    console.log(this.state.produto);
