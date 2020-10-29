@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from "../../template/card/Card";
 
+
 export default props => {
 
     const exibirProdutos = () => {

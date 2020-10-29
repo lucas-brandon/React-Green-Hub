@@ -1,0 +1,43 @@
+.input-group{
+    justify-content: center;
+    font-size: 26px;
+}
+
+.color-qtd{
+    border: none;
+    color: #5A6978;
+    text-align: center;
+}
+
+#btn-minus{
+    width: 30px;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+#btn-plus, #btn-minus{
+    width: 30px;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-left: 0.25rem;
+}
+
+
+#btn-minus:hover, #btn-plus:hover{
+    border: 1px solid #208023;
+    color: white;
+    background-color: #208023;
+    cursor: pointer;
+}
+
+.input{
+    width: 30px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

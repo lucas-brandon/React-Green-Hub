@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './contact.css';
 import Titulo from '../../template/titulo/titulo';
-//import './shoppingCart.js';
+
 
 export default class Contact extends Component {
 

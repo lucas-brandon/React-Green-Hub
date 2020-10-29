@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./detalhesProduto.css";
 import Titulo from "../../template/titulo/titulo";
 import { Link } from "react-router";
+import Input from "../../template/inputQuantidade/input";
 
 import axios from "axios";
 
@@ -39,6 +40,13 @@ export default class DetalhesProduto extends Component {
   };
 
   addItem = () => {
+    console.log("teste");
+  console.log(this.state.produto);
+    let valor = JSON.stringify(this.state.produto.valor);
+    valor = parseFloat(valor).toFixed(2);
+    valor = valor.toString();
+
+    valor = valor.replace(".", ",");
 
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);
@@ -67,18 +75,20 @@ export default class DetalhesProduto extends Component {
         qtd_item: this.state.quantidade,
         nome_produto: this.state.produto.nome_produto,
         ds_produto: this.state.produto.ds_produto,
-        preco_valor: this.state.produto.valor,
+        preco_valor: valor,
+        imagem: this.state.produto.imagem,
       });
       //if item doesn't exist, simply add it
     }
-
+    
     //make cart a string and store in local space
     let stringCart = JSON.stringify(cartCopy);
     localStorage.setItem("produtos", stringCart);
-  
   };
 
+  
   render() {
+   
     const produto = new Object(this.state.produto);
 
     let valor = JSON.stringify(produto.valor);
@@ -93,12 +103,7 @@ export default class DetalhesProduto extends Component {
         <div class="cartao">
           <div class="row">
             <div class="col-12 col-md-4">
-              <img
-                src="https://www.gsuplementos.com.br/upload/banner/8aa81255b9340ba8f2eda4edf36ab633.jpg"
-                k
-                class="cartao-img"
-                alt="..."
-              />
+              <img src={produto.imagem} style={{width: '210px', height: '280px'}}class="cartao-img" alt="..." />
             </div>
             <div class="col-12 col-md-8">
               <div class="card-body">
@@ -106,20 +111,7 @@ export default class DetalhesProduto extends Component {
                 <a class="a-detalhes" href="./detalhesDoProduto.php">
                   <h3 class="nomeItem">{produto.nome_produto}</h3>
                 </a>
-                <h4 class="preco">
-                  R$ {valor}
-                  <button type="submit" class="retirar">
-                    -
-                  </button>
-                  <input
-                    onChange={this.changeEstado}
-                    class="quantidade"
-                    placeholder="1"
-                  />
-                  <button type="submit" class="adicionar">
-                    +
-                  </button>
-                </h4>
+                <h4 class="preco">R$ {valor}</h4>
                 <p class="descricaoItem">{produto.ds_produto}</p>
                 <Link to={`/shoppingCart/`}>
                   <button type="submit" class="comprar" onClick={this.addItem}>

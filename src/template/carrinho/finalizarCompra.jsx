@@ -1,6 +1,7 @@
 import React from "react";
 import "./finalizarCompra.css";
 
+
 export default (props) => {
   return (
     <div class="row cart-item">
