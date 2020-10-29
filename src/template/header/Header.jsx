@@ -2,6 +2,12 @@ import React from 'react';
 import './header.css';
 
 export default props => {
+    let logado = localStorage.getItem('Cliente');
+    logado = JSON.parse(logado);
+    let naologado = localStorage.getItem('Cliente');
+    let deslogar = () => {
+        localStorage.removeItem("Cliente");
+    }
     return (
         <>
         <header class="container-fluid headerCustom">
@@ -17,6 +23,20 @@ export default props => {
                     <img src="images/search.png" id="search" style={{width: '20px', height: '20px'}}></img>
                 </a>
             </div>
+            {logado  && 
+                <div class="row col-6 col-md-3  mx-auto  top-bar-item">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#/profile" class="a-ps a-custom">
+                            <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img>
+                        </a>
+                    </li>
+                    <li>{logado.nome}</li>
+                    <li><a href="#/home" onClick={deslogar}>sair</a></li>
+                </ul>
+            </div>
+            }
+            {!naologado && 
             <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                 <ul class="list-unstyled">
                     <li>
@@ -30,6 +50,8 @@ export default props => {
                     </li>
                 </ul>
             </div>
+            }
+            
             <div class="col-6 col-md-3  mx-auto top-bar-item">
                 <a href="#/shopping_cart" class="a-ps a-custom"> <span class="badge badge-pill">2</span><br></br>
                     <img src="images/cesta.png" alt="Cesta do Carrinho" style={{width: '40px', height: '40px'}}></img>
