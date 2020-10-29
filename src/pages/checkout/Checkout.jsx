@@ -132,11 +132,6 @@ export default class Checkout extends Component {
     //-----------GET-----------
 
     getCliente = () => {
-        //console.log("\n\n\n\n\nnome cliente antes: \n"+`${URL_CLIENTE_GET}`+this.state.cliente_nome_1);
-
-        //axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
-        //.then(resp => console.log("\n\n\n\n\nid cliente: "+resp.data.id));
-        
         let self = this
         axios.get(`${URL_CLIENTE_GET}` + self.state.cliente_nome_1)
         .then( (resp) => {
@@ -147,19 +142,35 @@ export default class Checkout extends Component {
                 pedidoCart = {};
             }
 
-            //Object.defineProperty(pedidoCart, 'cliente', {id: resp.data.id});
             pedidoCart.cliente_id = resp.data.id;
 
             let submitCart = JSON.stringify(pedidoCart);
             localStorage.setItem("pedido", submitCart);
-
-            //localStorage.setItem("cliente_id", resp.data.id);
             self.postContato();
             
               
         });
-        //axios.get(`${URL}`+this.state.cliente_nome_1)
-        //.then(resp => this.setState({cliente_id: resp.data.id}))
+        /*
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        let cliente = localStorage.getItem("Cliente");
+        cliente = JSON.parse(cliente);
+
+        if (!is_null(cliente)){
+            if (!pedidoCart) {
+                pedidoCart = {};
+            }
+
+            pedidoCart.cliente_id = cliente.id;
+
+            let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+            self.postContato();
+
+
+        }
+        */
     }
 
     componentDidMount(){
