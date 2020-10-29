@@ -38,7 +38,7 @@ a:active {
 }
 /*HEADER*/
 header {
-    background-color: #F5F5DC;
+    background-color: #edecd1;
     width: 100%;
     margin: 0;
 	padding: 0;
@@ -73,7 +73,7 @@ header {
 	text-align: left;
 	position: relative!important;
 	z-index:1;
-	background-color: #F5F5DC;
+	background-color: #edecd1;
 }
 /* teste sandwich*/
 .navbar-m {
@@ -83,7 +83,7 @@ header {
     justify-content: space-between;
     padding: .5rem 1rem;
     object-position: center;
-    background-color: #F5F5DC;
+    background-color: #edecd1;
    
 }
 	

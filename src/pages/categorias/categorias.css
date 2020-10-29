@@ -14,7 +14,7 @@ a:hover {
 .filtro {
     height: 75%;
     width: 100px;
-    background-color: #f5f5dc;
+    background-color: #edecd1;
     border: solid 2px transparent;
     margin-top: 15%;
     border-radius: 10px;
@@ -40,7 +40,7 @@ a:hover {
     min-width: 160px;
     border-radius: 10px;
     border: solid 2px transparent;
-    background-color: #f5f5dc;
+    background-color: #edecd1;
 }
 
 .nomeProdutoCartao {

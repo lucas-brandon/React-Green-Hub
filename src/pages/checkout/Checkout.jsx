@@ -12,7 +12,12 @@ const URL_ENDERECO_CLIENTE_POST = 'http://modelagem.test/api/enderecoCliente/sal
 
 const URL_PAGAMENTO_POST = 'http://modelagem.test/api/pagamento/salvar/';
 
-const URL_CARTAO_POST = 'http://modelagem.test/api/pagamento/salvar/';
+const URL_CARTAO_POST = 'http://modelagem.test/api/cartao/cadastrar/';
+
+const URL_PEDIDO_POST = 'http://modelagem.test/api/pedidos/salvar';
+
+const URL_CONTATO_POST = 'http://modelagem.test/api/contato/salvar';
+
 
 export default class Checkout extends Component {
 
@@ -20,6 +25,7 @@ export default class Checkout extends Component {
         super(props)
         this.state = {
             produto: [],
+            pedidos: [],
             cliente_id: 0,
             cliente_nome_1: "",
             cliente_nome_2: "",
@@ -108,7 +114,7 @@ export default class Checkout extends Component {
 
     //-----------Cartão-----------
     changeNrCartao = (event) => {
-        this.setState({tipo_pagamento: event.target.value})
+        this.setState({nr_cartao: event.target.value})
     }
 
     changeNomeCartao = (event) => {
@@ -134,9 +140,21 @@ export default class Checkout extends Component {
         let self = this
         axios.get(`${URL_CLIENTE_GET}` + self.state.cliente_nome_1)
         .then( (resp) => {
-            let cliente_id = resp.data.id;
-            localStorage.setItem("cliente_id", resp.data.id);
-            self.postEndereco();
+            let pedidoCart = localStorage.getItem("pedido");
+            pedidoCart = JSON.parse(pedidoCart);
+
+            if (!pedidoCart) {
+                pedidoCart = {};
+            }
+
+            //Object.defineProperty(pedidoCart, 'cliente', {id: resp.data.id});
+            pedidoCart.cliente_id = resp.data.id;
+
+            let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+
+            //localStorage.setItem("cliente_id", resp.data.id);
+            self.postContato();
             
               
         });
@@ -157,6 +175,48 @@ export default class Checkout extends Component {
     }
 
     //-----------POST-----------
+    postContato = () => {
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        if (!pedidoCart) {
+            pedidoCart = {};
+        }
+
+        axios.post(URL_CONTATO_POST, { 
+            cliente_id: pedidoCart.cliente_id,
+            ds_contato: this.state.telefone,
+            tipo: "telefone"
+        })
+        .then(resp => {
+
+            pedidoCart.telefone =  { 
+                cliente_id: pedidoCart.cliente_id,
+                ds_contato: this.state.telefone,
+                tipo: "telefone"
+            };
+
+            axios.post(URL_CONTATO_POST, { 
+                cliente_id: pedidoCart.cliente_id,
+                ds_contato: this.state.email,
+                tipo: "email"
+            })
+            .then(resp => {
+                pedidoCart.email =  { 
+                    cliente_id: pedidoCart.cliente_id,
+                    ds_contato: this.state.email,
+                    tipo: "email"
+                };
+
+                let submitCart = JSON.stringify(pedidoCart);
+
+                localStorage.setItem("pedido", submitCart);
+                this.postEndereco();
+            })
+
+        });
+    }
+
     postEndereco = () => {
         let self = this
         axios.post(URL_ENDERECO_POST, { 
@@ -170,7 +230,70 @@ export default class Checkout extends Component {
         })
         .then(resp => {
 
-            localStorage.setItem("endereco_id", resp.data.id);
+            let pedidoCart = localStorage.getItem("pedido");
+            pedidoCart = JSON.parse(pedidoCart);
+
+            if (!pedidoCart) {
+                pedidoCart = {};
+            }
+
+            let endereco = new Object({
+                endereco_id: resp.data.id,
+                ds_endereco: this.state.ds_endereco,
+                cep: this.state.cep,
+                numero: this.state.numero,
+                bairro: this.state.bairro,
+                cidade: this.state.cidade,
+                estado: this.state.estado 
+            });
+
+            pedidoCart.endereco = endereco;
+
+            let submitCart = JSON.stringify(pedidoCart);
+
+            localStorage.setItem("pedido", submitCart);
+
+            //localStorage.setItem("endereco_id", resp.data.id);
+            self.postCartao();
+        });
+    }
+    postCartao = () => {
+        let self = this
+        //let cliente = localStorage.getItem('cliente_id');
+
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        if (!pedidoCart) {
+            pedidoCart = {};
+        }
+
+        axios.post(URL_CARTAO_POST+pedidoCart.cliente_id, { 
+            nr_cartao: this.state.nr_cartao,
+            nome: this.state.nome_cartao,
+            //cd_seguranca: this.state.cd_seguranca,
+            bandeira: this.state.tipo_pagamento,
+            validade: this.state.dt_expiracao
+            //complemento: this.state.complemento,
+        })
+        .then(resp => {
+
+            let cartao = new Object({
+                cliente_id: pedidoCart.cliente_id,
+                nr_cartao: this.state.nr_cartao,
+                nome_cartao: this.state.nome_cartao,
+                bandeira: this.state.tipo_pagamento,
+                //cd_seguranca: this.state.cd_seguranca,
+                validade: this.state.dt_expiracao
+            })
+
+
+            pedidoCart.cartao = (cartao);
+
+            let submitCart = JSON.stringify(pedidoCart);
+
+            localStorage.setItem("pedido", submitCart);
+
             self.postPedido();
         });
     }
@@ -179,27 +302,78 @@ export default class Checkout extends Component {
         //console.log('configurando endereco cliente\n\n\n\n');     
         
         let localCartCliente = localStorage.getItem("cliente_id");
-        let localCartEndereco = localStorage.getItem("endereco_id");
+        let localCartEndereco = localStorage.getItem("endereco");
+        let localCartProdutos = localStorage.getItem("produtos");
+        localCartProdutos = JSON.parse(localCartProdutos);
+
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
 
 
         axios.post(URL_ENDERECO_CLIENTE_POST, { 
-            cliente_id: localCartCliente,
-            endereco_id: localCartEndereco 
+            cliente_id: pedidoCart.cliente_id,
+            endereco_id: pedidoCart.endereco.endereco_id
         })
         .then(resp => {
             //console.log("resposta\n\n\n\n\n\n\n")
             console.log(resp)
+            pedidoCart.pagamento = (this.state.tipo_pagamento);
+            pedidoCart.status_pedido_id = 1;
+            pedidoCart.nr_pedido = 10+pedidoCart.cliente_id
+            pedidoCart.dt_pedido = "2020-10-10"
+            pedidoCart.produtos = localCartProdutos;
+
+            let submitCart = JSON.stringify(pedidoCart);
+
+            localStorage.setItem("pedido", submitCart);
+
+            axios.post(URL_PEDIDO_POST, { 
+                cliente_id: pedidoCart.cliente_id,
+                pagamento_id: pedidoCart.pagamento,
+                nr_pedido: pedidoCart.nr_pedido,
+                dt_pedido: pedidoCart.dt_pedido,
+                produtos: localCartProdutos
+            })
+            .then(resp2 => {
+                console.log(resp2)
+                //alert("finish");
+            })
         });
 
     }
 
 
     render() {
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        let valorTotal = 0.0;
+        pedidoCart.produtos.forEach((produto, index) => {
+            valorTotal += produto.preco_valor;
+        });
+
+        let frete = 15;
+
+        let valorTotalFrete = valorTotal + frete;
+
+        valorTotal = parseFloat(valorTotal).toFixed(2);
+        valorTotal = valorTotal.toString();
+        valorTotal = valorTotal.replace(".", ",");
+
+        frete = parseFloat(frete).toFixed(2);
+        frete = frete.toString();
+        frete = frete.replace(".", ",");
+
+        valorTotalFrete = parseFloat(valorTotalFrete).toFixed(2);
+        valorTotalFrete = valorTotalFrete.toString();
+        valorTotalFrete = valorTotalFrete.replace(".", ",");
+
+
         return (
             <>
-    <Titulo name="Checkout"/>
+    <Titulo titulo="Checkout"/>
 
-    <Titulo name="Informações"/>
+    <Titulo titulo="Informações"/>
 
     <section class="container-fluid container-fluid-checkout col-12">
         <div class="row">
@@ -225,7 +399,7 @@ export default class Checkout extends Component {
                     <div class="row">
                         <div class="col-md-8 col-sm-12">
                             <label for="address">Endereço*</label>
-                            <input id="address" type="text" onChange={this.changeEndereco}class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
+                            <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
                         </div>
 
                         <div class="col-md-4 col-sm-12">
@@ -310,13 +484,7 @@ export default class Checkout extends Component {
                 {/*Fim das informações do cliente*/}
 
                 {/*Forma de pagamento*/}
-                <div class="container-fluid container-fluid-checkout">
-                    <div class="row title">
-                        <div class="col-12">
-                            <p>Forma de Pagamento</p>
-                        </div>
-                    </div>
-                </div>
+                <Titulo titulo="Forma de Pagamento"/>
                 <div class="container-fluid container-fluid-checkout">
                     <div class="input-group payment">
                         {/* 
@@ -330,28 +498,28 @@ export default class Checkout extends Component {
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão master card" name="payOption" value="Cartão de crédito MasterCard"></input>
+                                onClick={this.changeTipoPagamento}aria-label="opção de cartão master card" name="payOption" value="1"></input>
                             </div>
                             <img class="img-custom"src="images/mc_vrt_pos.svg" alt="master card"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão visa" name="payOption" value="Cartão de crédito Visa"></input>
+                                onClick={this.changeTipoPagamento} aria-label="opção de cartão visa" name="payOption" value="2"></input>
                             </div>
                             <img class="img-custom"src="images/visa.svg" alt="visa"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão american express" name="payOption" value="Cartão de crédito American Express"></input>
+                                onChange={this.changeTipoPagamento} aria-label="opção de cartão american express" name="payOption" value="3"></input>
                             </div>
                             <img class="img-custom"src="images/american-express.svg" alt="american express'"></img>
                         </div>
                         <div class="input-group-prepend itemRadio">
                             <div class="input-group">
                                 <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="Cartão de crédito Diners Club"></input>
+                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="4"></input>
                             </div>
                             <img class="img-custom"src="images/diners-club.svg" alt="diners club"></img>
                         </div>
@@ -369,17 +537,18 @@ export default class Checkout extends Component {
                             <div class="col-sm-12">
                                 <label for="cardName">Nome no cartão</label>
                                 <input id="cardName" type="text" 
-                                onChange={this.changeCEP}class="form-control" required></input>
+                                onChange={this.changeNomeCartao}class="form-control" required></input>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
+                            {/*
                             <div class="col-md-6 col-sm-12">
                                 <label for="cvv">Código de segurança</label>
                                 <input id="cvv" type="text" onChange={this.changeCdCartao} class="form-control" required></input>
                             </div>
-
+                            */}
                             <div class="col-md-6 col-sm-12">
                                 <label for="expiryDate">Data de expiração</label>
                                 <input id="expiryDate" type="text"  onChange={this.changeDtCartao} class="form-control" required></input>
@@ -390,16 +559,10 @@ export default class Checkout extends Component {
                 {/*Fim da forma de pagamento*/}
 
                 {/*Resumo do Pedido*/}
-                <div class="container-fluid container-fluid-checkout">
-                    <div class="row title">
-                        <div class="col-12">
-                            <p>Resumo do Pedido</p>
-                        </div>
-                    </div>
-                </div>
+                <Titulo titulo="Resumo do Pedido"></Titulo>
                 <div class="conteainer-fluid">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-8">
                             <table class="table table-checkout">
                                 {/*
                                 <thead>
@@ -415,17 +578,17 @@ export default class Checkout extends Component {
                                 <tr class="tableItemPedido">
                                     <th scope="row"></th>
                                     <td>Itens</td>
-                                    <td>R$ 39,90</td>
+                                    <td>R$ {valorTotal}</td>
                                 </tr>
                                 <tr class="tableDescontoPedido">
                                     <th scope="row"></th>
-                                    <td>Descontos</td>
-                                    <td>R$ -9,90</td>
+                                    <td>Custo do Frete</td>
+                                    <td>R$ {frete}</td>
                                 </tr>
                                 <tr class="tableTotalPedido">
                                     <th scope="row"></th>
                                     <td>Total</td>
-                                    <td>R$ 30,00</td>
+                                    <td>R$ {valorTotalFrete}</td>
                                 </tr>
                                 </tbody>
                             </table>

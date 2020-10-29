@@ -13,14 +13,14 @@ body {
 
 
 footer {
-    background-color: #F5F5DC;
+    background-color: #edecd1;
     color: gray;
     margin-top: 110px;
     max-height: 110px;
 }
 
 .footer {
-    background-color: #F5F5DC;
+    background-color: #edecd1;
     border-top: 1px solid #056608;
     text-align: center;
 }
@@ -40,7 +40,7 @@ footer {
 }
 
 .list-group-item {
-    background-color: #F5F5DC !important;
+    background-color: #edecd1 !important;
     border: none !important;
 }
 
