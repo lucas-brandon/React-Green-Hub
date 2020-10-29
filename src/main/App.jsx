@@ -4,6 +4,7 @@ import React from 'react';
 import Header from '../template/header/Header';
 import Footer from '../template/footer/Footer';
 import Routes from './Routes';
+import './app.css'
 
 export default props => {
     if (Routes.path == '.login'){

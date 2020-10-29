@@ -12,11 +12,23 @@ export default class Index extends Component {
     super(props);
     this.state = {
       produtos: [],
+      cont: 0
     };
 
   }
 
+  refreshPage = () => {
+    window.location.reload(false);
+    if (window.location.reload(true)){
+      window.location.reload(true);
+      this.cont ++;
+    }
+  }
+
   componentDidMount() {
+    if(this.cont < 1){
+      this.refreshPage();
+    }
     this.getProdutos();
   }
 
