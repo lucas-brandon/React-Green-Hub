@@ -93,6 +93,7 @@ export default class DetalhesProduto extends Component {
   
   render() {
    
+    // eslint-disable-next-line no-new-object
     const produto = new Object(this.state.produto);
 
     let valor = JSON.stringify(produto.valor);
@@ -107,7 +108,7 @@ export default class DetalhesProduto extends Component {
         <div class="cartao">
           <div class="row">
             <div class="col-12 col-md-4">
-              <img src={produto.imagem} style={{width: '210px', height: '280px'}}class="cartao-img" alt="..." />
+              <img src={produto.imagem} style={{width:'210px', height: '280px'}}class="cartao-img" alt="..." />
             </div>
             <div class="col-12 col-md-8">
               <div class="card-body">

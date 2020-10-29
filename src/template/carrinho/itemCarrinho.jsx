@@ -22,9 +22,9 @@ total = JSON.stringify(total);
 //  })
 
   return (
-    <div id="item" class="row cart-item">
+    <div id="item" class="row cart-item img">
       <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-        <img class="img-custom" src={props.img} alt="Omega 3" style={{width: "70px", height: "90px"}}></img>
+        <img src={props.img} alt="suplemento" style={{height:'90px'}}></img>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
         <span id="item-name" class="item-main">
