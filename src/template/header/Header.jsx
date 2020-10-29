@@ -12,10 +12,7 @@ export default props => {
                 </a>
             </div>
             <div class="col-8 col-md-4 mx-auto  search top-bar-item">
-                <input class="form-control form-control-custom" type="search" placeholder="Search " aria-label="Search"></input>
-                <a href="#/detalhesProduto/{id}" class=" a-custom">
-                    <img src="images/search.png" id="search" style={{width: '20px', height: '20px'}}></img>
-                </a>
+                <h1  style={{color: "green" }}>Green Hub</h1>
             </div>
             <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                 <ul class="list-unstyled">
