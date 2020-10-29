@@ -101,6 +101,7 @@ export default class DetalhesProduto extends Component {
                 k
                 class="cartao-img"
                 alt="..."
+                style={{width: "230px", height: "255px"}}
               />
             </div>
             <div class="col-12 col-md-8">
