@@ -7,7 +7,6 @@ import Finalizar from "../../template/carrinho/finalizarCompra";
 import Titulo from "../../template/titulo/titulo";
 import Indice from "../../template/indice/indice";
 
-
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
@@ -24,16 +23,25 @@ export default class ShoppingCart extends Component {
     localCart = JSON.parse(localCart);
     this.setState({ produtos: localCart });
   };
-  
+  calculaTotal = () => {
+    const list = this.state.produtos;
+
+    list.map((valor) => {
+      let numero = valor.valor_total;
+
+      let total = numero.reduce(function (total, numero) {
+        return total + numero;
+      }, 0);
+      return total;
+    });
+  };
+
   exibirProdutos = () => {
     const list = this.state.produtos;
 
     if (list != null && list !== undefined) {
-     
       return list.map((id) => {
-       
         return (
-            
           <ItemCart
             divClass="col-md-4 "
             img={id.imagem}
@@ -42,7 +50,6 @@ export default class ShoppingCart extends Component {
             quantidade={id.qtd_item}
             valor={id.preco_valor}
             identificador={id.id}
-            
           />
         );
       });
@@ -58,7 +65,7 @@ export default class ShoppingCart extends Component {
         <Indice items={["Produto", "Preço", "Quantidade", "Total"]} />
         <div>
           {this.exibirProdutos()}
-          <Finalizar />
+          <Finalizar total={this.calculaTotal}/>
         </div>
       </div>
     );

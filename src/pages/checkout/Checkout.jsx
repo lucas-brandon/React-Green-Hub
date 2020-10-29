@@ -352,6 +352,8 @@ export default class Checkout extends Component {
             valorTotal += produto.preco_valor;
         });
 
+        console.log('testePedidoCart ' +  pedidoCart)
+
         let frete = 15;
 
         let valorTotalFrete = valorTotal + frete;
