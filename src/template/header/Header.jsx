@@ -40,19 +40,19 @@ export default props => {
         
         <ul class="nav-m row">
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
+                <a href="#/categorias/1" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
             </li>
             <li class="col-12 col-md-4 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
+                <a href="#/categorias/2" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Vitaminas</a>
+                <a href="#/categorias/3" class="nav-link nav-link-custom a-custom">Vitaminas</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
+                <a href="#/categorias/4" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Proteinas</a>
+                <a href="#/categorias/5" class="nav-link nav-link-custom a-custom">Proteinas</a>
             </li>
         </ul>
     </nav>
