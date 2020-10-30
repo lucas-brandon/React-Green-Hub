@@ -360,7 +360,7 @@ export default class Checkout extends Component {
 
         let valorTotal = 0.0;
         pedidoCart.forEach((produto, index) => {
-            valorTotal += produto.preco_valor;
+            valorTotal += produto.valor_total;
         });
 
         console.log('testePedidoCart ' +  pedidoCart)
@@ -564,7 +564,7 @@ export default class Checkout extends Component {
                             */}
                             <div class="col-md-6 col-sm-12">
                                 <label for="expiryDate">Data de expiração</label>
-                                <input id="expiryDate" type="text"  onChange={this.changeDtCartao} class="form-control" required></input>
+                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" required></input>
                             </div>
                         </div>
                     </div>
