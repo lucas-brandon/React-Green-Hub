@@ -74,7 +74,7 @@ export default props => {
                 <a href="#/categorias/4" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias/5" class="nav-link nav-link-custom a-custom">Proteinas</a>
+                <a href="#/categorias/5" class="nav-link nav-link-custom a-custom">Proteínas</a>
             </li>
         </ul>
     </nav>
