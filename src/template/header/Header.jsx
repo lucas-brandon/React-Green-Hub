@@ -5,8 +5,9 @@ export default props => {
     let logado = localStorage.getItem('Cliente');
     logado = JSON.parse(logado);
     let naologado = localStorage.getItem('Cliente');
-    let deslogar = () => {
+    function deslogar () {
         localStorage.removeItem("Cliente");
+        window.location.href = "http://localhost:3002/#/home";
     }
     return (
         <>
@@ -29,7 +30,7 @@ export default props => {
                         </a>
                     </li>
                     <li>{logado.nome}</li>
-                    <li><a href="#/home" onClick={deslogar}>sair</a></li>
+                    <li><a href="#/home" onClick={deslogar()}>sair</a></li>
                 </ul>
             </div>
             }
