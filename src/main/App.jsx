@@ -13,13 +13,13 @@ export default props => {
         )
     } else {
         return (
-            <div className="container">
+            <>
                 <Header></Header>
-                
+                <div className= 'container-fluid'>
                 <Routes></Routes>
-                
+                </div>
                 <Footer></Footer>
-            </div>
+           </>
         )
     }
 }
