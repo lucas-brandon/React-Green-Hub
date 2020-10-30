@@ -188,7 +188,7 @@ export default class DetalhesProduto extends Component {
                 <h4 class="preco">R$ {valor}</h4>
                 <p class="descricaoItem">{produto.ds_produto}</p>
                 
-                <Link to={`/shoppingCart/`}>
+                <Link to={`#/shoppingCart/`}>
                   <button type="submit" class="comprar" onClick={this.addItem}>
                     Comprar
                   </button>

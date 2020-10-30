@@ -373,6 +373,7 @@ export default class Checkout extends Component {
             })
             .then(resp2 => {
                 console.log(resp2)
+                localStorage.removeItem('produtos');
                 //alert("finish");
             })
         });
@@ -418,6 +419,7 @@ export default class Checkout extends Component {
         <div class="row">
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                 {/*Informações do cliente*/}
+                {/*}
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
@@ -433,7 +435,7 @@ export default class Checkout extends Component {
                         </div>
                     </div>
                 </div>
-
+                */}
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-8 col-sm-12">
@@ -635,7 +637,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a ><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
+                            <a href='#/finished'><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>

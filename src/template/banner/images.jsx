@@ -8,7 +8,7 @@ export default props => (
           {" "}
               <img
               src={props.src}
-              
+              style={props.style}
               height="250px"
               className="d-block w-100"
               ></img>
