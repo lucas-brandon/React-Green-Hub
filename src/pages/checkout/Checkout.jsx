@@ -297,7 +297,7 @@ export default class Checkout extends Component {
     postCartao = () => {
         let self = this
         //let cliente = localStorage.getItem('cliente_id');
-
+        
         let pedidoCart = localStorage.getItem("pedido");
         pedidoCart = JSON.parse(pedidoCart);
 
@@ -314,7 +314,8 @@ export default class Checkout extends Component {
             //complemento: this.state.complemento,
         })
         .then(resp => {
-
+            console.log("TESTE-RESP")
+            console.log(resp)
             let cartao = new Object({
                 cliente_id: pedidoCart.cliente_id,
                 nr_cartao: this.state.nr_cartao,
@@ -635,7 +636,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a ><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
+                            <a href='#/pedidos'><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>
