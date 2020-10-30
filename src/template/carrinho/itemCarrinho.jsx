@@ -83,7 +83,7 @@ export default (props) => {
             </button>
           </div>
 
-          <div class="quantidade">{cont}</div>
+          <div class="quantidade" onChange = {props.onChange}>{cont}</div>
 
           <div class="input-group-prepend">
             <button

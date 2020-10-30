@@ -12,7 +12,7 @@ export default class ShoppingCart extends Component {
     super(props);
     this.state = {
       produtos: [],
-      total: [],
+      total:0,
     };
   }
   
@@ -28,14 +28,13 @@ export default class ShoppingCart extends Component {
   calculaTotal = () => {
     const list = this.state.produtos;
 
-    list.map((valor) => {
-      let numero = valor.valor_total;
+  let total = 0
+  list.forEach(produto => {
+    total += produto.valor_total 
 
-      let total = numero.reduce(function (total, numero) {
-        return total + numero;
-      }, 0);
-      return total;
-    });
+  });
+  this.setState({total: total});
+   
   };
 
   exibirProdutos = () => {
@@ -52,6 +51,9 @@ export default class ShoppingCart extends Component {
             quantidade={id.qtd_item}
             valor={id.preco_valor}
             identificador={id.id}
+            onChange={this.calculaTotal}
+            
+           
           />
         );
       });
@@ -67,7 +69,7 @@ export default class ShoppingCart extends Component {
         <Indice items={["Produto", "Preço", "Quantidade", "Total"]} />
         <div>
           {this.exibirProdutos()}
-          <Finalizar total={this.calculaTotal}/>
+          <Finalizar />
         </div>
       </div>
     );
