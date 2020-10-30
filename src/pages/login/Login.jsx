@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./login.css"
-import "./Login.css";
+import "./login.css";
 import axios from 'axios';
 import App from '../../main/App';
 import { Router, Redirect } from 'react-router';
@@ -30,10 +29,11 @@ export default class Login extends Component {
     setCliente = () => {
             axios.get(`${URL_LOGAR}` + this.state.senha + '/' + this.state.email)
             .then(resp => {
-              alert(resp.data)
+              //alert(resp.data)
               localStorage.setItem('Cliente', JSON.stringify(resp.data));
                 
             })
+            window.location.href = '#/home';
     }
 
     render () {
@@ -49,10 +49,13 @@ export default class Login extends Component {
                         {/*
                         <span className="psw"><a href="#">Esqueci minha senha </a></span>
                         */}
-                            <button className="btn btn-lg btn-primary btn-block" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button>
-                        
-                        <button className="btn btn-lg btn-primary btn-block" type="submit" id="Cadastrar" href='#/register'>Cadastre-se aqui.</button>
+                
+                      
                     </form>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button><br></br>
+                    <a href='#/register'>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit" id="Cadastrar">Cadastre-se aqui.</button>
+                    </a>
                 </div>
             </div> 
         )

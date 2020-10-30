@@ -52,9 +52,6 @@ export default class Index extends Component {
         {/*<!--Cards-->*/}
         <div className="container">
           <GridCard produtos={produtos} />
-
-          
-
           <GridCard />
         </div>
 
