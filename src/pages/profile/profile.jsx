@@ -3,13 +3,13 @@ import './profile.css';
 import Titulo from '../../template/titulo/titulo';
 
 export default class Profile extends Component {
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         logado: localStorage.getItem('Cliente'),
-    //         logado: JSON.parse(logado)
-    //     }
-    // }
+    constructor(props){
+        super(props);
+        this.state = {
+            cliente: '',
+            cliente: JSON.parse(this.cliente)
+        }
+    }
 
     componentDidMount() {
         this.getCliente();
@@ -31,13 +31,13 @@ export default class Profile extends Component {
                         <div class="col-12">
                             <div class= "form-group">
                                 <div class="card">
-                                    <h5 class="card-header">l</h5>
+                                    <h5 class="card-header">{this.logado.nome}</h5>
                                     <div class="card-body">
-                                        <p class="card-text">CPF: 123.456.789-10</p>
+                                        <p class="card-text">{this.logado.cpf}</p>
                                         <p class="card-text">Celular: (11) 9 9999-8888</p>
                                         <p class="card-text">Telefone: (11) 2000-2000</p>
                                         <p class="card-text">Email: maria.silva@gmail.com</p>
-                                        <p class="card-text">Data de Nascimento: 01/01/2001</p>
+                                        <p class="card-text">{this.logado.dt_nascimento}</p>
                                         <a href="#" class="btn btn-lg btnAlterar">Alterar Cadastro</a>
                                     </div>
                                 </div>

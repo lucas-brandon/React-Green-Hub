@@ -66,11 +66,16 @@ export default (props) => {
 
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
         <div class="input-group">
-          <div class="input-group-prepend">
+          <div class="input-group-prepstart">
             <button
               onClick={() => {
-                setCont(cont - 1);
-                loadProducts();
+                if (cont > 1) {
+                  setCont(cont - 1);
+                  loadProducts();
+                } else {
+                  setCont(cont - 0);
+                  loadProducts();
+                }
               }}
               class="color-qtd btn-minus"
               type="button"
@@ -90,6 +95,7 @@ export default (props) => {
               onClick={() => {
                 setCont(cont + 1);
                 loadProducts();
+                
               }}
               class="color-qtd btn-plus"
               type="button"
