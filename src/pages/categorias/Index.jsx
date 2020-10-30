@@ -1,21 +1,26 @@
 import React, { Component } from "react";
 import "./categorias.css";
-import axios from 'axios';
+import axios from "axios";
 import GridCard from "../../template/card/gridCard";
 
 const URL_PRODUTO_LISTA = "http://modelagem.test/api/categoria/buscarProdutos/";
 
 export default class Index extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        produtos: [],
-      };
+  constructor(props) {
+    super(props);
+    this.state = {
+      produtos: [],
+    };
+  }
+  componentDidMount() {
+    this.getProdutos();
+  }
 
-    }
-    componentDidMount() {
-      this.getProdutos();
-    }
+  getProdutos = () => {
+    axios
+      .get(`${URL_PRODUTO_LISTA}` + this.props.params.id)
+      .then((resp) => this.setState({ produtos: resp.data }));
+  };
 
     getProdutos = () => {
       axios
@@ -119,7 +124,7 @@ export default class Index extends Component {
                   </div>
               </div>
           </div>
-        
-    );
+      
+    )
   }
 }
