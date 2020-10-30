@@ -19,7 +19,7 @@ export default props => {
         
             return ( 
             <Card divClass ="col-md-4 " img ={item.link_imagem}
-            valor={valor} nome={item.nm_produto} marca={item.nm_marca} link={path+item.id} msg="Ver Produto" key={item.id}/>
+            valor={valor} nome={item.nome_produto} marca={item.nm_marca} link={path+item.id} msg="Ver Produto" key={item.id}/>
             )
         }
     )
