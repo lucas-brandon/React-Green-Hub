@@ -7,13 +7,19 @@ import './app.css';
 
 
 export default props => {
-    return (
-        <div className="container">
-            <Header></Header>
-            
+    if (Routes.path == '.login'){
+        return (
             <Routes></Routes>
-            
-            <Footer></Footer>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <div className="container">
+                <Header></Header>
+                
+                <Routes></Routes>
+                
+                <Footer></Footer>
+            </div>
+        )
+    }
 }

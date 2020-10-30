@@ -132,11 +132,31 @@ export default class Checkout extends Component {
     //-----------GET-----------
 
     getCliente = () => {
-        //console.log("\n\n\n\n\nnome cliente antes: \n"+`${URL_CLIENTE_GET}`+this.state.cliente_nome_1);
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
 
-        //axios.get(`${URL_CLIENTE_GET}` + this.state.cliente_nome_1)
-        //.then(resp => console.log("\n\n\n\n\nid cliente: "+resp.data.id));
-        
+        let cliente = localStorage.getItem("Cliente");
+        cliente = JSON.parse(cliente);
+
+        if ((cliente)){
+            if (!pedidoCart) {
+                pedidoCart = {};
+            }
+
+            pedidoCart.cliente_id = cliente.id;
+
+            let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+            this.postContato();
+
+
+        }
+        else{
+            //alert("teste")
+            window.location.href = '#/login'
+        }
+
+        /*
         let self = this
         axios.get(`${URL_CLIENTE_GET}` + self.state.cliente_nome_1)
         .then( (resp) => {
@@ -147,19 +167,36 @@ export default class Checkout extends Component {
                 pedidoCart = {};
             }
 
-            //Object.defineProperty(pedidoCart, 'cliente', {id: resp.data.id});
             pedidoCart.cliente_id = resp.data.id;
 
             let submitCart = JSON.stringify(pedidoCart);
             localStorage.setItem("pedido", submitCart);
-
-            //localStorage.setItem("cliente_id", resp.data.id);
             self.postContato();
             
               
         });
-        //axios.get(`${URL}`+this.state.cliente_nome_1)
-        //.then(resp => this.setState({cliente_id: resp.data.id}))
+        */
+        /*
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        let cliente = localStorage.getItem("Cliente");
+        cliente = JSON.parse(cliente);
+
+        if (!is_null(cliente)){
+            if (!pedidoCart) {
+                pedidoCart = {};
+            }
+
+            pedidoCart.cliente_id = cliente.id;
+
+            let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+            self.postContato();
+
+
+        }
+        */
     }
 
     componentDidMount(){
@@ -344,12 +381,12 @@ export default class Checkout extends Component {
 
 
     render() {
-        let pedidoCart = localStorage.getItem("pedido");
+        let pedidoCart = localStorage.getItem("produtos");
         pedidoCart = JSON.parse(pedidoCart);
 
         let valorTotal = 0.0;
-        pedidoCart.produtos.forEach((produto, index) => {
-            valorTotal += produto.preco_valor;
+        pedidoCart.forEach((produto, index) => {
+            valorTotal += produto.valor_total   ;
         });
 
         let frete = 15;
@@ -551,7 +588,7 @@ export default class Checkout extends Component {
                             */}
                             <div class="col-md-6 col-sm-12">
                                 <label for="expiryDate">Data de expiração</label>
-                                <input id="expiryDate" type="text"  onChange={this.changeDtCartao} class="form-control" required></input>
+                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" required></input>
                             </div>
                         </div>
                     </div>
@@ -596,7 +633,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href="#/finished"><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
+                            <a ><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>
