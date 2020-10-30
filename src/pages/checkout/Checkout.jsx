@@ -132,6 +132,31 @@ export default class Checkout extends Component {
     //-----------GET-----------
 
     getCliente = () => {
+        let pedidoCart = localStorage.getItem("pedido");
+        pedidoCart = JSON.parse(pedidoCart);
+
+        let cliente = localStorage.getItem("Cliente");
+        cliente = JSON.parse(cliente);
+
+        if ((cliente)){
+            if (!pedidoCart) {
+                pedidoCart = {};
+            }
+
+            pedidoCart.cliente_id = cliente.id;
+
+            let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+            this.postContato();
+
+
+        }
+        else{
+            //alert("teste")
+            window.location.href = '#/login'
+        }
+
+        /*
         let self = this
         axios.get(`${URL_CLIENTE_GET}` + self.state.cliente_nome_1)
         .then( (resp) => {
@@ -150,6 +175,7 @@ export default class Checkout extends Component {
             
               
         });
+        */
         /*
         let pedidoCart = localStorage.getItem("pedido");
         pedidoCart = JSON.parse(pedidoCart);
@@ -360,7 +386,7 @@ export default class Checkout extends Component {
 
         let valorTotal = 0.0;
         pedidoCart.forEach((produto, index) => {
-            valorTotal += produto.preco_valor;
+            valorTotal += produto.valor_total   ;
         });
 
         let frete = 15;
@@ -562,7 +588,7 @@ export default class Checkout extends Component {
                             */}
                             <div class="col-md-6 col-sm-12">
                                 <label for="expiryDate">Data de expiração</label>
-                                <input id="expiryDate" type="text"  onChange={this.changeDtCartao} class="form-control" required></input>
+                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" required></input>
                             </div>
                         </div>
                     </div>
@@ -607,7 +633,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href="#/finished"><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
+                            <a ><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>
