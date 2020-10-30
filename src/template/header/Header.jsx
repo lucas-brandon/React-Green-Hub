@@ -23,12 +23,11 @@ export default props => {
                 {logado  && 
                     <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                     <ul class="list-unstyled">
+                    <a href="#/profile" class="a-ps a-custom">
                         <li>
-                            <a href="#/profile" class="a-ps a-custom">
-                                <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img>
-                            </a>
+                            <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img>    
                         </li>
-                        <li>{logado.nome}</li>
+                        <li>{logado.nome}</li></a>
                         <li><a href="#/home" onClick={deslogar()}>sair</a></li>
                     </ul>
                 </div>

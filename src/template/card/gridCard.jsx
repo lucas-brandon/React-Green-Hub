@@ -26,8 +26,7 @@ export default props => {
 }
 
     return (
-
-        <div class="row mb-5" >
+        <div class="row mb-5">
             {exibirProdutos()}                
         </div>
     )
