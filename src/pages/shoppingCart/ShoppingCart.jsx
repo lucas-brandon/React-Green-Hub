@@ -16,9 +16,11 @@ export default class ShoppingCart extends Component {
       total: [],
     };
   }
+  
   componentDidMount() {
     this.loadProducts();
   }
+
   loadProducts = () => {
     let localCart = localStorage.getItem("produtos");
     localCart = JSON.parse(localCart);

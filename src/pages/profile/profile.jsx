@@ -3,13 +3,13 @@ import './profile.css';
 import Titulo from '../../template/titulo/titulo';
 
 export default class Profile extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            logado: localStorage.getItem('Cliente'),
-            logado: JSON.parse(logado)
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         logado: localStorage.getItem('Cliente'),
+    //         logado: JSON.parse(logado)
+    //     }
+    // }
 
     componentDidMount() {
         this.getCliente();

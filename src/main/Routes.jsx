@@ -13,7 +13,7 @@ import Register from '../pages/register/register';
 import DetalhesProduto from '../pages/detalhesProduto/detalhesProduto';
 import Profile from '../pages/profile/profile';
 import Pedidos from '../pages/pedidos/Pedidos';
-// import About from '../about/About';
+//import About from '../about/About';
 
 export default props => (
     <Router history={hashHistory}>
