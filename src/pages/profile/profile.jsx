@@ -3,6 +3,22 @@ import './profile.css';
 import Titulo from '../../template/titulo/titulo';
 
 export default class Profile extends Component {
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         logado: localStorage.getItem('Cliente'),
+    //         logado: JSON.parse(logado)
+    //     }
+    // }
+
+    componentDidMount() {
+        this.getCliente();
+    }
+
+    getCliente = () => {
+        this.setState({cliente: localStorage.getItem("Cliente")});
+    }
+    
     render() {
         return (
             <>
@@ -15,7 +31,7 @@ export default class Profile extends Component {
                         <div class="col-12">
                             <div class= "form-group">
                                 <div class="card">
-                                    <h5 class="card-header">Maria da Silva</h5>
+                                    <h5 class="card-header">l</h5>
                                     <div class="card-body">
                                         <p class="card-text">CPF: 123.456.789-10</p>
                                         <p class="card-text">Celular: (11) 9 9999-8888</p>

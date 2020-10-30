@@ -1,19 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React from 'react';
-//import Menu from '../template/Menu';
+import React, {Component} from 'react';
 import Header from '../template/header/Header';
 import Footer from '../template/footer/Footer';
 import Routes from './Routes';
-import './app.css'
+import './app.css';
+
 
 export default props => {
-    return (
-        <div className="container">
-            <Header></Header>
-            
+    if (Routes.path == '.login'){
+        return (
             <Routes></Routes>
-            
-            <Footer></Footer>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <div className="container">
+                <Header></Header>
+                
+                <Routes></Routes>
+                
+                <Footer></Footer>
+            </div>
+        )
+    }
 }

@@ -2,6 +2,12 @@ import React from 'react';
 import './header.css';
 
 export default props => {
+    let logado = localStorage.getItem('Cliente');
+    logado = JSON.parse(logado);
+    let naologado = localStorage.getItem('Cliente');
+    let deslogar = () => {
+        localStorage.removeItem("Cliente");
+    }
     return (
         <>
         <header class="container-fluid headerCustom">
@@ -14,6 +20,20 @@ export default props => {
             <div class="col-8 col-md-4 mx-auto  search top-bar-item">
                 <h1  style={{color: "green" }}>Green Hub</h1>
             </div>
+            {logado  && 
+                <div class="row col-6 col-md-3  mx-auto  top-bar-item">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#/profile" class="a-ps a-custom">
+                            <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img>
+                        </a>
+                    </li>
+                    <li>{logado.nome}</li>
+                    <li><a href="#/home" onClick={deslogar}>sair</a></li>
+                </ul>
+            </div>
+            }
+            {!naologado && 
             <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                 <ul class="list-unstyled">
                     <li>
@@ -27,6 +47,8 @@ export default props => {
                     </li>
                 </ul>
             </div>
+            }
+            
             <div class="col-6 col-md-3  mx-auto top-bar-item">
                 <a href="#/shoppingCart" class="a-ps a-custom"><br></br>
                     <img src="images/cesta.png" alt="Cesta do Carrinho" style={{width: '40px', height: '40px'}}></img>
@@ -40,19 +62,19 @@ export default props => {
         
         <ul class="nav-m row">
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
+                <a href="#/categorias/1" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
             </li>
             <li class="col-12 col-md-4 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
+                <a href="#/categorias/2" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Vitaminas</a>
+                <a href="#/categorias/3" class="nav-link nav-link-custom a-custom">Vitaminas</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
+                <a href="#/categorias/4" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
             </li>
             <li class="col-12 col-md-2 nav-item nav-item-custom">
-                <a href="#/categorias" class="nav-link nav-link-custom a-custom">Proteinas</a>
+                <a href="#/categorias/5" class="nav-link nav-link-custom a-custom">Proteinas</a>
             </li>
         </ul>
     </nav>
