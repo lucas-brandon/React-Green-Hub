@@ -20,7 +20,10 @@ export default class Index extends Component {
     getProdutos = () => {
       axios
         .get(`${URL_PRODUTO_LISTA}` + this.props.params.id)
-        .then((resp) => this.setState({ produtos: resp.data }));
+        .then((resp) => {this.setState({ produtos: resp.data })
+        console.log("categorias\n\n\n")
+        console.log(resp.data)
+    });
     };
     
     render() {
@@ -30,6 +33,7 @@ export default class Index extends Component {
 
         return (
           <div className="row">
+              {/*
               <div className="filtro column col-md-2 col-12">
                   <h4>Marca</h4>
                   <div className="form-check">
@@ -107,6 +111,7 @@ export default class Index extends Component {
                       </label>
                   </div>
               </div>
+              */}
               <div className="cartoes row col-md-10 col-12" style={{marginTop:"60px"}}>
                   <div className="container">
                       {/*<!--Cards-->*/}

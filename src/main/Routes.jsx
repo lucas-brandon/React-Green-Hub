@@ -4,7 +4,7 @@ import { Router, Route, Redirect, hashHistory } from 'react-router';
 import Home from '../pages/home/Index';
 import Login from '../pages/login/Login'
 //import Categorias from '../pages/categorias/Index';
-import Categorias from '../pages/categorias/categoriaHeader';
+import Categorias from '../pages/categorias/Index';
 import ShoppingCart from '../pages/shoppingCart/ShoppingCart';
 import Contact from '../pages/contact/Contact';
 import Checkout from '../pages/checkout/Checkout';
@@ -18,7 +18,6 @@ import Pedidos from '../pages/pedidos/Pedidos';
 export default props => (
     <Router history={hashHistory}>
         <Route path='/home' component={Home}></Route>
-        <Route path='/login' component={Login}></Route>
         <Route path='/categorias' component={Categorias}></Route>
         <Route path='/categorias/:id' component={Categorias}></Route>
         <Route path='/contact' component={Contact}></Route>

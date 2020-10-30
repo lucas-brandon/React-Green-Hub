@@ -184,4 +184,13 @@ label[for='bt-navbar-m']:hover{
         height: auto;
         margin-left:0;
     }
+
+}
+header{
+    padding: 0;
+
+}
+header .top-bar{
+    padding: 0;
+
 }

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./Login.css";
 import axios from 'axios';
+import App from '../../main/App';
+import { Router, Redirect } from 'react-router';
+//import { BrowserRouter, useHistory } from 'react-router-dom';
 const URL_LOGAR = 'http://modelagem.test/api/clientes/logar/';
 
 
@@ -32,7 +35,11 @@ export default class Login extends Component {
                     localStorage.setItem('Cliente', JSON.stringify(resp.data));
                     window.location.href = "http://localhost:3002/#/home";
                 }  
+              //alert(resp.data)
+              localStorage.setItem('Cliente', JSON.stringify(resp.data));
+                
             })
+            window.location.href = '#/home';
     }
 
     render () {
@@ -45,10 +52,16 @@ export default class Login extends Component {
                         <input type="email" id="email" className="form-control" placeholder="exemplo@email.com" value={this.email} onChange={this.changeEmail} required/>
                         <label htmlFor="inputPassword" className="sr-only">Senha</label>
                         <input type="password" id="senha" className="form-control" placeholder="Senha" value={this.senha} onChange={this.changeSenha} required/>
+                        {/*
                         <span className="psw"><a href="#">Esqueci minha senha </a></span>
                         <button className="btn btn-lg btn-primary btn-block" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button>
                         <button className="btn btn-lg btn-primary btn-block" type="submit" id="Cadastrar" href='#/register'>Cadastre-se aqui.</button>
+                        */}
                     </form>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button><br></br>
+                    <a href='#/register'>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit" id="Cadastrar">Cadastre-se aqui.</button>
+                    </a>
                 </div>
             </div> 
         )
