@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./itemCarrinho.css";
-import {browserHistory} from "react-router"
-
+import { browserHistory } from "react-router";
 
 export default (props) => {
   const [cont, setCont] = useState(1);
@@ -27,7 +26,6 @@ export default (props) => {
         item.valor_total = parseFloat(total);
       }
     });
-
     let stringCart = JSON.stringify(localCart);
     localStorage.setItem("produtos", stringCart);
   };
@@ -39,18 +37,22 @@ export default (props) => {
     localCart.forEach((item, indice) => {
       if (item.id === props.identificador) {
         localCart.splice(indice, 1);
-        // localStorage.removeItem(item.id);
       }
     });
     localStorage.clear("produtos");
     let stringCart = JSON.stringify(localCart);
     localStorage.setItem("produtos", stringCart);
-    browserHistory.push('#/shoppingCart')
-    document.location.reload(true)
-
-    // window.location.href = "/#/shoppingCart";
+    browserHistory.push("#/shoppingCart");
+    document.location.reload(true);
   };
 
+  const minusDell = ()=>{
+    if(cont >= 0){
+      dellProducts()
+      // browserHistory.push("#/shoppingCart");
+      // document.location.reload(true);
+    }
+  }
   return (
     <div id="item" class="row cart-item img">
       <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
@@ -78,6 +80,7 @@ export default (props) => {
               onClick={() => {
                 setCont(cont - 1);
                 loadProducts();
+                minusDell();
               }}
               class="color-qtd btn-minus"
               type="button"
