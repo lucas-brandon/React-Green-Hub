@@ -25,13 +25,8 @@ export default class FinalizarCompra extends Component {
           {/* <span id="cart-price-total" class="cart-total col-12">
             Total: R$: <span id="totalValue">{this.props.total}</span>
           </span> */}
-<<<<<<< HEAD
-          <a href={this.login()}>
-            <button type="submit" class="btn-finalizar-compra col-12">
-=======
           <a href={ this.login()}>
             <button type="submit"  class="btn-finalizar-compra col-12">
->>>>>>> 14cdfb65433dfe2a39276c183022fd9d9bd6cbaa
               Finalizar Compra
             </button>
           </a>

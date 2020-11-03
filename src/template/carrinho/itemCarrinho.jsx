@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./itemCarrinho.css";
+import {browserHistory} from "react-router"
+
 
 export default (props) => {
   const [cont, setCont] = useState(1);
 
   useEffect(() => {
-
-    let localCart = localStorage.getItem("produtos");
-    localCart = JSON.parse(localCart);
-
-    localCart.forEach((item) => {
-      if (item.id === props.identificador) {
-        item.qtd_item = cont;
-        item.valor_total = parseFloat(total);
-      }
-    });
-
-    let stringCart = JSON.stringify(localCart);
-    localStorage.setItem("produtos", stringCart);
-
-  })
- 
+    loadProducts();
+  });
 
   let total = parseInt(props.valor) * cont;
   total = JSON.stringify(total);
@@ -42,6 +30,25 @@ export default (props) => {
 
     let stringCart = JSON.stringify(localCart);
     localStorage.setItem("produtos", stringCart);
+  };
+
+  const dellProducts = () => {
+    let localCart = localStorage.getItem("produtos");
+    localCart = JSON.parse(localCart);
+
+    localCart.forEach((item, indice) => {
+      if (item.id === props.identificador) {
+        localCart.splice(indice, 1);
+        // localStorage.removeItem(item.id);
+      }
+    });
+    localStorage.clear("produtos");
+    let stringCart = JSON.stringify(localCart);
+    localStorage.setItem("produtos", stringCart);
+    browserHistory.push('#/shoppingCart')
+    document.location.reload(true)
+
+    // window.location.href = "/#/shoppingCart";
   };
 
   return (
@@ -76,14 +83,16 @@ export default (props) => {
               type="button"
             >
               <img
-                src="https://cdn.icon-icons.com/icons2/1244/PNG/512/1492790963-7remove_84188.png"
+                src="minus.png"
                 style={{ width: "32px", height: "32px" }}
                 alt=""
               />
             </button>
           </div>
 
-          <div class="quantidade" onChange = {props.onChange}>{cont}</div>
+          <div class="quantidade" onChange={props.onChange}>
+            {cont}
+          </div>
 
           <div class="input-group-prepend">
             <button
@@ -95,8 +104,8 @@ export default (props) => {
               type="button"
             >
               <img
-                src="https://cdn.icon-icons.com/icons2/1993/PNG/512/add_circle_create_expand_new_plus_icon_123218.png"
-                style={{ width: "40px", height: "40px" }}
+                src="plus.webp"
+                style={{ width: "32px", height: "32px" }}
                 alt=""
               />
             </button>
@@ -113,14 +122,22 @@ export default (props) => {
           R$:{total}
         </span>
       </div>
+
       <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
-        <img
-          onClick={props.onClick}
-          id="btn-cancel"
-          class="btn-cart-cancel img-custom"
-          src="images/cancel-icon.svg"
-          alt="cancel-icon"
-        ></img>
+        <button
+          className="dellProducts"
+          onClick={() => {
+            dellProducts();
+          }}
+          type="button"
+        >
+          <img
+            id="btn-cancel"
+            class="btn-cart-cancel img-custom"
+            src="images/cancel-icon.svg"
+            alt="cancel-icon"
+          ></img>
+        </button>
       </div>
     </div>
   );
