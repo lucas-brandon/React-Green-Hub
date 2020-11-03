@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { browserHistory } from 'react-router';
 import "./categorias.css";
 import axios from 'axios';
 import GridCard from "../../template/card/gridCard";
 
 
 const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
-const URL_CATEGORIA_BUSCA = "http://modelagem.test/api/categoria/buscarProdutos/";
+const URL_CATEGORIA_BUSCA = "http://modelagem.test/api/categoria/buscar/";
 const URL_PRODUTO_BUSCA = "http://modelagem.test/api/categoria/buscarProdutos/";
 
 export default class Index extends Component {
@@ -16,41 +17,40 @@ export default class Index extends Component {
         produtosCategoria: [],
         categoria: null
       };
-      this.getProdutos();
+      //this.getProdutos();
 
     }
     componentDidMount(){
-        //let cont = 0;
-        //setTimeout(() => {
-            //this.getProdutos();
-            //alert("tempo")
-            //console.log("cont: "+cont);
-            //cont++;
-        //}, 1000);
         this.getProdutos();
-        
-    }
-
-    componentDidUpdate() {
-        //setTimeout(() => {
-            //this.getProdutos();
-            //alert("tempo")
-        //}, 1000);
     }
 
     getProdutos = () => {
+        /*
         axios.get(`${URL_PRODUTO_LISTA}`)
-            .then((resp) => {this.setState({ produtos: resp.data })
+            .then((resp) => {
+                this.setState({ produtos: resp.data })
+                console.log(`${URL_PRODUTO_LISTA}`);
         });
 
         axios.get(`${URL_CATEGORIA_BUSCA}`+this.props.params.id)
-            .then((resp) => {this.setState({ categoria: resp.data.descricao })
+            .then((resp) => {
+                this.setState({ categoria: resp.data.descricao })
+                //console.log("categoria do resp")
+                //console.log(resp.data);
         });
-
+        */
+        axios.get(`${URL_PRODUTO_BUSCA}` + this.props.params.id)
+        .then((resp) => {this.setState({ produtosCategoria: resp.data })
+            console.log("categorias\n\n\n")
+            console.log(resp.data)
+        });
+        
     }
 
-    buscaProdutos = () => {
+    buscaProdutos(){
         let array = [];
+        //console.log("busca produtos:")
+        //console.log(this.state.produtos)
         this.state.produtos.forEach(produto => {
             if(produto.categoria === this.state.categoria){
                 array.push(produto);
@@ -58,22 +58,11 @@ export default class Index extends Component {
         });
 
         return array;
-        
-        /*    
-        axios.get(`${URL_PRODUTO_BUSCA}` + this.props.params.id)
-        .then((resp) => {this.setState({ produtosCategoria: resp.data })
-            console.log("categorias\n\n\n")
-            console.log(resp.data)
-        });
-        */
-       console.log("teste categoria")
     };
     
     render() {
-      let produtos = this.buscaProdutos();
-      //const produtos = new Object(this.state.produtosCategoria);
-      console.log('teste');
-      console.log(produtos);
+      //let produtos = this.buscaProdutos();
+      const produtos = new Object(this.state.produtosCategoria);
 
         return (
           <div className="row">
