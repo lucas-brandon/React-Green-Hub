@@ -3,11 +3,28 @@ import "./itemCarrinho.css";
 import { browserHistory } from "react-router";
 
 export default (props) => {
-  const [cont, setCont] = useState(1);
+  let localCart = localStorage.getItem("produtos");
+  localCart = JSON.parse(localCart);
+  let qtd
+
+  localCart.forEach((item) => {
+    if (item.id === props.identificador) {
+      let teste2 = parseInt(item.qtd_item);
+      if (teste2 != null) {
+        qtd = teste2
+      } else {
+      qtd = 1
+      }
+    }
+  });
+  const [cont, setCont] = useState(qtd);
+
 
   useEffect(() => {
     loadProducts();
+    teste();
   });
+  const teste = () => {};
 
   let total = parseInt(props.valor) * cont;
   total = JSON.stringify(total);
@@ -17,9 +34,6 @@ export default (props) => {
   total = total.replace(".", ",");
 
   const loadProducts = () => {
-    let localCart = localStorage.getItem("produtos");
-    localCart = JSON.parse(localCart);
-
     localCart.forEach((item) => {
       if (item.id === props.identificador) {
         item.qtd_item = cont;
@@ -46,13 +60,11 @@ export default (props) => {
     document.location.reload(true);
   };
 
-  const minusDell = ()=>{
-    if(cont >= 0){
-      dellProducts()
-      // browserHistory.push("#/shoppingCart");
-      // document.location.reload(true);
+  const minusDell = () => {
+    if (cont >= 0) {
+      dellProducts();
     }
-  }
+  };
   return (
     <div id="item" class="row cart-item img">
       <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
