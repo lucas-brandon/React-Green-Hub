@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import axios from 'axios';
 import App from '../../main/App';
-import { Router, Redirect } from 'react-router';
+import { Router, Redirect, browserHistory } from 'react-router';
 //import { BrowserRouter, useHistory } from 'react-router-dom';
 const URL_LOGAR = 'http://modelagem.test/api/clientes/logar/';
 
@@ -35,11 +35,12 @@ export default class Login extends Component {
                     localStorage.setItem('Cliente', JSON.stringify(resp.data));
                     window.location.href = "http://localhost:3002/#/home";
                 }  
-              //alert(resp.data)
-              localStorage.setItem('Cliente', JSON.stringify(resp.data));
+            //   //alert(resp.data)
+            //   localStorage.setItem('Cliente', JSON.stringify(resp.data));
                 
             })
-            window.location.href = '#/home';
+            document.location.reload('#/login');
+            browserHistory.push('#/home');
     }
 
     render () {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
 import './register.css';
 import Titulo from '../../template/titulo/titulo';
 import axios from "axios";
@@ -64,8 +65,9 @@ export default class Register extends Component {
         .then(resp => {
             console.log(resp.data)
             alert("Cadastro concluído com sucesso!")
-        })
-
+        });
+        document.location.reload('#/register');
+        browserHistory.push('#/login');
     }
 
 

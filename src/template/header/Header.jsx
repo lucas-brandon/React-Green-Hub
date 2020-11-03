@@ -1,13 +1,16 @@
 import React from 'react';
 import './header.css';
+import { useState } from 'react';
 
 export default props => {
-    let logado = localStorage.getItem('Cliente');
+    let logado = useState();
+    logado = localStorage.getItem('Cliente');
     logado = JSON.parse(logado);
-    let naologado = localStorage.getItem('Cliente');
+    let naoLogado = useState();
+    naoLogado = localStorage.getItem('Cliente');
+    naoLogado = JSON.parse(naoLogado);
     function deslogar () {
         localStorage.removeItem("Cliente");
-        window.location.href = "http://localhost:3002/#/home";
     }
     return (
         <><header class="container-fluid headerCustom">
@@ -32,7 +35,7 @@ export default props => {
                     </ul>
                 </div>
                 }
-                {!naologado && 
+                {!naoLogado && 
                 <div class="row col-6 col-md-3  mx-auto  top-bar-item">
                     <ul class="list-unstyled">
                         <li>
