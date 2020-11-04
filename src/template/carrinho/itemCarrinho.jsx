@@ -3,28 +3,31 @@ import "./itemCarrinho.css";
 import { browserHistory } from "react-router";
 
 export default (props) => {
+  const reload = () => {
+    browserHistory.push("#/shoppingCart");
+    document.location.reload(true);
+  };
+
   let localCart = localStorage.getItem("produtos");
   localCart = JSON.parse(localCart);
-  let qtd
+
+  let qtd;
 
   localCart.forEach((item) => {
     if (item.id === props.identificador) {
       let teste2 = parseInt(item.qtd_item);
       if (teste2 != null) {
-        qtd = teste2
+        qtd = teste2;
       } else {
-      qtd = 1
+        qtd = 1;
       }
     }
   });
   const [cont, setCont] = useState(qtd);
 
-
   useEffect(() => {
     loadProducts();
-    teste();
   });
-  const teste = () => {};
 
   let total = parseInt(props.valor) * cont;
   total = JSON.stringify(total);
@@ -38,6 +41,7 @@ export default (props) => {
       if (item.id === props.identificador) {
         item.qtd_item = cont;
         item.valor_total = parseFloat(total);
+        item.total_cart += parseFloat(total);
       }
     });
     let stringCart = JSON.stringify(localCart);
@@ -56,12 +60,11 @@ export default (props) => {
     localStorage.clear("produtos");
     let stringCart = JSON.stringify(localCart);
     localStorage.setItem("produtos", stringCart);
-    browserHistory.push("#/shoppingCart");
-    document.location.reload(true);
+    reload();
   };
 
   const minusDell = () => {
-    if (cont >= 0) {
+    if (cont <= 1) {
       dellProducts();
     }
   };
