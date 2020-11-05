@@ -182,7 +182,7 @@ export default class DetalhesProduto extends Component {
             <div class="col-12 col-md-8">
               <div class="card-body">
                 <p class="marcaItem">{produto.nm_marca}</p>
-                <a class="a-detalhes" href="#/detalhesDoProduto">
+                <a class="a-detalhes" href="#/details">
                   <h3 class="nomeItem">{produto.nome_produto}</h3>
                 </a>
                 <h4 class="preco">R$ {valor}</h4>

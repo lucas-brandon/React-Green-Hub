@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./login.css";
+import "./Login.css";
 import axios from 'axios';
-import App from '../../main/App';
-import { Router, Redirect } from 'react-router';
+import Msg from '../../template/mensagem/Mensagem';
+import { browserHistory } from 'react-router';
 //import { BrowserRouter, useHistory } from 'react-router-dom';
 const URL_LOGAR = 'http://modelagem.test/api/clientes/logar/';
 
@@ -29,16 +29,35 @@ export default class Login extends Component {
     setCliente = () => {
             axios.get(`${URL_LOGAR}` + this.state.senha + '/' + this.state.email)
             .then(resp => {
-              //alert(resp.data)
-              localStorage.setItem('Cliente', JSON.stringify(resp.data));
+                //alert("aqui: "+resp.data.nome)
+                localStorage.setItem('Cliente', JSON.stringify(resp.data));
+                browserHistory.push('#/home');
+                document.location.reload(true);
                 
             })
-            window.location.href = '#/home';
+            //window.location.href = '#/home';
+            
+    }
+
+    toggleM = (msg) => {
+        //let msg = document.getElementsByClassName("mensagem");
+        console.log("toggleeeeee")
+        console.log(msg)
+        if(msg.classList.contains("show")){
+            console.log("show pra hide")
+            msg.classList.replace("show", "hide");
+        }
+        else{
+            console.log("hide pra show")
+            msg.classList.replace("hide", "show");
+        }
+        
     }
 
     render () {
-        return (   
-            <div className='row'>
+        return (
+            <>
+            <div className='row'> 
                 <div className="login-container " id="box">
                     <form className="form-signin">
                         <h1 className="h3 mb-3 font-weight-normal titulo-login">Entre na sua conta</h1>
@@ -57,7 +76,8 @@ export default class Login extends Component {
                     <button className="btn btn-lg btn-primary btn-block" type="submit" id="Cadastrar">Cadastre-se aqui.</button>
                     </a>
                 </div>
-            </div> 
+            </div>
+            </> 
         )
     }
 }

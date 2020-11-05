@@ -34,7 +34,7 @@ export default class Finished extends Component {
         <div class="text-center" id="item3">Agradecemos a preferência</div>
         <div class="text-center" id="item4">Após o pagamento confirmaremos o envio por email</div>
         <div class="itemFinished">
-            <a href="#/Pedidos"><button type="button submit" class="button botaoPedidos">Histórico de pedidos</button></a>
+            <a href="#/orders"><button type="button submit" class="button botaoPedidos">Histórico de pedidos</button></a>
         </div>
      </div>
             </>

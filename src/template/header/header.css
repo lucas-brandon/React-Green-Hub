@@ -8,33 +8,18 @@ body {
     height: auto;
     margin: 5px;
 }
-.a-ps {
-    color: gray !important;
-}
-.a-ps:link {
-    color: gray;
-}
-.a-ps:visited {
-    text-decoration: none
-}
-.a-ps:hover {
-    background-color: #25a52a;
-    border-radius: 60rem;
-    color: honeydew !important;
-}
-a:active {
-    text-decoration: none
-}
+
 /*top barr*/
 .top-bar {
     position: relative;
-    border-bottom: solid 2px #056608;
+    border-bottom: none;
 }
 .top-bar-item {
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: none;
 }
 /*HEADER*/
 header {
@@ -43,7 +28,8 @@ header {
     margin: 0;
 	padding: 0;
 	color: #aaa;
-	font-family: 'Arial';
+    font-family: 'Arial';
+    border-bottom: none;
 }
 .search {
     width: 40%;
@@ -53,48 +39,88 @@ header {
     background-color: #A20808;
 }
 .form-control {
-    border-radius: 65rem !important;
+    border-radius: 65px !important;
     background-color: #D7E1ED !important;
 }
 .a-custom {
     color: inherit!important;
 }
+.nome-usuario{
+    color: #056608;
+    padding: 5px;
+}
+.nome-usuario:hover{
+    background-color: #056608;
+	border-radius: 60px;
+    color: honeydew !important;
+    cursor: pointer;
+    text-decoration: none;
+
+
+}
+.a-login {
+    color: gray;
+    padding: 5px;
+}
+.a-login:hover{
+    background-color: #056608;
+	border-radius: 60px;
+    color: honeydew !important;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
 /*navbar-m*/
+.nav-link {
+    margin: 0px;
+    padding: 0px;
+    
+}
 .nav-link:hover{
 	background-color: #056608;
-	border-radius: 60rem;
-	color: honeydew !important;
-	margin-bottom: 10px;
+	border-radius: 60px;
+    color: honeydew !important;
+    cursor: pointer;
+	
 }
 .nav-item {
-    border-bottom: solid 2px #056608;
+    align-self: center;
+    align-content: center;
+    align-items: center;
     color: #056366 !important;
     text-decoration: none;
-	text-align: left;
-	position: relative!important;
 	z-index:1;
-	background-color: #edecd1;
+    background-color: #edecd1;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 /* teste sandwich*/
 .navbar-m {
     width:100%;
-	height:50px;
     align-items: center;
-    justify-content: space-between;
-    padding: .5rem 1rem;
+    
     object-position: center;
     background-color: #edecd1;
+    border-top: solid 2px #056608;
+    border-bottom: solid 2px #056608;
+    margin-top: none;
+    margin-bottom: none;
    
 }
 	
 .navbar-m ul{
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
 	list-style: none;	
     position: relative;
-    padding-inline-start: 0px;
 	
 }
 .navbar-m ul li{
-	width: 150px;
+    align-self: center;
+    margin-top: none;
+    margin-bottom: none;
+	width: auto;
 	float: left;
 }
 .navbar-m a{
@@ -119,13 +145,12 @@ header {
 }
 .navbar-m ul ul li a{
 	background-color: #069;
-	position: relative;
+	text-align: left;
 }
 #bt-navbar-m{
 	display: none;
 }
 label[for='bt-navbar-m']{
-	padding: 5px;
 	background-color: #E0E0A2;
 	color: #056608;
 	font-family: 'Arial';
@@ -136,7 +161,7 @@ label[for='bt-navbar-m']{
 	width: 50px;
     height: 50px;
     border: #056608 solid 1px;
-    border-radius: 60rem;
+    border-radius: 60px;
 }	
 label[for='bt-navbar-m']:hover{
     background-color:#056608;    
@@ -148,44 +173,6 @@ label[for='bt-navbar-m']:hover{
     height: 20px
 }
 
-	
-@media (max-width: 800px) {
-	
-    .navbar-m{
-        margin-left:-100%;
-        transition:all .4s;
-        
-    }
-    label[for='bt-navbar-m']{
-        display:block;
-    }
-    .navbar-m ul{
-        margin-left: 0;
-    }
-    .navbar-m{
-        margin-top:5px;
-    }
-    .navbar-m ul li{
-        width:100%;
-        float:none;
-    }
-    .navbar-m ul ul{
-        position:static;
-        overflow:hidden;
-        max-height:0;
-        transition:all .4s;
-    }
-    .navbar-m ul li:hover ul{
-        height:auto;
-        max-height:200px;
-        transition:all .4s;
-    }
-    #bt-navbar-m:checked ~ .navbar-m{
-        height: auto;
-        margin-left:0;
-    }
-
-}
 header{
     padding: 0;
 
@@ -193,4 +180,20 @@ header{
 header .top-bar{
     padding: 0;
 
+}
+
+ul {
+    margin-top: 0px;
+    margin-bottom: 0px;    
+}
+.list-login li {
+    text-align: left;
+}
+.imagem-login{
+    margin-right: 10px;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
 }

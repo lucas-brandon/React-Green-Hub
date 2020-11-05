@@ -1,11 +1,16 @@
 import React, { Component } from "react";
+import { browserHistory } from 'react-router';
 import "./categorias.css";
 import axios from "axios";
 import GridCard from "../../template/card/gridCard";
 
-const URL_PRODUTO_LISTA = "http://modelagem.test/api/categoria/buscarProdutos/";
+
+const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
+const URL_CATEGORIA_BUSCA = "http://modelagem.test/api/categoria/buscar/";
+const URL_PRODUTO_BUSCA = "http://modelagem.test/api/categoria/buscarProdutos/";
 
 export default class Index extends Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -21,20 +26,61 @@ export default class Index extends Component {
       .get(`${URL_PRODUTO_LISTA}` + this.props.params.id)
       .then((resp) => this.setState({ produtos: resp.data }));
   };
+=======
+    constructor(props) {
+      super(props);
+      this.state = {
+        produtos: [],
+        produtosCategoria: [],
+        categoria: null
+      };
+      //this.getProdutos();
+
+    }
+    componentDidMount(){
+        this.getProdutos();
+    }
+>>>>>>> f9c371557dee7054a13bc8056707269ab966e41f
 
     getProdutos = () => {
-      axios
-        .get(`${URL_PRODUTO_LISTA}` + this.props.params.id)
-        .then((resp) => {this.setState({ produtos: resp.data })
-        console.log("categorias\n\n\n")
-        console.log(resp.data)
-    });
+        /*
+        axios.get(`${URL_PRODUTO_LISTA}`)
+            .then((resp) => {
+                this.setState({ produtos: resp.data })
+                console.log(`${URL_PRODUTO_LISTA}`);
+        });
+
+        axios.get(`${URL_CATEGORIA_BUSCA}`+this.props.params.id)
+            .then((resp) => {
+                this.setState({ categoria: resp.data.descricao })
+                //console.log("categoria do resp")
+                //console.log(resp.data);
+        });
+        */
+        axios.get(`${URL_PRODUTO_BUSCA}` + this.props.params.id)
+        .then((resp) => {this.setState({ produtosCategoria: resp.data })
+            console.log("categorias\n\n\n")
+            console.log(resp.data)
+        });
+        
+    }
+
+    buscaProdutos(){
+        let array = [];
+        //console.log("busca produtos:")
+        //console.log(this.state.produtos)
+        this.state.produtos.forEach(produto => {
+            if(produto.categoria === this.state.categoria){
+                array.push(produto);
+            }
+        });
+
+        return array;
     };
     
     render() {
-      const produtos = new Object(this.state.produtos);
-      console.log('teste');
-      console.log(produtos);
+      //let produtos = this.buscaProdutos();
+      const produtos = new Object(this.state.produtosCategoria);
 
         return (
           <div className="row">
