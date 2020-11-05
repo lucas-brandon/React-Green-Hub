@@ -43,8 +43,11 @@ export default class Header extends Component {
 
     goCategoria(id){
         console.log("categoria"+id);
-        browserHistory.push('#/categorias/'+id);
+        browserHistory.push('#/categories/'+id);
         document.location.reload(true);
+    }
+    testeF = (t) => {
+        console.log("teste")
     }
     render(){
 
@@ -54,15 +57,13 @@ export default class Header extends Component {
             logado = JSON.parse(logado);
             divLogado = (
                 <div className="row col-6 col-md-3  mx-auto  top-bar-item">
-                    <ul className="list-unstyled">
+                    <img src="images/user.png" className="imagem-login" id="user" style={{width: '30px', height: '30px'}}></img>
+                    <ul className="list-unstyled list-login">
                         <li>
-                            <a href="#/profile" className="a-ps a-custom">
-                                <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img>
-                            </a>
+                            <a href="#/profile" className="nome-usuario">{logado.nome}</a>
                         </li>
-                        <li>{logado.nome}</li>
                         <li>
-                            <a onClick={this.deslogar}>sair</a>
+                            <a onClick={this.deslogar} className="a-login">sair</a>
                         </li>
                     </ul>
                 </div>
@@ -71,14 +72,14 @@ export default class Header extends Component {
         else {
             divLogado = (
                 <div className="row col-6 col-md-3  mx-auto  top-bar-item">
-                    <ul className="list-unstyled">
+                    <img src="images/user.png" className="imagem-login" id="user" style={{width: '30px', height: '30px'}}></img>
+                    <ul className="list-unstyled list-login">
                         <li>
-                            <a href="#/login" className="a-ps a-custom">
-                                <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img> Entre
-                            </a>
+                            <a href="#/login" className="a-login">Entre</a>
                         </li>
+                        
                         <li>
-                            <a href="#/register" className="a-ps a-custom">
+                            <a href="#/register" className="a-login">
                                 Cadastre-se</a>
                         </li>
                     </ul>
@@ -89,8 +90,8 @@ export default class Header extends Component {
 
         return (
             <>
-            <header className="container-fluid headerCustom">
-            <div className="row top-bar align-content-center">
+            <header className="container-fluid headerCustom" onClick={this.testeF}>
+            <div className="row align-content-center">
                 <div className="col-4 col-md-2 mx-auto  top-bar-item">
                     <a href="#/home" className="a-ps a-custom">
                         <img className="logo" src="images/logo.png" alt="Logo"></img>

@@ -155,7 +155,7 @@ export default class Profile extends Component {
                                     </div>
                                     <div class="col-12 col-md-4 mt-5">
                                         <span>Exibindo ultimos três pedidos.</span>
-                                        <a href="#/Pedidos" class="btn btnCardAdd">Veja todos os seus pedidos</a>
+                                        <a href="#/orders" class="btn btnCardAdd">Veja todos os seus pedidos</a>
                                     </div>
                                 </div>
                             </div>

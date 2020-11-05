@@ -1,0 +1,18 @@
+.mensagem{
+    background-color: greenyellow;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+    position: fixed;
+    z-index: 10;
+
+    
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}

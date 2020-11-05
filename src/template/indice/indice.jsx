@@ -6,7 +6,7 @@ export default (props) => {
   const exibirItem = () => {
     const list = props.items || [];
 
-    const path = "#/detalhesProduto/";
+    const path = "#/orders/";
 
     return list.map((item) => (
       <Item
