@@ -11,6 +11,7 @@ import {
     browserHistory
   } from "react-router";
 import ItensMenu from './itensMenu';
+import Msg from '../../template/mensagem/Mensagem';
 import './header.css';
 
 const URL_CATEGORIA_LISTA = 'http://modelagem.test/api/categoria/listar'
@@ -20,7 +21,8 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          categorias: []
+          categorias: [],
+          msg: ""
         };
         //this.getProdutos();
   
@@ -32,10 +34,23 @@ export default class Header extends Component {
                 this.setState({ categorias: resp.data })
                 console.log(`${URL_CATEGORIA_LISTA}`);
         });
+        this.exibirMsg();
     }
 
+    exibirMsg = () => {
+        let local = localStorage.getItem("msg")
+        
+        if(local){
+            this.setState({ msg: local })
+            setTimeout(() => {
+                this.setState({msg: ""});
+                localStorage.removeItem("msg")
+              }, 10000);
+        }
+    }
     
     deslogar = () => {
+        localStorage.setItem('msg', "Logout realizado!");
         localStorage.removeItem("Cliente");
         browserHistory.push('#/home');
         document.location.reload(true);
@@ -86,8 +101,7 @@ export default class Header extends Component {
                 </div>
             )
         }
-
-
+        let msgLogin = (<Msg msg={this.state.msg}></Msg>)
         return (
             <>
             <header className="container-fluid headerCustom" onClick={this.testeF}>
@@ -115,6 +129,7 @@ export default class Header extends Component {
                 <ItensMenu categorias={this.state.categorias} onClick={this.goCategoria}></ItensMenu>
             </ul>
         </nav>
+        {msgLogin}
         </>
         )
     }

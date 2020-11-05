@@ -56,21 +56,3 @@ a:active {
 
 /*botton*/
 
-.btn-m {
-    display: inline-block;
-    font-weight: 400;
-    color: #056608 !important;
-    text-align: center;
-    vertical-align: middle;
-    background-color: white;
-    border: 2px solid #056608;
-    padding: .25rem .5rem;
-    font-size: .875rem;
-    line-height: 1.5;
-    border-radius: .60rem;
-}
-
-.btn-m:hover {
-    color: white !important;
-    background-color: #056608;
-}

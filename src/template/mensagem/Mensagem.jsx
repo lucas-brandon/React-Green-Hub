@@ -19,26 +19,65 @@ export default class Mensagem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          categorias: []
+          show: true
         };
         //this.getProdutos();
   
     }
 
+    componentDidUpdate(){
+        /*
+        console.log("update msg")
+        if(this.state.show === true){
+            console.log("in msg")
+            setTimeout(() => {
+                this.setState({show: false})
+              }, 5000);
+            //  setTimeout(this.setState({show: false}), 5000);
+        }
+        */
+    }
+
     click = (t) => {
-        console.log("click mensagem")
-        //console.log(t.target)
-        //t.target.classList.toggle("show");
-        //alert(t)
+        let div = document.getElementById("mensagem");
+        if(this.state.show){
+            this.setState({show: false})
+            div.classList.replace("show", "hide")
+        }
+        else {
+            //this.setState({show: true})
+            //div.classList.replace("hide", "show")
+        }
     }
 
     render(){
+        let div;
+        if(this.props.msg != ""){
+            div = (
+                <div className="mensagem show" id="mensagem">
+                    <span>{this.props.msg+"   "}</span>
+                    <button className="btn-msg" onClick={this.click}>Ok</button>
+                </div>
+            )
+        }
+        else {
+            div = (
+                <div className="mensagem hide" id="mensagem">
+                    <span>{this.props.msg+"   "}</span>
+                    <button className="btn-msg" onClick={this.click}>Ok</button>
+                </div>
+            )
+        }
+
         return (
-            <>
-            <div className="container mensagem" className={this.props.status}>
-                <span onClick={() => this.props.onClick()}>{this.props.msg}</span>
+            <div style={{
+                height: "50px",
+                display: "flex", 
+                justifyContent: "center", 
+                alignContent: "center",
+                marginTop: "30px"}}>
+                {div}
             </div>
-            </>
         )
     }
 
