@@ -3,7 +3,7 @@ import React from 'react';
 import './card.css'
 
 export default props => {
-    const path = "#/orders/";
+    const path = "#/details/";
     return (
             <div class={props.divClass} style={{marginBottom:"50px"}}>
                 <div class="card-m">
