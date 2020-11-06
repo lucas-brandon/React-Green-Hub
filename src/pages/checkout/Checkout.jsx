@@ -585,12 +585,12 @@ export default class Checkout extends Component {
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            {/*
+                            
                             <div class="col-md-6 col-sm-12">
                                 <label for="cvv">Código de segurança</label>
                                 <input id="cvv" type="text" onChange={this.changeCdCartao} class="form-control" required></input>
                             </div>
-                            */}
+                            
                             <div class="col-md-6 col-sm-12">
                                 <label for="expiryDate">Data de expiração</label>
                                 <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" required></input>
@@ -638,7 +638,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href='#/finished'><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
+                            <a href='#/success'><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>
