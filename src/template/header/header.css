@@ -20,6 +20,8 @@ body {
     align-items: center;
     justify-content: center;
     border-bottom: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 /*HEADER*/
 header {
@@ -44,6 +46,10 @@ header {
 }
 .a-custom {
     color: inherit!important;
+}
+
+.img-carrinho{
+    display: flex;
 }
 .nome-usuario{
     color: #056608;
