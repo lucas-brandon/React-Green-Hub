@@ -115,8 +115,8 @@ export default class Header extends Component {
                     <h1  style={{color: "green" }}>Green Hub</h1>
                 </div>
                 {divLogado}
-                <div className="col-6 col-md-3  mx-auto top-bar-item">
-                    <a href="#/shoppingCart" className="a-ps a-custom"><br></br>
+                <div className="col-12 col-md-3  mx-auto top-bar-item">
+                    <a href="#/shoppingCart" className="a-ps a-custom img-carrinho"><br></br>
                         <img src="images/cesta.png" alt="Cesta do Carrinho" style={{width: '40px', height: '40px'}}></img>
                     </a>
                 </div>

@@ -6,11 +6,6 @@ a:hover {
     color: white;
 }
 
-.pay-icon {
-    justify-self: center;
-    margin-left: 23%;
-}
-
 .filtro {
     height: 75%;
     width: 100px;
@@ -78,4 +73,9 @@ a:hover {
     color: white;
     background-color: #208023;
     border: 3px solid #208023;
+}
+
+.grid{
+    align-content: center;
+    justify-content: center;
 }

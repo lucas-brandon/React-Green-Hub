@@ -11,18 +11,31 @@ body {
     margin: 5px;
 }
 
+.div-logo{
+    display: flex;
+    justify-content: center;
+}
 
-footer {
+.page-footer {
     background-color: #edecd1;
     color: gray;
-    margin-top: 130px;
-    max-height: 110px;
+    margin-top: 70px;
+    border-top: 1px solid #056608;
 }
 
 .footer {
-    background-color: #edecd1;
-    border-top: 1px solid #056608;
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    
+}
+
+.img-footer{
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .midia-icon {
@@ -33,14 +46,11 @@ footer {
 }
 
 .pay-icon {
-    max-width: 200px;
+    max-width: 250px;
     max-height: 200px;
-    width: auto relative;
-    height: auto relative;
 }
 
 .list-group-item {
-    background-color: #edecd1 !important;
     border: none !important;
 }
 
@@ -48,5 +58,11 @@ h5 {
     color: #056608;
     size: auto relative;
     margin-top: 5px;
+    font-size: 20px;
 }
 
+.a-ps:hover {
+    background-color: #00aa06;
+    border-radius: 60px;
+    color: honeydew;
+}
