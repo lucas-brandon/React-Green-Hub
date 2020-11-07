@@ -56,7 +56,7 @@ export default class Index extends Component {
         </div>
 
         {/*<!-- Banner bottom -->*/}
-        <Banner name="botton-barr col12" />
+        <Banner name="botton-barr" />
         
         <script
           src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
