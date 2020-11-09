@@ -9,6 +9,7 @@ import Titulo from "../../template/titulo/titulo";
 const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
 const URL_CATEGORIA_BUSCA = "http://modelagem.test/api/categoria/buscar/";
 const URL_PRODUTO_BUSCA = "http://modelagem.test/api/categoria/buscarProdutos/";
+const URL_CATEGORIA_PRODUTO = "http://modelagem.test/api/categoria/buscarTermo/";
 
 export default class Index extends Component {
     constructor(props) {
@@ -22,7 +23,23 @@ export default class Index extends Component {
 
     }
     componentDidMount(){
-        this.getProdutos();
+        let test = parseFloat(this.props.params.id);
+        if(!isNaN(test)){
+            this.getProdutos();
+        }
+        else{
+            this.getSearch();
+        }
+    }
+
+    getSearch = () => {
+        //alert("search!")
+        axios.get(`${URL_CATEGORIA_PRODUTO}` + this.props.params.id)
+        .then((resp) => {this.setState({ produtosCategoria: resp.data })
+            //console.log("categorias\n\n\n")
+            //console.log(resp.data)
+        });
+        
     }
 
     getProdutos = () => {
@@ -71,6 +88,9 @@ export default class Index extends Component {
       //let produtos = this.buscaProdutos();
       const produtos = new Object(this.state.produtosCategoria);
       const categoria = this.state.categoria;
+
+      console.log("search no render")
+      console.log(produtos)
 
         return (
           <div className="row">

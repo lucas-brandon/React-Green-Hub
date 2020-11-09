@@ -10,6 +10,7 @@ const URL_ENDERECO_POST = 'http://modelagem.test/api/endereco/salvar';
 
 const URL_ENDERECO_CLIENTE_POST = 'http://modelagem.test/api/enderecoCliente/salvar/';
 
+
 const URL_PAGAMENTO_POST = 'http://modelagem.test/api/pagamento/salvar/';
 
 const URL_CARTAO_POST = 'http://modelagem.test/api/cartao/cadastrar/';
@@ -201,6 +202,7 @@ export default class Checkout extends Component {
 
     componentDidMount(){
         //this.getCliente();
+
     }
 
     getProduto = () => {

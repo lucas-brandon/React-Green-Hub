@@ -22,6 +22,7 @@ export default class Header extends Component {
         super(props);
         this.state = {
           categorias: [],
+          search: "",
           msg: ""
         };
         //this.getProdutos();
@@ -35,6 +36,15 @@ export default class Header extends Component {
                 console.log(`${URL_CATEGORIA_LISTA}`);
         });
         this.exibirMsg();
+    }
+
+    changeSearch = event => {
+        this.setState({search: event.target.value});
+    }
+
+    search = () => {
+        browserHistory.push('#/categories/'+this.state.search);
+        document.location.reload(true); 
     }
 
     exibirMsg = () => {
@@ -111,8 +121,13 @@ export default class Header extends Component {
                         <img className="logo" src="images/logo.png" alt="Logo"></img>
                     </a>
                 </div>
-                <div className="col-8 col-md-4 mx-auto  search top-bar-item">
+                <div className="col-8 col-md-4 mx-auto search top-bar-item flex-column">
                     <h1  style={{color: "green" }}>Green Hub</h1>
+                    <div className="row input-search">
+                        <input type="email" onChange={this.changeSearch}  className="form-control email col-8" placeholder="buscar"/>
+                        <a className="col-2" onClick={this.search}>Go</a>
+                    </div>
+                    
                 </div>
                 {divLogado}
                 <div className="col-12 col-md-3  mx-auto top-bar-item">

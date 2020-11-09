@@ -176,7 +176,11 @@ label[for='bt-navbar-m']:hover{
 
 #search {
     width: 20px; 
-    height: 20px
+    height: 20px;
+}
+
+.input-search{
+    align-items: center;
 }
 
 header{
