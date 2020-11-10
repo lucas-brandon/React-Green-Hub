@@ -22,6 +22,7 @@ body {
     border-bottom: none;
     margin-top: 10px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 /*HEADER*/
 header {
@@ -206,4 +207,19 @@ ul {
 .row{
     margin-left: 0px;
     margin-right: 0px;
+}
+
+.search-img{
+    width: 40px;
+    height: 40px;
+    padding: 7px;
+}
+
+.search-img:hover{
+    cursor: pointer;
+}
+
+.input-search{
+    display: inline-flex;
+
 }

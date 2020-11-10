@@ -81,7 +81,7 @@ export default class Header extends Component {
         if(logado){
             logado = JSON.parse(logado);
             divLogado = (
-                <div className="row col-6 col-md-3  mx-auto  top-bar-item">
+                <div className="row col-6 col-md-2  mx-auto  top-bar-item">
                     <img src="images/user.png" className="imagem-login" id="user" style={{width: '30px', height: '30px'}}></img>
                     <ul className="list-unstyled list-login">
                         <li>
@@ -96,7 +96,7 @@ export default class Header extends Component {
         }
         else {
             divLogado = (
-                <div className="row col-6 col-md-3  mx-auto  top-bar-item">
+                <div className="row col-6 col-md-2  mx-auto  top-bar-item">
                     <img src="images/user.png" className="imagem-login" id="user" style={{width: '30px', height: '30px'}}></img>
                     <ul className="list-unstyled list-login">
                         <li>
@@ -121,16 +121,16 @@ export default class Header extends Component {
                         <img className="logo" src="images/logo.png" alt="Logo"></img>
                     </a>
                 </div>
-                <div className="col-8 col-md-4 mx-auto search top-bar-item flex-column">
-                    <h1  style={{color: "green" }}>Green Hub</h1>
-                    <div className="row input-search">
-                        <input type="email" onChange={this.changeSearch}  className="form-control email col-8" placeholder="buscar"/>
-                        <a className="col-2" onClick={this.search}>Go</a>
+                <div className="col-8 col-md-6 mx-auto search top-bar-item">
+                    <h1 className="col-12" style={{color: "green" }}>Green Hub</h1>
+                    <div className="col-12">
+                        <input type="email" onChange={this.changeSearch}  className="form-control input-search col-11" placeholder="buscar um produto..."/>
+                        <img className="search-img col-1" src="images/search.png" alt="search" onClick={this.search}></img>
                     </div>
                     
                 </div>
                 {divLogado}
-                <div className="col-12 col-md-3  mx-auto top-bar-item">
+                <div className="col-12 col-md-2  mx-auto top-bar-item">
                     <a href="#/shoppingCart" className="a-ps a-custom img-carrinho"><br></br>
                         <img src="images/cesta.png" alt="Cesta do Carrinho" style={{width: '40px', height: '40px'}}></img>
                     </a>
