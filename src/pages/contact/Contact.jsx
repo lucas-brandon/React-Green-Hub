@@ -9,7 +9,7 @@ export default class Contact extends Component {
     render() {
         return (
             <>
-            <Titulo name="Formulário de Contato"/>
+            <Titulo titulo="Formulário de Contato"/>
                     
                 <form name="formulario">
                     {/*container retangular*/}
@@ -86,7 +86,7 @@ export default class Contact extends Component {
                                         <label>Mensagem*</label>
                                     </div>
                                     <div class="col-12 containerText">
-                                        <textarea></textarea>
+                                        <textarea class="form-control area"></textarea>
                                     </div>
                                     <div class="col-12 col-md-6 containerBotao" id="botao1">
                                         <button class="limparContact">Limpar</button>

@@ -125,7 +125,7 @@ export default class Header extends Component {
                     <h1 className="col-12" style={{color: "green" }}>Green Hub</h1>
                     <div className="col-12">
                         <input type="email" onChange={this.changeSearch}  className="form-control input-search col-11" placeholder="buscar um produto..."/>
-                        <img className="search-img col-1" src="images/search.png" alt="search" onClick={this.search}></img>
+                        <img className="search-img" src="images/search.png" alt="search" onClick={this.search}></img>
                     </div>
                     
                 </div>
