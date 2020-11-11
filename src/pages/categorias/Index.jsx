@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { browserHistory } from 'react-router';
 import "./categorias.css";
-import axios from 'axios';
+import axios from "axios";
 import GridCard from "../../template/card/gridCard";
 import Titulo from "../../template/titulo/titulo";
 
