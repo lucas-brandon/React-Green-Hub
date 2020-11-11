@@ -10,7 +10,6 @@ const URL_CATEGORIA_BUSCA = "http://modelagem.test/api/categoria/buscar/";
 const URL_PRODUTO_BUSCA = "http://modelagem.test/api/categoria/buscarProdutos/";
 
 export default class Index extends Component {
-<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -26,21 +25,6 @@ export default class Index extends Component {
       .get(`${URL_PRODUTO_LISTA}` + this.props.params.id)
       .then((resp) => this.setState({ produtos: resp.data }));
   };
-=======
-    constructor(props) {
-      super(props);
-      this.state = {
-        produtos: [],
-        produtosCategoria: [],
-        categoria: null
-      };
-      //this.getProdutos();
-
-    }
-    componentDidMount(){
-        this.getProdutos();
-    }
->>>>>>> f9c371557dee7054a13bc8056707269ab966e41f
 
     getProdutos = () => {
         /*
