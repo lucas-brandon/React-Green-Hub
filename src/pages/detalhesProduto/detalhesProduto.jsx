@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./detalhesProduto.css";
 import Titulo from "../../template/titulo/titulo";
-import { Link } from "react-router";
+import { Link, browserHistory } from "react-router";
 import Input from "../../template/inputQuantidade/input";
 
 import axios from "axios";
@@ -57,106 +57,60 @@ export default class DetalhesProduto extends Component {
 
     console.log("existe cliente?\n\n"+cliente)
 
-    //if ((cliente)){
-      console.log("teste");
-      console.log(this.state.produto);
-      let valor = JSON.stringify(this.state.produto.valor);
-      valor = parseFloat(valor).toFixed(2);
-      valor = valor.toString();
+    
+    console.log("teste");
+    console.log(this.state.produto);
+    let valor = JSON.stringify(this.state.produto.valor);
+    valor = parseFloat(valor).toFixed(2);
+    valor = valor.toString();
 
-      valor = valor.replace(".", ",");
+    valor = valor.replace(".", ",");
 
-      let localCart = localStorage.getItem("produtos");
-      localCart = JSON.parse(localCart);
+    let localCart = localStorage.getItem("produtos");
+    localCart = JSON.parse(localCart);
 
-      console.log("print do estado")
-      console.log(this.state)
+    console.log("print do estado")
+    console.log(this.state)
 
-      //create a copy of our cart state, avoid overwritting existing state
-      let cartCopy = localCart;
+    //create a copy of our cart state, avoid overwritting existing state
+    let cartCopy = localCart;
 
-      //assuming we have an ID field in our item
-      let id = this.props.params.id;
+    //assuming we have an ID field in our item
+    let id = this.props.params.id;
 
-      let existingItem;
-      //look for item in cart array
-      if (cartCopy) {
-        existingItem = cartCopy.find((cartItem) => cartItem.id === id);
+    let existingItem;
+    //look for item in cart array
+    if (cartCopy) {
+      existingItem = cartCopy.find((cartItem) => cartItem.id === id);
+    }
+
+    //if item already exists
+    if (existingItem) {
+      existingItem.qtd_item += this.state.quantidade; //update item
+    } else {
+      if (!cartCopy) {
+        cartCopy = [];
       }
-
-      //if item already exists
-      if (existingItem) {
-        existingItem.qtd_item += this.state.quantidade; //update item
-      } else {
-        if (!cartCopy) {
-          cartCopy = [];
-        }
-        cartCopy.push({
-          id: this.props.params.id,
-          qtd_item: this.state.quantidade,
-          nome_produto: this.state.produto.nome_produto,
-          ds_produto: this.state.produto.ds_produto,
-          preco_valor: valor,
-          imagem: this.state.produto.imagem,
-        });
-        //if item doesn't exist, simply add it
-      }
-      
+      cartCopy.push({
+        id: this.props.params.id,
+        qtd_item: this.state.quantidade,
+        nome_produto: this.state.produto.nome_produto,
+        ds_produto: this.state.produto.ds_produto,
+        preco_valor: valor,
+        imagem: this.state.produto.imagem,
+      });
+  
+    }
+    
       
       //make cart a string and store in local space
       let stringCart = JSON.stringify(cartCopy);
-      localStorage.setItem("produtos", stringCart);    
-    //}
-   /* 
-   console.log("teste");
-   console.log(this.state.produto);
-   let valor = JSON.stringify(this.state.produto.valor);
-   valor = parseFloat(valor).toFixed(2);
-   valor = valor.toString();
-
-   valor = valor.replace(".", ",");
-
-   let localCart = localStorage.getItem("produtos");
-   localCart = JSON.parse(localCart);
-
-   console.log("print do estado")
-   console.log(this.state)
-
-   //create a copy of our cart state, avoid overwritting existing state
-   let cartCopy = localCart;
-
-   //assuming we have an ID field in our item
-   let id = this.props.params.id;
-
-   let existingItem;
-   //look for item in cart array
-   if (cartCopy) {
-     existingItem = cartCopy.find((cartItem) => cartItem.id === id);
-   }
-
-   //if item already exists
-   if (existingItem) {
-     existingItem.qtd_item += this.state.quantidade; //update item
-   } else {
-     if (!cartCopy) {
-       cartCopy = [];
-     }
-     cartCopy.push({
-       id: this.props.params.id,
-       qtd_item: this.state.quantidade,
-       nome_produto: this.state.produto.nome_produto,
-       ds_produto: this.state.produto.ds_produto,
-       preco_valor: valor,
-       imagem: this.state.produto.imagem,
-     });
-     //if item doesn't exist, simply add it
-   }
-   
-   
-   //make cart a string and store in local space
-   let stringCart = JSON.stringify(cartCopy);
-   localStorage.setItem("produtos", stringCart);
-    */
+      localStorage.setItem("produtos", stringCart);
+      localStorage.setItem('msg', "Produto "+this.state.produto.nome_produto+" adicionado no carrinho");
+      
+      
+      browserHistory.push('#/shoppingCart/');
+      document.location.reload(true); 
   };
 
   
@@ -182,36 +136,21 @@ export default class DetalhesProduto extends Component {
             <div class="col-12 col-md-8">
               <div class="card-body">
                 <p class="marcaItem">{produto.nm_marca}</p>
-                <a class="a-detalhes" href="#/detalhesDoProduto">
+                <a class="a-detalhes" href="#/details">
                   <h3 class="nomeItem">{produto.nome_produto}</h3>
                 </a>
                 <h4 class="preco">R$ {valor}</h4>
                 <p class="descricaoItem">{produto.ds_produto}</p>
                 
-                <Link to={`#/shoppingCart/`}>
-                  <button type="submit" class="comprar" onClick={this.addItem}>
-                    Comprar
-                  </button>
-                </Link>
+                
+                <button type="submit" class="comprar" onClick={this.addItem}>
+                  Comprar
+                </button>
+                
               </div>
             </div>
           </div>
         </div>
-        <script
-          src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-          crossorigin="anonymous"
-        ></script>
-        <script
-          src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-          crossorigin="anonymous"
-        ></script>
-        <script
-          src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-          crossorigin="anonymous"
-        ></script>
         <script src="assets/scripts/detalhesDoProduto.js"></script>
         <script src="assets/js/detalhesDoProduto.js"></script>
       </>

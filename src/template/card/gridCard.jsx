@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Card from "../../template/card/Card";
 
 
@@ -18,12 +18,11 @@ export default props => {
             valor = valor.replace(".", ",");
         
             return ( 
-            <Card divClass ="col-md-4 " img ={item.link_imagem}
-            valor={valor} nome={item.nome_produto} marca={item.nm_marca} link={item.id} msg="Ver Produto" key={item.id}/>
+                <Card divClass ="col-md-4 " img ={item.link_imagem}
+                valor={valor} nome={item.nome_produto} marca={item.nm_marca} link={item.id} msg="Ver Produto" key={item.id}/>
             )
-        }
-    )
-}
+        })
+    }
 
     return (
         <div class="row mb-5">

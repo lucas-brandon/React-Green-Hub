@@ -18,16 +18,15 @@ import Pedidos from '../pages/pedidos/Pedidos';
 export default props => (
     <Router history={hashHistory}>
         <Route path='/home' component={Home}></Route>
-        <Route path='/categorias' component={Categorias}></Route>
-        <Route path='/categorias/:id' component={Categorias}></Route>
+        <Route path='/categories/:id' component={Categorias}></Route>
         <Route path='/contact' component={Contact}></Route>
         <Route path='/shoppingCart' component={ShoppingCart}></Route>
         <Route path='/checkout' component={Checkout}></Route>
-        <Route path='/finished' component={Finished}></Route>
+        <Route path='/success' component={Finished}></Route>
         <Route path='/register' component={Register}></Route>
-        <Route path='/detalhesProduto/:id' component={DetalhesProduto}></Route>
+        <Route path='/details/:id' component={DetalhesProduto}></Route>
         <Route path='/profile' component={Profile}></Route>
-        <Route path='/pedidos' component={Pedidos}></Route>
+        <Route path='/orders' component={Pedidos}></Route>
         <Route path='/login' component={Login}></Route>
         <Redirect from='*' to='/home'></Redirect>
     </Router>

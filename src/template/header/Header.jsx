@@ -1,94 +1,136 @@
 import React, { Component } from "react";
-import { browserHistory } from "react-router";
+import axios from 'axios';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect,
+    useHistory,
+    useLocation,
+    browserHistory
+  } from "react-router";
+import ItensMenu from './itensMenu';
+import Msg from '../../template/mensagem/Mensagem';
 import './header.css';
 import { useState } from 'react';
+
+const URL_CATEGORIA_LISTA = 'http://modelagem.test/api/categoria/listar'
 
 export default class Header extends Component {
     constructor(props){
         super(props);
         this.state = {
-            logado: JSON.parse(localStorage.getItem('Cliente')),
-            naoLogado: JSON.parse(localStorage.getItem('Cliente'))
+          categorias: [],
+          msg: ""
+        };
+        //this.getProdutos();
+  
+    }
+
+    componentDidMount = () => {
+        axios.get(`${URL_CATEGORIA_LISTA}`)
+            .then((resp) => {
+                this.setState({ categorias: resp.data })
+                console.log(`${URL_CATEGORIA_LISTA}`);
+        });
+        this.exibirMsg();
+    }
+
+    exibirMsg = () => {
+        let local = localStorage.getItem("msg")
+        
+        if(local){
+            this.setState({ msg: local })
+            setTimeout(() => {
+                this.setState({msg: ""});
+                localStorage.removeItem("msg")
+              }, 10000);
         }
     }
-
-    // logado = localStorage.getItem('Cliente');
-    // logado = JSON.parse(logado);
-    // naoLogado = localStorage.getItem('Cliente');
-    // naoLogado = JSON.parse(naoLogado);
+    
     deslogar = () => {
+        localStorage.setItem('msg', "Logout realizado!");
         localStorage.removeItem("Cliente");
         browserHistory.push('#/home');
-        document.location.reload(true)
+        document.location.reload(true);
     }
 
+    goCategoria(id){
+        console.log("categoria"+id);
+        browserHistory.push('#/categories/'+id);
+        document.location.reload(true);
+    }
+    testeF = (t) => {
+        console.log("teste")
+    }
     render(){
-        return (
-            <><header class="container-fluid headerCustom">
-                <div class="row top-bar align-content-center">
-                    <div class="col-4 col-md-2 mx-auto  top-bar-item">
-                        <a href="#/home" class="a-ps a-custom">
-                            <img class="logo" src="images/logo.png" alt="Logo"></img>
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-4 mx-auto  search top-bar-item">
-                        <h1  style={{color: "green" }}>Green Hub</h1>
-                    </div>
-                    {this.logado  && 
-                        <div class="row col-6 col-md-3  mx-auto  top-bar-item">
-                        <ul class="list-unstyled">
-                        <a href="#/profile" class="a-ps a-custom">
-                            <li>
-                                <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img>    
-                            </li>
-                            <li>{this.logado.nome}</li></a>
-                            <li><a href="#/home" onClick={this.deslogar()}>sair</a></li>
-                        </ul>
-                    </div>
-                    }
-                    {!this.naoLogado && 
-                    <div class="row col-6 col-md-3  mx-auto  top-bar-item">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#/login" class="a-ps a-custom">
-                                    <img src="images/user.png" alt="some text" id="user" style={{width: '30px', height: '30px'}}></img> Entre
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#/register" class="a-ps a-custom">
-                                    Cadastre-se</a>
-                            </li>
-                        </ul>
-                    </div>
-                    } 
-                    <div class="col-6 col-md-3  mx-auto top-bar-item">
-                        <a href="#/shoppingCart" class="a-ps a-custom"><br></br>
-                            <img src="images/cesta.png" alt="Cesta do Carrinho" style={{width: '40px', height: '40px'}}></img>
-                        </a>
-                    </div>
+
+        let divLogado;
+        let logado = localStorage.getItem('Cliente');
+        if(logado){
+            logado = JSON.parse(logado);
+            divLogado = (
+                <div className="row col-6 col-md-3  mx-auto  top-bar-item">
+                    <img src="images/user.png" className="imagem-login" id="user" style={{width: '30px', height: '30px'}}></img>
+                    <ul className="list-unstyled list-login">
+                        <li>
+                            <a href="#/profile" className="nome-usuario">{logado.nome}</a>
+                        </li>
+                        <li>
+                            <a onClick={this.deslogar} className="a-login">sair</a>
+                        </li>
+                    </ul>
                 </div>
-            </header>
-            <input type="checkbox" id="bt-navbar-m"></input>
-            <label class=".bmd-label-static" for="bt-navbar-m">&#9776;</label>
-            <nav class="navbar-m navbar-expand{-sm|-md|-lg|-xl} menu ">    
-                <ul class="nav-m row">
-                    <li class="col-12 col-md-2 nav-item nav-item-custom">
-                        <a href="#/categorias/1" class="nav-link nav-link-custom a-custom">Aminoácidos</a>
-                    </li>
-                    <li class="col-12 col-md-4 nav-item nav-item-custom">
-                        <a href="#/categorias/2" class="nav-link nav-link-custom a-custom">Suplementos-alimentares</a>
-                    </li>
-                    <li class="col-12 col-md-2 nav-item nav-item-custom">
-                        <a href="#/categorias/3" class="nav-link nav-link-custom a-custom">Vitaminas</a>
-                    </li>
-                    <li class="col-12 col-md-2 nav-item nav-item-custom">
-                        <a href="#/categorias/4" class="nav-link nav-link-custom a-custom">Fitoterápicos</a>
-                    </li>
-                    <li class="col-12 col-md-2 nav-item nav-item-custom">
-                        <a href="#/categorias/5" class="nav-link nav-link-custom a-custom">Proteinas</a>
-                    </li>
-                </ul>
-            </nav></>
+            )
+        }
+        else {
+            divLogado = (
+                <div className="row col-6 col-md-3  mx-auto  top-bar-item">
+                    <img src="images/user.png" className="imagem-login" id="user" style={{width: '30px', height: '30px'}}></img>
+                    <ul className="list-unstyled list-login">
+                        <li>
+                            <a href="#/login" className="a-login">Entre</a>
+                        </li>
+                        
+                        <li>
+                            <a href="#/register" className="a-login">
+                                Cadastre-se</a>
+                        </li>
+                    </ul>
+                </div>
+            )
+        }
+        let msgLogin = (<Msg msg={this.state.msg}></Msg>)
+        return (
+            <>
+            <header className="container-fluid headerCustom" onClick={this.testeF}>
+            <div className="row align-content-center">
+                <div className="col-4 col-md-2 mx-auto  top-bar-item">
+                    <a href="#/home" className="a-ps a-custom">
+                        <img className="logo" src="images/logo.png" alt="Logo"></img>
+                    </a>
+                </div>
+                <div className="col-8 col-md-4 mx-auto  search top-bar-item">
+                    <h1  style={{color: "green" }}>Green Hub</h1>
+                </div>
+                {divLogado}
+                <div className="col-12 col-md-3  mx-auto top-bar-item">
+                    <a href="#/shoppingCart" className="a-ps a-custom img-carrinho"><br></br>
+                        <img src="images/cesta.png" alt="Cesta do Carrinho" style={{width: '40px', height: '40px'}}></img>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <input type="checkbox" id="bt-navbar-m"></input>
+        <label className=".bmd-label-static" htmlFor="bt-navbar-m">&#9776;</label>
+        <nav className="navbar-m navbar-expand{-sm|-md|-lg|-xl} menu ">
+            <ul className="nav-m row">
+                <ItensMenu categorias={this.state.categorias} onClick={this.goCategoria}></ItensMenu>
+            </ul>
+        </nav>
+        {msgLogin}
+        </>
         )
     }
 }

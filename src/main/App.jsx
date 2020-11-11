@@ -15,7 +15,7 @@ export default props => {
         return (
             <>
                 <Header></Header>
-                <div className= 'container-fluid'>
+                <div className= 'container-fluid main'>
                 <Routes></Routes>
                 </div>
                 <Footer></Footer>

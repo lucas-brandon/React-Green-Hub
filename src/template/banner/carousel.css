@@ -1,0 +1,20 @@
+.carousel {
+    max-height: 280px;
+    height: auto;
+    border: #056608 solid 10px;
+    background-color: rgb(145, 192, 145)
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon{
+    background-color: #056608;
+    height: 30px;
+}
+
+.carousel-indicators {
+    bottom: -20px
+}
+
+.carousel-indicators li {
+    background-color: #005503;
+    height: 10px;
+}

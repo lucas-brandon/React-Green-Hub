@@ -1,27 +1,71 @@
 import React, {Component} from 'react';
 import './profile.css';
 import Titulo from '../../template/titulo/titulo';
+import Cartoes from "../../template/profile/cartoes";
+import axios from'axios';
+const EMAIL_CLIENTE = 'http://modelagem.test/api/contato/emailCliente/';
+const TELEFONE_CLIENTE = 'http://modelagem.test/api/contato/telefoneCliente/';
+const CARTOES_CLIENTE = 'http://modelagem.test/api/cartao/cartoesCliente/';
+
 
 export default class Profile extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
+            email: '',
             cliente: '',
+            telefone: '',
+            cartoes: '',
         }
     }
 
     componentDidMount() {
         this.getCliente();
+        this.getEmail();
+        this.getTelefone();
+        this.getCartoes();
     }
 
     getCliente = () => {
-        this.setState({cliente: JSON.parse(localStorage.getItem("Cliente"))});
+        let logado = localStorage.getItem('Cliente');
+        logado = JSON.parse(logado);
+        this.setState({cliente: localStorage.getItem('Cliente')});
+    }
+
+    getEmail = () => {
+        let logado = localStorage.getItem('Cliente');
+        logado = JSON.parse(logado);
+        axios.get(`${EMAIL_CLIENTE}`+ logado.id)
+        .then(resp => {
+            this.setState({email: resp.data})
+        })
+    }
+
+    getTelefone = () => {
+        let logado = localStorage.getItem('Cliente');
+        logado = JSON.parse(logado);
+        axios.get(`${TELEFONE_CLIENTE}`+ logado.id)
+        .then(resp => {
+            this.setState({telefone: resp.data})
+        })
+    }
+
+    getCartoes = () => {
+        let logado = localStorage.getItem('Cliente');
+        logado = JSON.parse(logado);
+        axios.get(`${CARTOES_CLIENTE}`+ logado.id)
+        .then(resp => {
+            this.setState({cartoes: resp.data})
+        })
     }
     
     render() {
+        let logado = localStorage.getItem('Cliente');
+        logado = JSON.parse(logado);
+        const cartoes = new Object(this.state.cartoes);
+
         return (
             <>
-
             <Titulo name="Perfil" />
 
             <div class="container col-12">
@@ -30,13 +74,12 @@ export default class Profile extends Component {
                         <div class="col-12">
                             <div class= "form-group">
                                 <div class="card">
-                                    {/* <h5 class="card-header">{this.logado.nome}</h5> */}
+                                    <h5 class="card-header align-self-center">{logado.nome + " " + logado.sobrenome}</h5>
                                     <div class="card-body">
-                                        {/* <p class="card-text">{this.logado.cpf}</p> */}
-                                        <p class="card-text">Celular: (11) 9 9999-8888</p>
-                                        <p class="card-text">Telefone: (11) 2000-2000</p>
-                                        <p class="card-text">Email: maria.silva@gmail.com</p>
-                                        {/* <p class="card-text">{this.logado.dt_nascimento}</p> */}
+                                        <p class="card-text">CPF: {logado.cpf}</p>
+                                        <p class="card-text">Telefone: {this.state.telefone}</p>
+                                        <p class="card-text">Email: {this.state.email}</p>
+                                        <p class="card-text">Data Nascimento: {logado.dt_nascimento}</p>
                                         <a  class="btn btn-lg btnAlterar">Alterar Cadastro</a>
                                     </div>
                                 </div>
@@ -46,7 +89,7 @@ export default class Profile extends Component {
                 </div>
             </div>
 
-           <Titulo name="Endereços" />
+           {/* <Titulo name="Endereços" /> */}
 
             {/* // <div class="container col-12">
             //     <div class="row">
@@ -92,7 +135,7 @@ export default class Profile extends Component {
             //     </div>
             // </div> */}
         
-            <Titulo name="Pedidos" />
+            {/* <Titulo name="Pedidos" /> */}
 
             {/* // <div class="container col-12">
             //     <div class="row">
@@ -161,7 +204,10 @@ export default class Profile extends Component {
             //             </div>
             //         </div>
             //     </div> */}
-                <Titulo name="Cartões" />
+
+            <Titulo name="Cartões"/>
+                
+            <Cartoes cartoes={this.state.cartoes}/>
             {/* //     <div class="container col-12">
             //         <div class="row">
             //             <div class="container col-12 mx-12">

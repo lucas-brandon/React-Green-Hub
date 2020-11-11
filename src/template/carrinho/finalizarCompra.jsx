@@ -4,6 +4,7 @@ import "./finalizarCompra.css";
 export default class FinalizarCompra extends Component {
 //export default (props) => {
 
+
   login = () => {
   //function login(){
     let cliente = localStorage.getItem('Cliente');
@@ -24,8 +25,8 @@ export default class FinalizarCompra extends Component {
           {/* <span id="cart-price-total" class="cart-total col-12">
             Total: R$: <span id="totalValue">{this.props.total}</span>
           </span> */}
-          <a href={this.login()}>
-            <button type="submit" class="btn-finalizar-compra col-12">
+          <a href={ this.login()}>
+            <button type="submit"  class="btn-finalizar-compra col-12">
               Finalizar Compra
             </button>
           </a>
