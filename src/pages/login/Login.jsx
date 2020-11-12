@@ -14,7 +14,9 @@ export default class Login extends Component {
         this.state = {
             email: '',
             senha: '',
-            cliente: []
+            cliente: [],
+            msgFail: false
+
         }
     }
 
@@ -29,11 +31,24 @@ export default class Login extends Component {
     setCliente = () => {
             axios.get(`${URL_LOGAR}` + this.state.senha + '/' + this.state.email)
             .then(resp => {
-                //alert("aqui: "+resp.data.nome)
-                localStorage.setItem('Cliente', JSON.stringify(resp.data));
-                browserHistory.push('#/home');
-                document.location.reload(true);
+                console.log(resp.data)
+                if(resp.data.id){
+                    localStorage.setItem('Cliente', JSON.stringify(resp.data));
+                    localStorage.setItem('msg', "Login realizado com sucesso!");
+                    browserHistory.push('#/home');
+                    document.location.reload(true);    
+                }
+                else {
+                    localStorage.setItem('msg', "Login não realizado. Usuário ou senha incorreta!");
+                    //browserHistory.push('#/login');
+                    //document.location.reload(true); 
+                }
                 
+            })
+            .catch(err => {
+                console.log(err.response)
+                localStorage.setItem('msg', "Login não realizado. Usuário ou senha incorreta!");
+                document.location.reload(true); 
             })
             //window.location.href = '#/home';
             
@@ -43,20 +58,24 @@ export default class Login extends Component {
         //let msg = document.getElementsByClassName("mensagem");
         console.log("toggleeeeee")
         console.log(msg)
-        if(msg.classList.contains("show")){
-            console.log("show pra hide")
-            msg.classList.replace("show", "hide");
+        if(msg){
+            if(msg.classList.contains("show")){
+                console.log("show pra hide")
+                msg.classList.replace("show", "hide");
+            }
+            else{
+                console.log("hide pra show")
+                msg.classList.replace("hide", "show");
+            }
         }
-        else{
-            console.log("hide pra show")
-            msg.classList.replace("hide", "show");
-        }
+        
         
     }
 
     render () {
         return (
             <>
+            
             <div className='row'> 
                 <div className="login-container " id="box">
                     <form className="form-signin">

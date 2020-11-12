@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import "./categorias.css";
 import axios from "axios";
 import GridCard from "../../template/card/gridCard";
+import Titulo from "../../template/titulo/titulo";
 
 
 const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
@@ -10,21 +11,19 @@ const URL_CATEGORIA_BUSCA = "http://modelagem.test/api/categoria/buscar/";
 const URL_PRODUTO_BUSCA = "http://modelagem.test/api/categoria/buscarProdutos/";
 
 export default class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      produtos: [],
-    };
-  }
-  componentDidMount() {
-    this.getProdutos();
-  }
+    constructor(props) {
+      super(props);
+      this.state = {
+        produtos: [],
+        produtosCategoria: [],
+        categoria: null
+      };
+      //this.getProdutos();
 
-  getProdutos = () => {
-    axios
-      .get(`${URL_PRODUTO_LISTA}` + this.props.params.id)
-      .then((resp) => this.setState({ produtos: resp.data }));
-  };
+    }
+    componentDidMount(){
+        this.getProdutos();
+    }
 
     getProdutos = () => {
         /*
@@ -43,6 +42,12 @@ export default class Index extends Component {
         */
         axios.get(`${URL_PRODUTO_BUSCA}` + this.props.params.id)
         .then((resp) => {this.setState({ produtosCategoria: resp.data })
+            console.log("categorias\n\n\n")
+            console.log(resp.data)
+        });
+
+        axios.get(`${URL_CATEGORIA_BUSCA}` + this.props.params.id)
+        .then((resp) => {this.setState({ categoria: resp.data.descricao })
             console.log("categorias\n\n\n")
             console.log(resp.data)
         });
@@ -65,9 +70,11 @@ export default class Index extends Component {
     render() {
       //let produtos = this.buscaProdutos();
       const produtos = new Object(this.state.produtosCategoria);
+      const categoria = this.state.categoria;
 
         return (
           <div className="row">
+              <Titulo titulo={categoria}></Titulo>
               {/*
               <div className="filtro column col-md-2 col-12">
                   <h4>Marca</h4>
@@ -147,14 +154,16 @@ export default class Index extends Component {
                   </div>
               </div>
               */}
-              <div className="cartoes row col-md-10 col-12" style={{marginTop:"60px"}}>
-                  <div className="container">
+              <div className="cartoes row col-md-10 col-12 grid" style={{marginTop:"60px"}}>
+                  
+              </div>
+              <div className="container grid">
                       {/*<!--Cards-->*/}
                       <GridCard produtos={produtos} /><GridCard />
                   </div>
-              </div>
           </div>
-      
-    )
+          
+        
+    );
   }
 }

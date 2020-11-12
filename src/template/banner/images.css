@@ -4,7 +4,7 @@ a:active {
 
 
 .a-ps {
-    color: gray !important;
+    color: gray;
 }
 
 .a-ps:link {
@@ -16,7 +16,7 @@ a:active {
 }
 
 .a-ps:hover {
-    background-color: #25a52a;
-    border-radius: 60rem;
-    color: honeydew !important;
+    background-color: #00aa06;
+    border-radius: 60px;
+    color: honeydew;
 }
