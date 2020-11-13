@@ -3,12 +3,14 @@ import './checkout.css';
 import './checkout.js';
 import Titulo from '../../template/titulo/titulo';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 const URL_CLIENTE_GET = 'http://modelagem.test/api/clientes/buscarNome/';
 
 const URL_ENDERECO_POST = 'http://modelagem.test/api/endereco/salvar';
 
 const URL_ENDERECO_CLIENTE_POST = 'http://modelagem.test/api/enderecoCliente/salvar/';
+
 
 const URL_PAGAMENTO_POST = 'http://modelagem.test/api/pagamento/salvar/';
 
@@ -201,6 +203,7 @@ export default class Checkout extends Component {
 
     componentDidMount(){
         //this.getCliente();
+
     }
 
     getProduto = () => {
@@ -339,7 +342,7 @@ export default class Checkout extends Component {
 
         //console.log('configurando endereco cliente\n\n\n\n');     
         
-        let localCartCliente = localStorage.getItem("cliente_id");
+        let localCartCliente = localStorage.getItem("Cliente");
         let localCartEndereco = localStorage.getItem("endereco");
         let localCartProdutos = localStorage.getItem("produtos");
         localCartProdutos = JSON.parse(localCartProdutos);
@@ -356,25 +359,37 @@ export default class Checkout extends Component {
             //console.log("resposta\n\n\n\n\n\n\n")
             console.log(resp)
             pedidoCart.pagamento = (this.state.tipo_pagamento);
+
+            let rand = (10000 + (Math.random() * 10000)).toFixed(0);
+
             pedidoCart.status_pedido_id = 1;
-            pedidoCart.nr_pedido = 10+pedidoCart.cliente_id
-            pedidoCart.dt_pedido = "2020-10-10"
+            pedidoCart.nr_pedido = rand;
+            pedidoCart.dt_pedido = "2020-10-10";
             pedidoCart.produtos = localCartProdutos;
 
             let submitCart = JSON.stringify(pedidoCart);
 
-            localStorage.setItem("pedido", submitCart);
 
             axios.post(URL_PEDIDO_POST, { 
                 cliente_id: pedidoCart.cliente_id,
                 pagamento_id: pedidoCart.pagamento,
                 nr_pedido: pedidoCart.nr_pedido,
                 dt_pedido: pedidoCart.dt_pedido,
-                produtos: localCartProdutos
+                produtos: localCartProdutos,
+                telefone: this.state.telefone,
+                name: this.state.cliente_nome_1,
+                email: this.state.email,
+                msg: "Pedido "+rand+" está em andamento",
+                assunto: "Green Hub - Pedido "+rand
             })
             .then(resp2 => {
+                console.log("pedidooo")
                 console.log(resp2)
                 localStorage.removeItem('produtos');
+                localStorage.setItem("pedido", submitCart);
+                //localStorage.setItem('msg', "Pedido realizado com sucesso!");
+                browserHistory.push('#/success');
+                document.location.reload(true);  
                 //alert("finish");
             })
         });
@@ -388,7 +403,7 @@ export default class Checkout extends Component {
 
         let valorTotal = 0.0;
         pedidoCart.forEach((produto, index) => {
-            valorTotal += produto.valor_total   ;
+            valorTotal += produto.total   ;
         });
 
         console.log('testePedidoCart ' +  pedidoCart)
@@ -445,7 +460,7 @@ export default class Checkout extends Component {
                         </div>
 
                         <div class="col-md-4 col-sm-12">
-                            <label for="complement">Numero</label>
+                            <label for="complement">Número*</label>
                             <input id="complement" type="text" onChange={this.changeNumEndereco}class="form-control"></input>
                         </div>
                     </div>
@@ -514,7 +529,7 @@ export default class Checkout extends Component {
                         <div class="col-md-8 col-sm-12">
                             <label for="email">E-mail*</label>
                             <input id="email" type="text" 
-                            onChange={this.changeEmail}class="form-control" placeholder="ex: exemplo@email.com" required></input>
+                            onChange={this.changeEmail} class="form-control" placeholder="ex: exemplo@email.com" required></input>
                         </div>
 
                         <div class="col-md-4 col-sm-12">
@@ -638,7 +653,7 @@ export default class Checkout extends Component {
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href='#/success'><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
+                            <a><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
                         </div>
                     </div>
                 </div>

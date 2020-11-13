@@ -3,45 +3,36 @@ import "./itemCarrinho.css";
 import { browserHistory } from "react-router";
 
 export default (props) => {
-  let localCart = localStorage.getItem("produtos");
-  localCart = JSON.parse(localCart);
-  let qtd
-
-  localCart.forEach((item) => {
-    if (item.id === props.identificador) {
-      let teste2 = parseInt(item.qtd_item);
-      if (teste2 != null) {
-        qtd = teste2
-      } else {
-      qtd = 1
-      }
-    }
-  });
-  const [cont, setCont] = useState(qtd);
-
-
   useEffect(() => {
     loadProducts();
-    teste();
-  });
-  const teste = () => {};
-
-  let total = parseInt(props.valor) * cont;
-  total = JSON.stringify(total);
-  total = parseFloat(total).toFixed(2);
-  total = total.toString();
-
-  total = total.replace(".", ",");
+    console.log("use effect");
+  })
 
   const loadProducts = () => {
+    let total = 0;
     localCart.forEach((item) => {
       if (item.id === props.identificador) {
         item.qtd_item = cont;
         item.valor_total = parseFloat(total);
+        //item.total_cart += parseFloat(total);
+        item.total = cont * (parseFloat(item.preco_valor))
       }
     });
     let stringCart = JSON.stringify(localCart);
     localStorage.setItem("produtos", stringCart);
+    //props.parent(total)
+
+    
+
+  }
+
+  function handleChange(event){
+    props.onChange(event.target.value);
+  }
+
+  const reload = () => {
+    browserHistory.push("#/shoppingCart");
+    document.location.reload(true);
   };
 
   const dellProducts = () => {
@@ -53,18 +44,42 @@ export default (props) => {
         localCart.splice(indice, 1);
       }
     });
-    localStorage.clear("produtos");
+    //localStorage.clear("produtos");
     let stringCart = JSON.stringify(localCart);
     localStorage.setItem("produtos", stringCart);
-    browserHistory.push("#/shoppingCart");
-    document.location.reload(true);
-  };
+    reload();
+  }
 
-  const minusDell = () => {
-    if (cont >= 0) {
-      dellProducts();
+  let localCart = localStorage.getItem("produtos");
+  localCart = JSON.parse(localCart);
+
+  let qtd;
+
+  localCart.forEach((item) => {
+    if (item.id === props.identificador) {
+      let teste2 = parseInt(item.qtd_item);
+      if (teste2 != null) {
+        qtd = teste2;
+      } else {
+        qtd = 1;
+      }
     }
-  };
+  });
+
+  if(qtd < 0){
+    qtd = 0;
+  }
+
+  const [cont, setCont] = useState(qtd);
+
+  let total = parseInt(props.valor) * cont;
+  total = JSON.stringify(total);
+  total = parseFloat(total).toFixed(2);
+  total = total.toString();
+
+  total = total.replace(".", ",");
+
+
   return (
     <div id="item" class="row cart-item img">
       <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
@@ -90,9 +105,11 @@ export default (props) => {
           <div class="input-group-prepend">
             <button
               onClick={() => {
-                setCont(cont - 1);
-                loadProducts();
-                minusDell();
+                if(cont > 1){
+                  setCont(cont - 1);
+                }
+                //loadProducts();
+                //minusDell();
               }}
               class="color-qtd btn-minus"
               type="button"
@@ -105,15 +122,17 @@ export default (props) => {
             </button>
           </div>
 
-          <div class="quantidade" onChange={props.onChange}>
+          <div class="quantidade" onChange={handleChange}>
             {cont}
           </div>
 
           <div class="input-group-prepend">
             <button
               onClick={() => {
-                setCont(cont + 1);
-                loadProducts();
+                if(cont < 10){
+                  setCont(cont + 1);
+                }
+                //loadProducts();
               }}
               class="color-qtd btn-plus"
               type="button"

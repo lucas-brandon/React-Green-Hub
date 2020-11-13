@@ -22,6 +22,7 @@ body {
     border-bottom: none;
     margin-top: 10px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 /*HEADER*/
 header {
@@ -41,7 +42,7 @@ header {
     background-color: #A20808;
 }
 .form-control {
-    border-radius: 65px !important;
+    border-radius: 10px !important;
     background-color: #D7E1ED !important;
 }
 .a-custom {
@@ -176,7 +177,11 @@ label[for='bt-navbar-m']:hover{
 
 #search {
     width: 20px; 
-    height: 20px
+    height: 20px;
+}
+
+.input-search{
+    align-items: center;
 }
 
 header{
@@ -202,4 +207,19 @@ ul {
 .row{
     margin-left: 0px;
     margin-right: 0px;
+}
+
+.search-img{
+    width: 40px;
+    height: 40px;
+    padding: 7px;
+}
+
+.search-img:hover{
+    cursor: pointer;
+}
+
+.input-search{
+    display: inline-flex;
+
 }

@@ -43,6 +43,7 @@ export default class Mensagem extends Component {
         if(this.state.show){
             this.setState({show: false})
             div.classList.replace("show", "hide")
+            localStorage.removeItem("msg")
         }
         else {
             //this.setState({show: true})
