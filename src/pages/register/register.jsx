@@ -92,9 +92,9 @@ export default class Register extends Component {
 
             */
             localStorage.setItem('msg', "Cadastro realizado com sucesso! Um e-mail de boas-vindas foi enviado");
-            alert("Cadastro concluído com sucesso!")
-            //browserHistory.push('#/login');
-            //document.location.reload(true);  
+            //alert("Cadastro concluído com sucesso!")
+            browserHistory.push('#/login');
+            document.location.reload(true);  
         })
 
     }
@@ -131,7 +131,7 @@ export default class Register extends Component {
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
                                                 <label>CPF*</label>
-                                                <input type="text" onChange={this.changeCPF} className="form-control cpf"  placeholder="ex: 123.456.789-10" required/>
+                                                <input type="text" onChange={this.changeCPF} className="form-control cpf" maxLength="14" placeholder="ex: 123.456.789-10" required/>
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6 col-sm-12">
@@ -151,7 +151,7 @@ export default class Register extends Component {
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" onChange={this.changeTelefone} className="form-control telefone" placeholder="DDD + Telefone" required/>
+                                                <input type="text" onChange={this.changeTelefone} className="form-control telefone" placeholder="DDD + Telefone" maxLength="12" required/>
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6"></div>
@@ -176,7 +176,7 @@ export default class Register extends Component {
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
                                                 <label>Senha*</label>
-                                                <input type="password" onChange={this.changeSenha} className="form-control senha" required/>
+                                                <input type="password" onChange={this.changeSenha} className="form-control senha" minLength="8" required/>
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6">
