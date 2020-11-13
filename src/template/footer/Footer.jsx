@@ -19,7 +19,7 @@ export default props => {
                         <li>
                             <img class="contato-icon midia-icon" src="../images/24h.png"></img> Telefone: 115567-3490
                         </li>
-                        <li>greenhub@green.com.br</li>
+                        <li>green.hub.suplementos@gmail.com</li>
                         <li>Rua Minas gerais, 123</li>
                     </ul>
 

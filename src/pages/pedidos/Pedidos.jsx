@@ -21,10 +21,14 @@ export default class Pedidos extends Component {
         this.listarPedidos();
     }
     listarPedidos = () => {
+        console.log("pedidoooo")
         axios.get(`${URL_PEDIDOS_LISTA}`)
-        .then((resp) => this.setState({ pedidos: resp.data }));
-        console.log("listar pedidos\n\n\n\n")
-    };
+        .then(resp => {
+            console.log(resp);
+            console.log("listar pedidos\n\n\n\n")
+            this.setState({ pedidos: resp.data })
+        });
+    }
     changeEstado = (event) => {
         this.setState({ quantidade: event.target.value });
     };
@@ -62,7 +66,7 @@ export default class Pedidos extends Component {
             )
           });
         } else {
-          return "Carrinho Vazio.";
+          return "Nenhum Pedido.";
         }
       };
 

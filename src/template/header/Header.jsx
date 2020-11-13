@@ -88,7 +88,10 @@ export default class Header extends Component {
                             <a href="#/profile" className="nome-usuario">{logado.nome}</a>
                         </li>
                         <li>
-                            <a onClick={this.deslogar} className="a-login">sair</a>
+                            <a href="#/orders" className="a-login">Pedidos</a>
+                        </li>
+                        <li>
+                            <a onClick={this.deslogar} className="a-login">Sair</a>
                         </li>
                     </ul>
                 </div>
