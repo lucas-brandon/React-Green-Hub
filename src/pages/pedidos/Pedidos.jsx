@@ -26,7 +26,8 @@ export default class Pedidos extends Component {
         .then(resp => {
             console.log(resp);
             console.log("listar pedidos\n\n\n\n")
-            this.setState({ pedidos: resp.data })
+            let a = resp.data.sort((a,b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0));
+            this.setState({ pedidos: a })
         });
     }
     changeEstado = (event) => {
@@ -53,10 +54,14 @@ export default class Pedidos extends Component {
             {
                 status = "Em Andamento"
             }
+            else if(item.status_pedido_id == 2)
+            {
+                status = "Em Andamento"
+            }
          
             return (<><ItemCart
               divClass="col-md-3 "
-              status= {status}
+              status= {item.ds_status}
               codigo={item.nr_pedido}
               valor={item.valor}
               data={item.dt_pedido}
