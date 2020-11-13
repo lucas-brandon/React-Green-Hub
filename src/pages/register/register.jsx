@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './register.css';
 import Titulo from '../../template/titulo/titulo';
+import { cpfMask } from './mask';
 import axios from "axios";
 
 const URL_CLIENTE_SALVAR = 'http://modelagem.test/api/clientes/salvar';
@@ -16,8 +17,15 @@ export default class Register extends Component {
             senha: "",
             email: "",
             telefone: "",
+            documentId: "",
         }
+        //this.handlechange = this.handlechange.bind(this)
     }
+
+    //handlechange(e){
+    //    this.setState({documentId: cpfMask(e.target.value)})
+    //}
+    
     //-----------Cliente-----------
     changeClienteNome = (event) => {
         this.setState({nome: event.target.value})
@@ -30,6 +38,7 @@ export default class Register extends Component {
     }
 
     changeCPF = (event) => {
+        this.setState({documentId: cpfMask(event.target.value)})
         this.setState({cpf: event.target.value})
     }
 
@@ -71,7 +80,9 @@ export default class Register extends Component {
 
 
     render() {
+        const {documentId} = this.state
         return (
+            
             <>
                 <Titulo titulo="Cadastro"/>
     
@@ -97,12 +108,20 @@ export default class Register extends Component {
                                                 <input type="text" onChange={this.changeClienteSobrenome} className="form-control sobrenome" required/>
                                             </div>
                                         </div>
+
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
                                                 <label>CPF*</label>
-                                                <input type="text" onChange={this.changeCPF} className="form-control cpf"  placeholder="ex: 123.456.789-10" required/>
+                                                <input type="text" 
+                                                onChange={this.changeCPF}
+                                                className="form-control documentId cpf"   value={documentId} id="cpf"
+                                                placeholder="ex: 123.456.789-10" maxLength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required/>
+
+                                                
                                             </div>
                                         </div>
+
+
                                         <div className="col-12 col-md-6 col-sm-12">
                                             <div className="form-group">
                                                 <label>Data de Nascimento</label>

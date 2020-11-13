@@ -41,7 +41,7 @@ export default props => {
                     <h5 class="icon-midia h5-custom">Redes Sociais</h5>
                     <a><img class="midia-icon" src="../images/youtube.png"></img></a>
                     <a><img class="midia-icon" src="../images/twitter.png"></img></a>
-                    <a><img class="midia-icon" src="../images/instagram.png"></img></a>
+           [         <a><img class="midia-icon" src="../images/instagram.png"></img></a>
                     <a><img class="midia-icon" src="../images/facebook.png"></img></a>
                 </div>
 
