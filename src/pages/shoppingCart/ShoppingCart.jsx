@@ -41,12 +41,14 @@ export default class ShoppingCart extends Component {
 
     let todo = 0;
     console.log("map estranho")
-    localCart.map((item)=>{
-      console.log(item)
-      todo += parseFloat(item.valor_total)
-    })
-    //alert(todo)
-   this.setState({total: todo})
+    if(localCart){
+      localCart.map((item)=>{
+        console.log(item)
+        todo += parseFloat(item.valor_total)
+      })
+      //alert(todo)
+     this.setState({total: todo})
+    }
   }
 
   exibirProdutos = () => {
@@ -85,13 +87,19 @@ export default class ShoppingCart extends Component {
   //     localStorage.setItem("produtos", stringCart);
   //   };
   render() {
-    
+    let localCart = localStorage.getItem("produtos");
+    let fim;
+    if(localCart){
+      fim = (
+        <Finalizar total={this.state.total} />
+      )
+    }
     return (
       <div class="shopping_cart">
         <Titulo titulo="Carrinho" />
         <Indice items={["Produto", "Preço", "Quantidade", "Total"]} />
         <div>{this.exibirProdutos()}</div>
-        <Finalizar total={this.state.total} />
+        {fim}
       </div>
     );
   }

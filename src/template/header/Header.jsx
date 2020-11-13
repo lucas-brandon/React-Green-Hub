@@ -62,6 +62,8 @@ export default class Header extends Component {
     deslogar = () => {
         localStorage.setItem('msg', "Logout realizado!");
         localStorage.removeItem("Cliente");
+        localStorage.removeItem("produtos");
+        localStorage.removeItem("pedido");
         browserHistory.push('#/home');
         document.location.reload(true);
     }
