@@ -105,7 +105,6 @@ export default class Register extends Component {
             browserHistory.push('#/login');
             document.location.reload(true);  
         })
-
     }
 
 
