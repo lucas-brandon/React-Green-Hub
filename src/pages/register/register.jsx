@@ -3,8 +3,12 @@ import './register.css';
 import Titulo from '../../template/titulo/titulo';
 import { cpfMask } from './mask';
 import axios from "axios";
+import { browserHistory } from 'react-router';
+
 
 const URL_CLIENTE_SALVAR = 'http://modelagem.test/api/clientes/salvar';
+
+const URL_EMAIL = 'http://modelagem.test/api/sendmail';
 
 export default class Register extends Component {
 
@@ -59,7 +63,7 @@ export default class Register extends Component {
     }
 
     postCliente = () => {
-        console.log(this.state)
+        //console.log(this.state)
 
         axios.post(URL_CLIENTE_SALVAR, {
             nome: this.state.nome,
@@ -68,11 +72,38 @@ export default class Register extends Component {
             cpf: this.state.cpf,
             senha: this.state.senha,
             email: this.state.email,
-            telefone: this.state.telefone 
+            telefone: this.state.telefone,
+            name: this.state.nome,
+            //email: this.state.email,
+            msg: "Parabéns pelo cadastro no site Green Hub! Aproveite nossas ofertas!",
+            assunto: "Green Hub - Bem Vindo!"
         })
         .then(resp => {
-            console.log(resp.data)
-            alert("Cadastro concluído com sucesso!")
+
+            console.log("then do post cliente")
+            console.log(this.state.email)
+            console.log(URL_EMAIL)
+            console.log(resp)
+            /*
+            axios.get(URL_EMAIL, {
+                name: this.state.nome,
+                email: this.state.email,
+                msg: "Parabéns pelo cadastro no site Green Hub! Aproveite nossas ofertas!",
+                assunto: "Green Hub - Bem Vindo!"
+            }).then(resp => {
+                console.log("email resp")
+                console.log(resp.data)
+                localStorage.setItem('msg', "Cadastro realizado com sucesso! Um e-mail de boas-vindas foi enviado");
+                alert("Cadastro concluído com sucesso!")
+                //browserHistory.push('#/login');
+                //document.location.reload(true); 
+            })
+
+            */
+            localStorage.setItem('msg', "Cadastro realizado com sucesso! Um e-mail de boas-vindas foi enviado");
+            //alert("Cadastro concluído com sucesso!")
+            browserHistory.push('#/login');
+            document.location.reload(true);  
         })
 
     }
@@ -139,7 +170,7 @@ export default class Register extends Component {
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" onChange={this.changeTelefone} className="form-control telefone" placeholder="DDD + Telefone" required/>
+                                                <input type="text" onChange={this.changeTelefone} className="form-control telefone" placeholder="DDD + Telefone" maxLength="12" required/>
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6"></div>
@@ -164,7 +195,7 @@ export default class Register extends Component {
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
                                                 <label>Senha*</label>
-                                                <input type="password" onChange={this.changeSenha} className="form-control senha" required/>
+                                                <input type="password" onChange={this.changeSenha} className="form-control senha" minLength="8" required/>
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6">

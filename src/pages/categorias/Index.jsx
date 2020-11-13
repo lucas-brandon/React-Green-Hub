@@ -9,6 +9,7 @@ import Titulo from "../../template/titulo/titulo";
 const URL_PRODUTO_LISTA = "http://modelagem.test/api/produtos/listar";
 const URL_CATEGORIA_BUSCA = "http://modelagem.test/api/categoria/buscar/";
 const URL_PRODUTO_BUSCA = "http://modelagem.test/api/categoria/buscarProdutos/";
+const URL_CATEGORIA_PRODUTO = "http://modelagem.test/api/categoria/buscarTermo/";
 
 export default class Index extends Component {
     constructor(props) {
@@ -22,7 +23,25 @@ export default class Index extends Component {
 
     }
     componentDidMount(){
-        this.getProdutos();
+        let test = parseFloat(this.props.params.id);
+        if(!isNaN(test)){
+            this.getProdutos();
+        }
+        else{
+            this.getSearch();
+        }
+    }
+
+    getSearch = () => {
+        //alert("search!")
+        axios.get(`${URL_CATEGORIA_PRODUTO}` + this.props.params.id)
+        .then(resp => {
+            this.setState({ produtosCategoria: resp.data })
+            this.setState({ categoria: "Busca por \""+this.props.params.id+"\"" })
+            //console.log("categorias\n\n\n")
+            //console.log(resp.data)
+        });
+        
     }
 
     getProdutos = () => {
@@ -68,9 +87,27 @@ export default class Index extends Component {
     };
     
     render() {
-      //let produtos = this.buscaProdutos();
-      const produtos = new Object(this.state.produtosCategoria);
-      const categoria = this.state.categoria;
+        //let produtos = this.buscaProdutos();
+        const produtos = new Object(this.state.produtosCategoria);
+        const categoria = this.state.categoria;
+
+        console.log("search no render")
+        console.log(produtos)
+        let div;
+        //alert(this.state.produtosCategoria.length)
+        if(this.state.produtosCategoria.length > 0){
+            div = (
+                <div className="container grid">
+                    {/*<!--Cards-->*/}
+                    <GridCard produtos={produtos} /><GridCard />
+                </div>
+            )
+        }
+        else {
+            div = (
+                <Titulo titulo="Nenhum produto encontrado."></Titulo>
+            )
+        }
 
         return (
           <div className="row">
@@ -153,15 +190,14 @@ export default class Index extends Component {
                       </label>
                   </div>
               </div>
-              */}
-              <div className="cartoes row col-md-10 col-12 grid" style={{marginTop:"60px"}}>
-                  
-              </div>
-              <div className="container grid">
-                      {/*<!--Cards-->*/}
-                      <GridCard produtos={produtos} /><GridCard />
-                  </div>
-          </div>
+              
+              
+                <div className="container grid">
+                    <GridCard produtos={produtos} /><GridCard />
+                </div>
+                */}
+                {div}
+            </div>
           
         
     );
