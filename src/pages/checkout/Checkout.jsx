@@ -379,8 +379,8 @@ export default class Checkout extends Component {
                 localStorage.removeItem('produtos');
                 localStorage.setItem("pedido", submitCart);
                 //localStorage.setItem('msg', "Pedido realizado com sucesso!");
-                browserHistory.push('#/success');
-                document.location.reload(true);  
+                //browserHistory.push('#/success');
+                //document.location.reload(true);  
                 //alert("finish");
             })
         });
