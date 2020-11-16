@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './register.css';
 import Titulo from '../../template/titulo/titulo';
-import { cpfMask, telMask } from './mask';
+import { cpfMask, telMask } from '../mask';
 import axios from "axios";
 import { browserHistory } from 'react-router';
 
