@@ -173,6 +173,22 @@ export default class Checkout extends Component {
         let self = this
         let cliente = localStorage.getItem('Cliente');
         cliente = JSON.parse(cliente);
+
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        }
+
+        let produtos = localStorage.getItem('produtos')
+        produtos = JSON.parse(produtos);
+
+        if(produtos == null || produtos == undefined){
+            browserHistory.push('#/home');
+            document.location.reload(true); 
+        }
+        
+
+
         console.log("get contatos")
         console.log(URL_CONTATOS_GET+cliente.id)
         axios.get(`${URL_CONTATOS_GET}`+cliente.id)
@@ -376,11 +392,14 @@ export default class Checkout extends Component {
             .then(resp2 => {
                 console.log("pedidooo")
                 console.log(resp2)
-                localStorage.removeItem('produtos');
-                localStorage.setItem("pedido", submitCart);
-                //localStorage.setItem('msg', "Pedido realizado com sucesso!");
-                //browserHistory.push('#/success');
-                //document.location.reload(true);  
+                if(resp.data.nr_pedido){
+                    localStorage.removeItem('produtos');
+                    localStorage.setItem("pedido", submitCart);
+                    //localStorage.setItem('msg', "Pedido realizado com sucesso!");
+                    browserHistory.push('#/success');
+                    document.location.reload(true);    
+                }
+                localStorage.setItem('msg', "Erro ao realizar o pedido. Tente novamente.");
                 //alert("finish");
             })
         });

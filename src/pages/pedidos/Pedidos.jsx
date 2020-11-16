@@ -40,7 +40,7 @@ export default class Pedidos extends Component {
         const list = this.state.pedidos
         
         
-        if (list != null && list !== undefined) {
+        if (list != null && list !== undefined && list.length > 0) {
           
           return list.map(item => {
     
@@ -48,16 +48,6 @@ export default class Pedidos extends Component {
             item.valor = item.valor.toString();
     
             item.valor = item.valor.replace(".", ",");
-
-            let status = "Em Andamento";
-            if(item.status_pedido_id == 1)
-            {
-                status = "Em Andamento"
-            }
-            else if(item.status_pedido_id == 2)
-            {
-                status = "Em Andamento"
-            }
          
             return (<><ItemCart
               divClass="col-md-3 "
@@ -71,7 +61,8 @@ export default class Pedidos extends Component {
             )
           });
         } else {
-          return "Nenhum Pedido.";
+            console.log("vazio")
+            return <Titulo titulo="Nenhum pedido encontrado."></Titulo>;
         }
       };
 

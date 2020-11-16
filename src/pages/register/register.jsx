@@ -102,10 +102,15 @@ export default class Register extends Component {
             })
 
             */
-            localStorage.setItem('msg', "Cadastro realizado com sucesso! Um e-mail de boas-vindas foi enviado");
-            //alert("Cadastro concluído com sucesso!")
-            //browserHistory.push('#/login');
-            //document.location.reload(true);  
+            if(resp.data.nome){
+                localStorage.setItem('msg', "Cadastro realizado com sucesso! Um e-mail de boas-vindas foi enviado");
+                //alert("Cadastro concluído com sucesso!")
+                browserHistory.push('#/login');
+                document.location.reload(true);   
+            }
+            else{
+                localStorage.setItem('msg', "Ocorreu um erro no cadastro. Tente novamente.");    
+            }  
         })
     }
 
@@ -147,7 +152,9 @@ export default class Register extends Component {
                                                 <label>CPF*</label>
                                                 <input type="text" 
                                                 onChange={this.changeCPF}
-                                                className="form-control mascaraCPF cpf"   value={mascaraCPF} id="cpf"
+                                                className="form-control cpf" 
+                                                value={mascaraCPF} 
+                                                id="cpf"
                                                 placeholder="ex: 123.456.789-10" maxLength="14" minLength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required/>
                                             </div>
                                         </div>
@@ -204,7 +211,7 @@ export default class Register extends Component {
                                         
                                         <div className="col-12 col-md-12">
                                             <div className="form-group"> 
-                                            <a href="#/home">
+                                            <a>
                                                 <button type="button submit" onClick={this.postCliente} className="btn-block botaoRegister">Cadastrar</button>
                                             </a>
                                             </div>
