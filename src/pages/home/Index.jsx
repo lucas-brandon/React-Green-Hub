@@ -40,7 +40,7 @@ export default class Index extends Component {
   };
 
   render() {
-    const produtos = new Object(this.state.produtos);
+    let produtos = new Object(this.state.produtos);
     console.log('teste');
     console.log(produtos);
 

@@ -5,8 +5,9 @@ import Finalizar from "../../template/carrinho/finalizarCompra";
 import Titulo from "../../template/titulo/titulo";
 import Indice from "../../template/indice/indice";
 import axios from "axios";
+import { browserHistory } from 'react-router';
 
-const URL_PEDIDOS_LISTA = 'http://modelagem.test/api/pedidos/listar';
+const URL_PEDIDOS_LISTA = 'http://modelagem.test/api/pedidos/listarCliente/';
 
 export default class Pedidos extends Component {
 
@@ -21,8 +22,17 @@ export default class Pedidos extends Component {
         this.listarPedidos();
     }
     listarPedidos = () => {
+        let cliente = localStorage.getItem('Cliente');
+        cliente = JSON.parse(cliente);
+
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        }
+
+
         console.log("pedidoooo")
-        axios.get(`${URL_PEDIDOS_LISTA}`)
+        axios.get(`${URL_PEDIDOS_LISTA}`+cliente.id)
         .then(resp => {
             console.log(resp);
             console.log("listar pedidos\n\n\n\n")
@@ -40,7 +50,7 @@ export default class Pedidos extends Component {
         const list = this.state.pedidos
         
         
-        if (list != null && list !== undefined) {
+        if (list != null && list !== undefined && list.length > 0) {
           
           return list.map(item => {
     
@@ -48,16 +58,6 @@ export default class Pedidos extends Component {
             item.valor = item.valor.toString();
     
             item.valor = item.valor.replace(".", ",");
-
-            let status = "Em Andamento";
-            if(item.status_pedido_id == 1)
-            {
-                status = "Em Andamento"
-            }
-            else if(item.status_pedido_id == 2)
-            {
-                status = "Em Andamento"
-            }
          
             return (<><ItemCart
               divClass="col-md-3 "
@@ -71,7 +71,8 @@ export default class Pedidos extends Component {
             )
           });
         } else {
-          return "Nenhum Pedido.";
+            console.log("vazio")
+            return <Titulo titulo="Nenhum pedido encontrado."></Titulo>;
         }
       };
 

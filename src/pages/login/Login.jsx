@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import axios from 'axios';
 import Msg from '../../template/mensagem/Mensagem';
+import Titulo from '../../template/titulo/titulo';
 import { browserHistory } from 'react-router';
 //import { BrowserRouter, useHistory } from 'react-router-dom';
 const URL_LOGAR = 'http://modelagem.test/api/clientes/logar/';
@@ -75,7 +76,7 @@ export default class Login extends Component {
     render () {
         return (
             <>
-            
+            <Titulo titulo="Login"></Titulo>
             <div className='row'> 
                 <div className="login-container " id="box">
                     <form className="form-signin">

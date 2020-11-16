@@ -129,7 +129,7 @@ export default class Header extends Component {
                 <div className="col-8 col-md-6 mx-auto search top-bar-item">
                     <h1 className="col-12" style={{color: "green" }}>Green Hub</h1>
                     <div className="col-12">
-                        <input type="email" onChange={this.changeSearch}  className="form-control input-search col-11" placeholder="buscar um produto..."/>
+                        <input type="email" onChange={this.changeSearch}  className="form-control input-search col-11" placeholder="buscar produtos..."/>
                         <img className="search-img" src="images/search.png" alt="search" onClick={this.search}></img>
                     </div>
                     

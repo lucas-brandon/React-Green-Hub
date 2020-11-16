@@ -173,6 +173,22 @@ export default class Checkout extends Component {
         let self = this
         let cliente = localStorage.getItem('Cliente');
         cliente = JSON.parse(cliente);
+
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        }
+
+        let produtos = localStorage.getItem('produtos')
+        produtos = JSON.parse(produtos);
+
+        if(produtos == null || produtos == undefined){
+            browserHistory.push('#/home');
+            document.location.reload(true); 
+        }
+        
+
+
         console.log("get contatos")
         console.log(URL_CONTATOS_GET+cliente.id)
         axios.get(`${URL_CONTATOS_GET}`+cliente.id)
@@ -331,6 +347,7 @@ export default class Checkout extends Component {
         //console.log('configurando endereco cliente\n\n\n\n');     
         
         let localCartCliente = localStorage.getItem("Cliente");
+        let clienteCart = JSON.parse(localCartCliente);
         let localCartEndereco = localStorage.getItem("endereco");
         let localCartProdutos = localStorage.getItem("produtos");
         localCartProdutos = JSON.parse(localCartProdutos);
@@ -359,6 +376,10 @@ export default class Checkout extends Component {
             pedidoCart.produtos = localCartProdutos;
 
             let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+
+            let localCartCliente = localStorage.getItem("Cliente");
+            clienteCart = JSON.parse(localCartCliente);
 
 
             axios.post(URL_PEDIDO_POST, { 
@@ -368,7 +389,7 @@ export default class Checkout extends Component {
                 dt_pedido: pedidoCart.dt_pedido,
                 produtos: localCartProdutos,
                 telefone: this.state.telefone,
-                name: this.state.cliente_nome_1,
+                name: clienteCart.nome+" "+clienteCart.sobrenome,
                 email: this.state.email,
                 msg: "Pedido "+rand+" está em andamento",
                 assunto: "Green Hub - Pedido "+rand
@@ -376,11 +397,17 @@ export default class Checkout extends Component {
             .then(resp2 => {
                 console.log("pedidooo")
                 console.log(resp2)
-                localStorage.removeItem('produtos');
-                localStorage.setItem("pedido", submitCart);
-                //localStorage.setItem('msg', "Pedido realizado com sucesso!");
-                //browserHistory.push('#/success');
-                //document.location.reload(true);  
+                //if(resp.data.id){
+                    localStorage.removeItem('produtos');
+                    localStorage.setItem("pedido", submitCart);
+                    //localStorage.setItem('msg', "Pedido realizado com sucesso!");
+                    browserHistory.push('#/success');
+                    document.location.reload(true);    
+                //}
+                //else{
+                    //localStorage.setItem('msg', "Erro ao realizar o pedido. Tente novamente.");
+                //}
+                
                 //alert("finish");
             })
         });
