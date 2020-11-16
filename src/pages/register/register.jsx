@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './register.css';
 import Titulo from '../../template/titulo/titulo';
-import { cpfMask } from './mask';
+import { cpfMask, telMask } from './mask';
 import axios from "axios";
 import { browserHistory } from 'react-router';
 
@@ -21,7 +21,8 @@ export default class Register extends Component {
             senha: "",
             email: "",
             telefone: "",
-            documentId: "",
+            mascaraCPF: "",
+            mascaraTel: "",
         }
         //this.handlechange = this.handlechange.bind(this)
     }
@@ -42,7 +43,7 @@ export default class Register extends Component {
     }
 
     changeCPF = (event) => {
-        this.setState({documentId: cpfMask(event.target.value)})
+        this.setState({mascaraCPF: cpfMask(event.target.value)})
         this.setState({cpf: event.target.value})
     }
 
@@ -55,6 +56,7 @@ export default class Register extends Component {
     }
 
     changeTelefone = (event) => {
+        this.setState({mascaraTel: telMask(event.target.value)})
         this.setState({telefone: event.target.value})
     }
 
@@ -102,8 +104,8 @@ export default class Register extends Component {
             */
             localStorage.setItem('msg', "Cadastro realizado com sucesso! Um e-mail de boas-vindas foi enviado");
             //alert("Cadastro concluído com sucesso!")
-            browserHistory.push('#/login');
-            document.location.reload(true);  
+            //browserHistory.push('#/login');
+            //document.location.reload(true);  
         })
 
     }
@@ -111,7 +113,8 @@ export default class Register extends Component {
 
 
     render() {
-        const {documentId} = this.state
+        const {mascaraCPF} = this.state
+        const {mascaraTel} = this.state
         return (
             
             <>
@@ -145,32 +148,24 @@ export default class Register extends Component {
                                                 <label>CPF*</label>
                                                 <input type="text" 
                                                 onChange={this.changeCPF}
-                                                className="form-control documentId cpf"   value={documentId} id="cpf"
-                                                placeholder="ex: 123.456.789-10" maxLength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required/>
-
-                                                
+                                                className="form-control mascaraCPF cpf"   value={mascaraCPF} id="cpf"
+                                                placeholder="ex: 123.456.789-10" maxLength="14" minLength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required/>
                                             </div>
                                         </div>
-
 
                                         <div className="col-12 col-md-6 col-sm-12">
                                             <div className="form-group">
                                                 <label>Data de Nascimento</label>
-                                                <input type="date" onChange={this.changeData} className="form-control data-nascimento" required/>
+                                                <input type="date" onChange={this.changeData} className="form-control data-nascimento" id="dt-nascimento" required/>
+                                            </div>
+                                            <div class="alert alert-warning" id="aviso-data" style={{display:'none'}} role="alert">
+                                                Desculpe, pessoas com menos de 18 anos não podem se cadastrar.
                                             </div>
                                         </div>
-                                        {/*
-                                        <div className="col-12 col-md-6">
-                                            <div className="form-group">
-                                                <label>Celular*</label>
-                                                <input type="text" className="form-control celular" placeholder="DDD + Telefone" required/>
-                                            </div>
-                                        </div>
-                                        */}
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" onChange={this.changeTelefone} className="form-control telefone" placeholder="DDD + Telefone" maxLength="12" required/>
+                                                <input type="text" onChange={this.changeTelefone} className="form-control mascaraTel telefone" value={mascaraTel} placeholder="DDD + Telefone" maxLength="15" minLength="15" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required/>
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6"></div>
@@ -206,15 +201,6 @@ export default class Register extends Component {
                                         </div>
                                         
                                         <div className="col-12 col-md-12">
-                                            
-                                        {/*
-                                            <div className="form-group">    
-                                                <div className="form-check">
-                                                    <input className="form-check-input ofertas" type="checkbox" name="envio-ofertas" value="ofertas" id="check_ofertas"/>
-                                                    <label className="form-check-label" for="check_ofertas">Desejo receber informações e ofertas  de produtos</label>
-                                                </div>
-                                            </div>
-                                        */}
                                         </div>
                                         
                                         <div className="col-12 col-md-12">
