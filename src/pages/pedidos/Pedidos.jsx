@@ -5,8 +5,9 @@ import Finalizar from "../../template/carrinho/finalizarCompra";
 import Titulo from "../../template/titulo/titulo";
 import Indice from "../../template/indice/indice";
 import axios from "axios";
+import { browserHistory } from 'react-router';
 
-const URL_PEDIDOS_LISTA = 'http://modelagem.test/api/pedidos/listar';
+const URL_PEDIDOS_LISTA = 'http://modelagem.test/api/pedidos/listarCliente/';
 
 export default class Pedidos extends Component {
 
@@ -21,8 +22,17 @@ export default class Pedidos extends Component {
         this.listarPedidos();
     }
     listarPedidos = () => {
+        let cliente = localStorage.getItem('Cliente');
+        cliente = JSON.parse(cliente);
+
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        }
+
+
         console.log("pedidoooo")
-        axios.get(`${URL_PEDIDOS_LISTA}`)
+        axios.get(`${URL_PEDIDOS_LISTA}`+cliente.id)
         .then(resp => {
             console.log(resp);
             console.log("listar pedidos\n\n\n\n")

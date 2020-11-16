@@ -9,13 +9,14 @@ export default (props) => {
   })
 
   const loadProducts = () => {
-    let total = 0;
+    let total = 0.0;
     localCart.forEach((item) => {
       if (item.id === props.identificador) {
         item.qtd_item = cont;
         item.valor_total = parseFloat(total);
+        let num = item.preco_valor.replace(',', '.')
         //item.total_cart += parseFloat(total);
-        item.total = cont * (parseFloat(item.preco_valor))
+        item.total = parseFloat(parseFloat(cont) * (parseFloat(num)))
       }
     });
     let stringCart = JSON.stringify(localCart);
@@ -57,7 +58,7 @@ export default (props) => {
 
   localCart.forEach((item) => {
     if (item.id === props.identificador) {
-      let teste2 = parseInt(item.qtd_item);
+      let teste2 = parseFloat(item.qtd_item);
       if (teste2 != null) {
         qtd = teste2;
       } else {
@@ -72,7 +73,10 @@ export default (props) => {
 
   const [cont, setCont] = useState(qtd);
 
-  let total = parseInt(props.valor) * cont;
+  let valor = props.valor;
+  valor = valor.replace(",", ".");
+  let total = parseFloat(valor) * cont;
+  //console.log((total));
   total = JSON.stringify(total);
   total = parseFloat(total).toFixed(2);
   total = total.toString();

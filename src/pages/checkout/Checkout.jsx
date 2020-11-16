@@ -347,6 +347,7 @@ export default class Checkout extends Component {
         //console.log('configurando endereco cliente\n\n\n\n');     
         
         let localCartCliente = localStorage.getItem("Cliente");
+        let clienteCart = JSON.parse(localCartCliente);
         let localCartEndereco = localStorage.getItem("endereco");
         let localCartProdutos = localStorage.getItem("produtos");
         localCartProdutos = JSON.parse(localCartProdutos);
@@ -375,6 +376,10 @@ export default class Checkout extends Component {
             pedidoCart.produtos = localCartProdutos;
 
             let submitCart = JSON.stringify(pedidoCart);
+            localStorage.setItem("pedido", submitCart);
+
+            let localCartCliente = localStorage.getItem("Cliente");
+            clienteCart = JSON.parse(localCartCliente);
 
 
             axios.post(URL_PEDIDO_POST, { 
@@ -384,7 +389,7 @@ export default class Checkout extends Component {
                 dt_pedido: pedidoCart.dt_pedido,
                 produtos: localCartProdutos,
                 telefone: this.state.telefone,
-                name: this.state.cliente_nome_1,
+                name: clienteCart.nome+" "+clienteCart.sobrenome,
                 email: this.state.email,
                 msg: "Pedido "+rand+" está em andamento",
                 assunto: "Green Hub - Pedido "+rand
@@ -392,14 +397,17 @@ export default class Checkout extends Component {
             .then(resp2 => {
                 console.log("pedidooo")
                 console.log(resp2)
-                if(resp.data.nr_pedido){
+                //if(resp.data.id){
                     localStorage.removeItem('produtos');
                     localStorage.setItem("pedido", submitCart);
                     //localStorage.setItem('msg', "Pedido realizado com sucesso!");
                     browserHistory.push('#/success');
                     document.location.reload(true);    
-                }
-                localStorage.setItem('msg', "Erro ao realizar o pedido. Tente novamente.");
+                //}
+                //else{
+                    //localStorage.setItem('msg', "Erro ao realizar o pedido. Tente novamente.");
+                //}
+                
                 //alert("finish");
             })
         });
