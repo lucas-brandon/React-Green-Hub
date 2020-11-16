@@ -36,3 +36,16 @@ export function validadata(){
 
   document.getElementById("aviso-data").style.display = "none";
 }  
+
+
+
+
+
+
+//let btnMouseout = document.getElementById("cep");
+//function acaoQuandoTiraMouse() {
+//    alert("Mouseout - tirou o mouse");
+//}
+//
+//
+//btnMouseout.addEventListener("mouseout", acaoQuandoTiraMouse);

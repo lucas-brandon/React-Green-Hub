@@ -88,8 +88,18 @@ export default class Checkout extends Component {
 
     changeCEP = (event) => {
         this.setState({cep: event.target.value})
+        fetch('https://viacep.com.br/ws/'+ event.target.value + '/json/')
+        .then((respostaDoServer) => {
+            return respostaDoServer.json()
+        })
+        .then((dadosCep) => {
+            console.log(dadosCep);
+            document.getElementById('bairro').value = dadosCep.bairro;
+            document.getElementById('city').value = dadosCep.localidade;
+            document.getElementById('address').value = dadosCep.logradouro;
+            document.getElementById('state').value = dadosCep.uf;
+        })
     }
-
     changeNumEndereco = (event) => {
         this.setState({numero: event.target.value})
     }
@@ -566,15 +576,14 @@ export default class Checkout extends Component {
                                 <option value="DF">DF</option>
                             </select>
                         </div>
-
                         <div class="col-md-3 col-sm-12">
                             <label for="cep">CEP*</label>
                             <input id="cep" type="text" 
-                            onChange={this.changeCEP}class="form-control" maxLength="9" placeholder="ex: 05339-900" required></input>
+                            onChange={this.changeCEP}
+                            class="form-control" maxLength="9" placeholder="ex: 05339-900" required></input>
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-8 col-sm-12">
