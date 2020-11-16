@@ -102,15 +102,15 @@ export default class Register extends Component {
             })
 
             */
-            if(resp.data.nome){
+            //if(resp.data.nome){
                 localStorage.setItem('msg', "Cadastro realizado com sucesso! Um e-mail de boas-vindas foi enviado");
                 //alert("Cadastro concluído com sucesso!")
                 browserHistory.push('#/login');
                 document.location.reload(true);   
-            }
-            else{
-                localStorage.setItem('msg', "Ocorreu um erro no cadastro. Tente novamente.");    
-            }  
+            //}
+            //else{
+                //localStorage.setItem('msg', "Ocorreu um erro no cadastro. Tente novamente.");    
+            //}  
         })
     }
 
