@@ -22,9 +22,6 @@ export default class ShoppingCart extends Component {
     //setValue(newValue);
   //}
 
-  handler = (event) => {
-    this.setState({total: event.target.value});
-  }
 
   componentDidMount() {
     this.loadProducts();
@@ -55,6 +52,7 @@ export default class ShoppingCart extends Component {
     const list = this.state.produtos;
 
     if (list != null && list !== undefined) {
+      console.log("teste item cart")
       return list.map((id) => {
         return (
           <ItemCart
@@ -65,7 +63,7 @@ export default class ShoppingCart extends Component {
             quantidade={id.qtd_item}
             valor={id.preco_valor}
             identificador={id.id}
-            onChange={this.handler}
+            teste={this.handler}
           />
         );
       });
@@ -89,9 +87,10 @@ export default class ShoppingCart extends Component {
   render() {
     let localCart = localStorage.getItem("produtos");
     let fim;
+    console.log("render do carrinho")
     if(localCart){
       fim = (
-        <Finalizar total={this.state.total} />
+        <Finalizar total={this.state.total} key={Math.random()  } />
       )
     }
     return (

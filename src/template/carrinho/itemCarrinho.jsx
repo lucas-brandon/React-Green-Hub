@@ -5,7 +5,8 @@ import { browserHistory } from "react-router";
 export default (props) => {
   useEffect(() => {
     loadProducts();
-    console.log("use effect");
+    //console.log("use effect");
+    //console.log(props)
   })
 
   const loadProducts = () => {
@@ -22,6 +23,7 @@ export default (props) => {
     let stringCart = JSON.stringify(localCart);
     localStorage.setItem("produtos", stringCart);
     //props.parent(total)
+    //props.teste();
 
     
 
@@ -114,6 +116,7 @@ export default (props) => {
                 }
                 //loadProducts();
                 //minusDell();
+                //props.teste();
               }}
               class="color-qtd btn-minus"
               type="button"
@@ -126,7 +129,7 @@ export default (props) => {
             </button>
           </div>
 
-          <div class="quantidade" onChange={handleChange}>
+          <div class="quantidade" onChange="">
             {cont}
           </div>
 
@@ -137,6 +140,7 @@ export default (props) => {
                   setCont(cont + 1);
                 }
                 //loadProducts();
+                //props.teste();
               }}
               class="color-qtd btn-plus"
               type="button"
@@ -174,6 +178,7 @@ export default (props) => {
             class="btn-cart-cancel img-custom"
             src="images/cancel-icon.svg"
             alt="cancel-icon"
+            style={{ width: "50px", height: "50px" }}
           ></img>
         </button>
       </div>
