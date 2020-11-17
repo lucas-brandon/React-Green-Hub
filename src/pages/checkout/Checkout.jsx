@@ -526,12 +526,18 @@ export default class Checkout extends Component {
                 */}
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-8 col-sm-12">
-                            <label for="address">Endereço*</label>
-                            <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
+                    <div className="col-md-3 col-sm-12">
+                            <label for="cep">CEP*</label>
+                            <input id="cep" type="text" 
+                            onChange={this.changeCEP}
+                            value={mascaraCEP}
+                            className="form-control cep" maxLength="9" placeholder="ex: 05339-900" required></input>
                         </div>
-
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-7 col-sm-12">
+                            <label for="address">Endereço*</label>
+                            <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques" required></input>
+                        </div>
+                        <div class="col-md-2 col-sm-12">
                             <label for="complement">Número*</label>
                             <input id="complement" type="text" onChange={this.changeNumEndereco}class="form-control"></input>
                         </div>
@@ -539,24 +545,17 @@ export default class Checkout extends Component {
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-5 col-sm-12">
                             <label for="bairro">Bairro*</label>
                             <input id="bairro" type="text" 
                             onChange={this.changeBairro}class="form-control" required></input>
                         </div>
-                        <div class="col-md-3 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <label for="city">Cidade*</label>
                             <input id="city" type="text" 
                             onChange={this.changeCidade}class="form-control" required></input>
                         </div>
-                        
-                        {/*
-                        <div class="col-md-2 col-sm-12">
-                            <label for="state">Estado*</label>
-                            <input id="state" type="text" class="form-control" required></input>
-                        </div>
-                        */}
-                        <div class="col-md-2 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label for="state">Estado*</label>
                             <select class="form-control" id="state" onChange={this.changeEstado}required>    
                                 <option value="AC">AC</option>
@@ -587,14 +586,7 @@ export default class Checkout extends Component {
                                 <option value="TO">TO</option>
                                 <option value="DF">DF</option>
                             </select>
-                        </div>
-                        <div className="col-md-3 col-sm-12">
-                            <label for="cep">CEP*</label>
-                            <input id="cep" type="text" 
-                            onChange={this.changeCEP}
-                            value={mascaraCEP}
-                            className="form-control cep" maxLength="9" placeholder="ex: 05339-900" required></input>
-                        </div>
+                        </div> 
                     </div>
                 </div>
                 <div class="form-group">
