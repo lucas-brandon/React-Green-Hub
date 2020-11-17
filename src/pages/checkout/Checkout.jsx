@@ -14,7 +14,6 @@ const URL_ENDERECO_POST = 'http://modelagem.test/api/endereco/salvar';
 
 const URL_ENDERECO_CLIENTE_POST = 'http://modelagem.test/api/enderecoCliente/salvar/';
 
-
 const URL_PAGAMENTO_POST = 'http://modelagem.test/api/pagamento/salvar/';
 
 const URL_CARTAO_POST = 'http://modelagem.test/api/cartao/cadastrar/';
@@ -104,7 +103,6 @@ export default class Checkout extends Component {
     }
 
     changeTelefone = (event) => {
-        this.setState({mascaraCEP: cepMask(event.target.value)})
         this.setState({telefone: event.target.value})
     }
 
@@ -173,9 +171,8 @@ export default class Checkout extends Component {
             localStorage.setItem("pedido", submitCart);
             this.postEndereco();
             //this.postContato();
-
-
         }
+
         else{
             //alert("teste")
             window.location.href = '#/login'
@@ -317,13 +314,25 @@ export default class Checkout extends Component {
             localStorage.setItem("pedido", submitCart);
 
             //localStorage.setItem("endereco_id", resp.data.id);
-            self.postCartao();
+            self.testeCartao();
         });
     }
+
+    testeCartao = () => {
+        let self = this
+        console.log(this.state.tipo_pagamento)
+        let teste = this.state.tipo_pagamento;
+        if (teste == 'Boleto'){
+        self.postPedido();
+        }  else if (teste == 'Cartao'){
+            self.postCartao();
+        }
+    }
+
     postCartao = () => {
         let self = this
         //let cliente = localStorage.getItem('cliente_id');
-        
+
         let pedidoCart = localStorage.getItem("pedido");
         pedidoCart = JSON.parse(pedidoCart);
 
@@ -361,6 +370,7 @@ export default class Checkout extends Component {
             self.postPedido();
         });
     }
+    
     postPedido = () => {
 
         //console.log('configurando endereco cliente\n\n\n\n');     
@@ -526,7 +536,7 @@ export default class Checkout extends Component {
                 */}
                 <div class="form-group">
                     <div class="row">
-                    <div className="col-md-3 col-sm-12">
+                        <div className="col-md-3 col-sm-12">
                             <label for="cep">CEP*</label>
                             <input id="cep" type="text" 
                             onChange={this.changeCEP}
@@ -535,7 +545,7 @@ export default class Checkout extends Component {
                         </div>
                         <div class="col-md-7 col-sm-12">
                             <label for="address">Endereço*</label>
-                            <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques" required></input>
+                            <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
                         </div>
                         <div class="col-md-2 col-sm-12">
                             <label for="complement">Número*</label>
@@ -555,6 +565,13 @@ export default class Checkout extends Component {
                             <input id="city" type="text" 
                             onChange={this.changeCidade}class="form-control" required></input>
                         </div>
+                        
+                        {/*
+                        <div class="col-md-2 col-sm-12">
+                            <label for="state">Estado*</label>
+                            <input id="state" type="text" class="form-control" required></input>
+                        </div>
+                        */}
                         <div class="col-md-3 col-sm-12">
                             <label for="state">Estado*</label>
                             <select class="form-control" id="state" onChange={this.changeEstado}required>    
@@ -586,7 +603,8 @@ export default class Checkout extends Component {
                                 <option value="TO">TO</option>
                                 <option value="DF">DF</option>
                             </select>
-                        </div> 
+                        </div>
+                  
                     </div>
                 </div>
                 <div class="form-group">
@@ -621,48 +639,35 @@ export default class Checkout extends Component {
                 <Titulo titulo="Forma de Pagamento"/>
                 <div class="container-fluid container-fluid-checkout">
                     <div class="input-group payment">
-                        {/* 
+                        
                         <div class="input-group-prepend itemRadio">
-                            <input type="radio" aria-label="opção de boleto bancário" name="payOption"></input>
-                            
-                            <img class="img-custom"src="images/boleto-bancario-48.png" alt="boleto bancário"></img>
+                            <input type="radio" 
+                            aria-label="opção de boleto bancário" 
+                            name="payOption"
+                            onClick={this.changeTipoPagamento}
+                            value="Boleto"></input>
+                            <label>Boleto</label>
+                            {/*<img class="img-custom"src="images/boletos.png" alt="boleto bancário"></img>*/}
+                        </div>
+                        
+                        <div class="input-group-prepend itemRadio">
+                            <div class="input-group">
+                                <input type="radio" 
+                                onClick={this.changeTipoPagamento}
+                                aria-label="opção de cartão master card" 
+                                name="payOption" 
+                                value="Cartao"></input>
+                                <label>Cartão de Crédito</label>
+                            </div>
+                            {/*<img class="img-custom"src="images/cartao.png" alt="master card"></img>*/}
+                        </div>
                         
                         </div>
-                        */}
-                        <div class="input-group-prepend itemRadio">
-                            <div class="input-group">
-                                <input type="radio" 
-                                onClick={this.changeTipoPagamento}aria-label="opção de cartão master card" name="payOption" value="MasterCard"></input>
-                            </div>
-                            <img class="img-custom"src="images/mc_vrt_pos.svg" alt="master card"></img>
-                        </div>
-                        <div class="input-group-prepend itemRadio">
-                            <div class="input-group">
-                                <input type="radio" 
-                                onClick={this.changeTipoPagamento} aria-label="opção de cartão visa" name="payOption" value="Visa"></input>
-                            </div>
-                            <img class="img-custom"src="images/visa.svg" alt="visa"></img>
-                        </div>
-                        <div class="input-group-prepend itemRadio">
-                            <div class="input-group">
-                                <input type="radio" 
-                                onChange={this.changeTipoPagamento} aria-label="opção de cartão american express" name="payOption" value="American Express"></input>
-                            </div>
-                            <img class="img-custom"src="images/american-express.svg" alt="american express'"></img>
-                        </div>
-                        <div class="input-group-prepend itemRadio">
-                            <div class="input-group">
-                                <input type="radio" 
-                                onChange={this.changeTipoPagamento}aria-label="opção de cartão diners club" name="payOption" value="Diners Club"></input>
-                            </div>
-                            <img class="img-custom"src="images/diners-club.svg" alt="diners club"></img>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="cardNumber">Número do cartão</label>
-                                <input id="cardNumber" type="text" onChange={this.changeNrCartao} class="form-control" required></input>
+                                <input id="cardNumber" type="text" onChange={this.changeNrCartao} class="form-control" ></input>
                             </div>
                         </div>
                     </div>
@@ -671,7 +676,7 @@ export default class Checkout extends Component {
                             <div class="col-sm-12">
                                 <label for="cardName">Nome no cartão</label>
                                 <input id="cardName" type="text" 
-                                onChange={this.changeNomeCartao}class="form-control" required></input>
+                                onChange={this.changeNomeCartao}class="form-control" ></input>
                             </div>
                         </div>
                     </div>
@@ -680,12 +685,11 @@ export default class Checkout extends Component {
                             
                             <div class="col-md-6 col-sm-12">
                                 <label for="cvv">Código de segurança</label>
-                                <input id="cvv" type="text" onChange={this.changeCdCartao} class="form-control" required></input>
+                                <input id="cvv" type="text" onChange={this.changeCdCartao} class="form-control" ></input>
                             </div>
-                            
                             <div class="col-md-6 col-sm-12">
                                 <label for="expiryDate">Data de expiração</label>
-                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" required></input>
+                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" ></input>
                             </div>
                         </div>
                     </div>
