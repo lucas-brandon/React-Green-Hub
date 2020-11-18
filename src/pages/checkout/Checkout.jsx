@@ -20,6 +20,8 @@ const URL_CARTAO_POST = 'http://modelagem.test/api/cartao/cadastrar/';
 
 const URL_PEDIDO_POST = 'http://modelagem.test/api/pedidos/salvar';
 
+const URL_PEDIDOS_LISTA = 'http://modelagem.test/api/pedidos/listarCliente/';
+
 const URL_CONTATO_POST = 'http://modelagem.test/api/contato/salvar';
 
 
@@ -181,6 +183,21 @@ export default class Checkout extends Component {
 
     componentDidMount(){
         //this.getCliente();
+        let cliente = localStorage.getItem('Cliente');
+        cliente = JSON.parse(cliente);
+
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        }
+
+
+        console.log("pedidoooo")
+        axios.get(`${URL_PEDIDOS_LISTA}`+cliente.id)
+        .then(resp => {
+            this.setState({ numPedidos: resp.data })
+        });
+
         this.getContatos();
 
     }
@@ -223,6 +240,8 @@ export default class Checkout extends Component {
             this.setState({listEmail: listEmail, listTel: listTel});
             console.log(listEmail)
             console.log(listTel)
+            //console.log("teste random")
+            //console.log(this.testaRandom());
         });
     }
 
@@ -370,7 +389,28 @@ export default class Checkout extends Component {
             self.postPedido();
         });
     }
+<<<<<<< HEAD
     
+=======
+    testaRandom = () => {
+        let cond = true;
+        let num;
+        while(cond){
+            num = (10000 + (Math.random() * 10000)).toFixed(0);
+            let cond2 = true;
+            this.state.numPedidos.forEach(pedido => {
+                if(num == pedido.nr_pedido){
+                    cond2 = false;
+                    //break;
+                }
+            });
+            if(cond2){
+                cond = false
+            }
+        }
+        return num;
+    }
+>>>>>>> 66c1f0a308371d54a4622211d5e8c80671781d4e
     postPedido = () => {
 
         //console.log('configurando endereco cliente\n\n\n\n');     
@@ -397,7 +437,8 @@ export default class Checkout extends Component {
             let rand = (10000 + (Math.random() * 10000)).toFixed(0);
 
             pedidoCart.status_pedido_id = 1;
-            pedidoCart.nr_pedido = rand;
+            //pedidoCart.nr_pedido = rand;
+            pedidoCart.nr_pedido = this.testaRandom();
             let d = new Date();
             let f = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
 

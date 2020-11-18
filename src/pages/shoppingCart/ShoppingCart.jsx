@@ -6,6 +6,7 @@ import ItemCart from "../../template/carrinho/itemCarrinho";
 import Finalizar from "../../template/carrinho/finalizarCompra";
 import Titulo from "../../template/titulo/titulo";
 import Indice from "../../template/indice/indice";
+import { browserHistory } from 'react-router';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -84,6 +85,11 @@ export default class ShoppingCart extends Component {
   //     let stringCart = JSON.stringify(list);
   //     localStorage.setItem("produtos", stringCart);
   //   };
+  goBack = () => {
+    //browserHistory.goBack()
+    browserHistory.push('#/home');
+    document.location.reload(true); 
+  }
   render() {
     let localCart = localStorage.getItem("produtos");
     let fim;
@@ -96,6 +102,11 @@ export default class ShoppingCart extends Component {
     return (
       <div class="shopping_cart">
         <Titulo titulo="Carrinho" />
+        <div className="row row-back">
+          <div className="col-2" style={{display: "flex", justifyContent: "center"}}>
+            <button className="btn-m btn-back" onClick={this.goBack}>Voltar</button>
+          </div>
+        </div>
         <Indice items={["Produto", "Preço", "Quantidade", "Total"]} />
         <div>{this.exibirProdutos()}</div>
         {fim}
