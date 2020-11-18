@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './checkout.css';
 import './checkout.js';
 import Titulo from '../../template/titulo/titulo';
-import {cepMask} from '../mask';
+import {cepMask, numMask} from '../mask';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
@@ -23,7 +23,6 @@ const URL_PEDIDO_POST = 'http://modelagem.test/api/pedidos/salvar';
 const URL_PEDIDOS_LISTA = 'http://modelagem.test/api/pedidos/listarCliente/';
 
 const URL_CONTATO_POST = 'http://modelagem.test/api/contato/salvar';
-
 
 export default class Checkout extends Component {
 
@@ -62,7 +61,7 @@ export default class Checkout extends Component {
             cd_seguranca: "",
             dt_expiracao: "",
             mascaraCEP: "",
-
+            mascaraNumeros: "",
         }
     }
     //-----------Cliente-----------
@@ -108,7 +107,6 @@ export default class Checkout extends Component {
         this.setState({telefone: event.target.value})
     }
 
-
     changeNumEndereco = (event) => {
         this.setState({numero: event.target.value})
     }
@@ -138,6 +136,7 @@ export default class Checkout extends Component {
 
     //-----------Cartão-----------
     changeNrCartao = (event) => {
+        this.setState({mascaraNumeros: numMask(event.target.value)})
         this.setState({nr_cartao: event.target.value})
     }
 
@@ -333,17 +332,20 @@ export default class Checkout extends Component {
             localStorage.setItem("pedido", submitCart);
 
             //localStorage.setItem("endereco_id", resp.data.id);
-            self.testeCartao();
+            self.conferePagamento();
         });
     }
 
-    testeCartao = () => {
+    conferePagamento = () => {
         let self = this
-        console.log(this.state.tipo_pagamento)
-        let teste = this.state.tipo_pagamento;
-        if (teste == 'Boleto'){
+        //console.log(this.state.tipo_pagamento)
+        let pagamento = this.state.tipo_pagamento;
+        if (pagamento == 'Boleto'){
         self.postPedido();
-        }  else if (teste == 'Cartao'){
+        }  else if (pagamento == 'Cartao'){
+            //let maisUmTeste = document.getElementsByClassName("teste");
+            //console.log(maisUmTeste);
+            //maisUmTeste.style.display = "block";
             self.postCartao();
         }
     }
@@ -511,9 +513,11 @@ export default class Checkout extends Component {
         return div;
     }
 
+    state = {teste: true};
 
     render() {
 
+        const {teste} = this.state;
 
         let pedidoCart = localStorage.getItem("produtos");
         pedidoCart = JSON.parse(pedidoCart);
@@ -541,246 +545,254 @@ export default class Checkout extends Component {
         valorTotalFrete = valorTotalFrete.toString();
         valorTotalFrete = valorTotalFrete.replace(".", ",");
 
-        const {mascaraCEP} = this.state
-
+        //Máscaras
+        const {mascaraCEP} = this.state  
+        const {mascaraNumeros} = this.state
+        
         return (
             <>
-    <Titulo titulo="Checkout"/>
+                <Titulo titulo="Checkout"/>
+                <Titulo titulo="Informações"/>
 
-    <Titulo titulo="Informações"/>
+                <section class="container-fluid container-fluid-checkout col-12">
+                    <div class="row">
+                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
+                            {/*Informações do cliente*
+                            {/*}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="firstName">Nome*</label>
+                                        <input id="firstName" type="text" class="form-control" onChange={this.changeClienteNome}
+                                        on
+                                        onMouseOut={this.changeClienteNome} required></input>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="lastName">Sobrenome*</label>
+                                        <input id="lastName" type="text" onChange={this.changeClienteSobrenome} class="form-control" required></input>
+                                    </div>
+                                </div>
+                            </div>*/}
 
-    <section class="container-fluid container-fluid-checkout col-12">
-        <div class="row">
-            
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
-                {/*Informações do cliente*/}
-                {/*}
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <label for="firstName">Nome*</label>
-                            <input id="firstName" type="text" class="form-control" onChange={this.changeClienteNome}
-                            on
-                            onMouseOut={this.changeClienteNome} required></input>
-                        </div>
-
-                        <div class="col-md-6 col-sm-12">
-                            <label for="lastName">Sobrenome*</label>
-                            <input id="lastName" type="text" onChange={this.changeClienteSobrenome}class="form-control" required></input>
-                        </div>
-                    </div>
-                </div>
-                */}
-                <div class="form-group">
-                    <div class="row">
-                        <div className="col-md-3 col-sm-12">
-                            <label for="cep">CEP*</label>
-                            <input id="cep" type="text" 
-                            onChange={this.changeCEP}
-                            value={mascaraCEP}
-                            className="form-control cep" maxLength="9" placeholder="ex: 05339-900" required></input>
-                        </div>
-                        <div class="col-md-7 col-sm-12">
-                            <label for="address">Endereço*</label>
-                            <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <label for="complement">Número*</label>
-                            <input id="complement" type="text" onChange={this.changeNumEndereco}class="form-control"></input>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-5 col-sm-12">
-                            <label for="bairro">Bairro*</label>
-                            <input id="bairro" type="text" 
-                            onChange={this.changeBairro}class="form-control" required></input>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <label for="city">Cidade*</label>
-                            <input id="city" type="text" 
-                            onChange={this.changeCidade}class="form-control" required></input>
-                        </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div className="col-md-3 col-sm-12">
+                                        <label for="cep">CEP*</label>
+                                        <input id="cep" type="text" 
+                                        onChange={this.changeCEP}
+                                        value={mascaraCEP}
+                                        className="form-control cep" maxLength="9" placeholder="ex: 05339-900" required></input>
+                                    </div>
+                                    <div class="col-md-7 col-sm-12">
+                                        <label for="address">Endereço*</label>
+                                        <input id="address" type="text" onChange={this.changeEndereco} class="form-control" placeholder="ex: Av. Corifeu de Azevedo Marques, 3097" required></input>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12">
+                                        <label for="complement">Número*</label>
+                                        <input id="complement" type="text" onChange={this.changeNumEndereco}class="form-control"></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-12">
+                                        <label for="bairro">Bairro*</label>
+                                        <input id="bairro" type="text" 
+                                        onChange={this.changeBairro}class="form-control" required></input>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <label for="city">Cidade*</label>
+                                        <input id="city" type="text" 
+                                        onChange={this.changeCidade}class="form-control" required></input>
+                                    </div>
                         
-                        {/*
-                        <div class="col-md-2 col-sm-12">
-                            <label for="state">Estado*</label>
-                            <input id="state" type="text" class="form-control" required></input>
-                        </div>
-                        */}
-                        <div class="col-md-3 col-sm-12">
-                            <label for="state">Estado*</label>
-                            <select class="form-control" id="state" onChange={this.changeEstado}required>    
-                                <option value="AC">AC</option>
-                                <option value="AL">AL</option>
-                                <option value="AP">AP</option>
-                                <option value="AM">AM</option>
-                                <option value="BA">BA</option>
-                                <option value="CE">CE</option>
-                                <option value="ES">ES</option>
-                                <option value="GO">GO</option>
-                                <option value="MA">MA</option>
-                                <option value="MT">MT</option>
-                                <option value="MS">MS</option>
-                                <option value="MG">MG</option>
-                                <option value="PA">PA</option>
-                                <option value="PB">PB</option>
-                                <option value="PR">PR</option>
-                                <option value="PE">PE</option>
-                                <option value="PI">PI</option>
-                                <option value="RJ">RJ</option>
-                                <option value="RN">RN</option>
-                                <option value="RS">RS</option>
-                                <option value="RO">RO</option>
-                                <option value="RR">RR</option>
-                                <option value="SC">SC</option>
-                                <option value="SP">SP</option>
-                                <option value="SE">SE</option>
-                                <option value="TO">TO</option>
-                                <option value="DF">DF</option>
-                            </select>
-                        </div>
-                  
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-8 col-sm-12">
-                            <label for="email">E-mail*</label>
-                            {/*
-                            <input id="email" type="text" 
-                            onChange={this.changeEmail} class="form-control" placeholder="ex: exemplo@email.com" required></input>
-                            */}
-                            <select class="form-control" id="email" onChange={this.changeEmail} required>
-                                <option selected></option>
-                                {this.listarEmail()}
-                            </select>
-                        </div>
+                                    {/*
+                                    <div class="col-md-2 col-sm-12">
+                                    <label for="state">Estado*</label>
+                                    <input id="state" type="text" class="form-control" required></input>
+                                    </div>*/}
 
-                        <div class="col-md-4 col-sm-12">
-                            <label for="phone">Telefone*</label>
-                            {/*
-                            <input id="phone" type="text" onChange={this.changeTelefone}class="form-control" placeholder="ex: DDD + Telefone" required></input>
-                            */}
-                            <select class="form-control" id="telefone" onChange={this.changeTelefone} required>
-                                <option selected></option>
-                                {this.listarTel()}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                {/*Fim das informações do cliente*/}
-
-                {/*Forma de pagamento*/}
-                <Titulo titulo="Forma de Pagamento"/>
-                <div class="container-fluid container-fluid-checkout">
-                    <div class="input-group payment">
-                        
-                        <div class="input-group-prepend itemRadio">
-                            <input type="radio" 
-                            aria-label="opção de boleto bancário" 
-                            name="payOption"
-                            onClick={this.changeTipoPagamento}
-                            value="Boleto"></input>
-                            <label>Boleto</label>
-                            {/*<img class="img-custom"src="images/boletos.png" alt="boleto bancário"></img>*/}
-                        </div>
-                        
-                        <div class="input-group-prepend itemRadio">
-                            <div class="input-group">
-                                <input type="radio" 
-                                onClick={this.changeTipoPagamento}
-                                aria-label="opção de cartão master card" 
-                                name="payOption" 
-                                value="Cartao"></input>
-                                <label>Cartão de Crédito</label>
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="state">Estado*</label>
+                                        <select class="form-control" id="state" onChange={this.changeEstado}required>    
+                                            <option value="AC">AC</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AP">AP</option>
+                                            <option value="AM">AM</option>
+                                            <option value="BA">BA</option>
+                                            <option value="CE">CE</option>
+                                            <option value="ES">ES</option>
+                                            <option value="GO">GO</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MT">MT</option>
+                                            <option value="MS">MS</option>
+                                            <option value="MG">MG</option>
+                                            <option value="PA">PA</option>
+                                            <option value="PB">PB</option>
+                                            <option value="PR">PR</option>
+                                            <option value="PE">PE</option>
+                                            <option value="PI">PI</option>
+                                            <option value="RJ">RJ</option>
+                                            <option value="RN">RN</option>
+                                            <option value="RS">RS</option>
+                                            <option value="RO">RO</option>
+                                            <option value="RR">RR</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SP">SP</option>
+                                            <option value="SE">SE</option>
+                                            <option value="TO">TO</option>
+                                            <option value="DF">DF</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            {/*<img class="img-custom"src="images/cartao.png" alt="master card"></img>*/}
-                        </div>
-                        
-                        </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <label for="cardNumber">Número do cartão</label>
-                                <input id="cardNumber" type="text" onChange={this.changeNrCartao} class="form-control" ></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <label for="cardName">Nome no cartão</label>
-                                <input id="cardName" type="text" 
-                                onChange={this.changeNomeCartao}class="form-control" ></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            
-                            <div class="col-md-6 col-sm-12">
-                                <label for="cvv">Código de segurança</label>
-                                <input id="cvv" type="text" onChange={this.changeCdCartao} class="form-control" ></input>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <label for="expiryDate">Data de expiração</label>
-                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" ></input>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/*Fim da forma de pagamento*/}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-12">
+                                        <label for="email">E-mail*</label>
+                                        {/*
+                                        <input id="email" type="text" 
+                                        onChange={this.changeEmail} class="form-control"    placeholder="ex: exemplo@email.com" required></input>
+                                        */}
+                                        <select class="form-control" id="email" onChange={this.changeEmail} required>
+                                            <option selected></option>
+                                            {this.listarEmail()}
+                                        </select>
+                                    </div>
 
-                {/*Resumo do Pedido*/}
-                <Titulo titulo="Resumo do Pedido"></Titulo>
-                <div class="conteainer-fluid">
-                    <div class="row">
-                        <div class="col-8">
-                            <table class="table table-checkout">
-                                {/*
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                                </thead>
-                                */}
-                                <tbody>
-                                <tr class="tableItemPedido">
-                                    <th scope="row"></th>
-                                    <td>Itens</td>
-                                    <td>R$ {valorTotal}</td>
-                                </tr>
-                                <tr class="tableDescontoPedido">
-                                    <th scope="row"></th>
-                                    <td>Custo do Frete</td>
-                                    <td>R$ {frete}</td>
-                                </tr>
-                                <tr class="tableTotalPedido">
-                                    <th scope="row"></th>
-                                    <td>Total</td>
-                                    <td>R$ {valorTotalFrete}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <a><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <label for="phone">Telefone*</label>
+                                        {/*
+                                        <input id="phone" type="text" onChange={this.changeTelefone}    class="form-control" placeholder="ex: DDD + Telefone"   required></input>
+                                        */}
+                                        <select class="form-control" id="telefone" onChange={this.changeTelefone} required>
+                                            <option selected></option>
+                                            {this.listarTel()}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            {/*Fim das informações do cliente*/}
 
-        </div>
-
-    </section>
-
+                            {/*Forma de pagamento*/}
+                            <Titulo titulo="Forma de Pagamento"/>
+                            <div class="container-fluid container-fluid-checkout">
+                                <div class="input-group payment">
+                                    <div class="input-group-prepend itemRadio">
+                                        <input type="radio" 
+                                        aria-label="opção de boleto bancário" 
+                                        name="payOption"
+                                        value="Boleto"
+                                        onFocus={() => this.setState({teste: false})}
+                                        onClick={this.changeTipoPagamento}
+                                        ></input>
+                                        {/*<img class="img-custom"src="images/boletos.png" alt="boleto  bancário"></img>*/}
+                                        <label>Boleto</label>
+                                        
+                                    </div>
+                                    
+                                    {/*<img class="img-custom"src="images/cartao.png" alt="master  card"></img>*/}
+                    
+                                    <div class="input-group-prepend itemRadio">
+                                        <div class="input-group">
+                                            <input type="radio" 
+                                            aria-label="opção de cartão master card" 
+                                            name="payOption" 
+                                            value="Cartao"
+                                            onFocus={() => this.setState({teste: true})}
+                                            onClick={this.changeTipoPagamento}
+                                            ></input>
+                                            <label>Cartão de Crédito</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            { teste 
+                                ?<div>
+                                    <div class="form-group teste">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label for="cardNumber">Número do cartão</label>
+                                                <input id="cardNumber" 
+                                                type="text" 
+                                                value={mascaraNumeros}
+                                                onChange={this.changeNrCartao} 
+                                                className="form-control nmrCartao" 
+                                                minLength="16" maxLength="16"></input>
+                                            </div>
+                                        </div>
+                                    </div>                     
+                                    <div class="form-group teste">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label for="cardName">Nome no cartão</label>
+                                                <input id="cardName" type="text" 
+                                                onChange={this.changeNomeCartao}class="form-control"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group teste">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <label for="cvv">Código de segurança</label>
+                                                <input id="cvv" type="text" onChange={this.changeCdCartao}  class="form-control" ></input>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <label for="expiryDate">Data de expiração</label>
+                                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" ></input>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    {/*Fim da forma de pagamento*/}
+                                </div>
+                                :null
+                            }
+                       
+                            {/*Resumo do Pedido*/}
+                            <Titulo titulo="Resumo do Pedido"></Titulo>
+                            <div class="conteainer-fluid">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <table class="table table-checkout">
+                                        {/*
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                        </tr>
+                                        </thead>
+                                        */}
+                                            <tbody>
+                                                <tr class="tableItemPedido">
+                                                    <th scope="row"></th>
+                                                    <td>Itens</td>
+                                                    <td>R$ {valorTotal}</td>
+                                                </tr>
+                                                <tr class="tableDescontoPedido">
+                                                    <th scope="row"></th>
+                                                    <td>Custo do Frete</td>
+                                                    <td>R$ {frete}</td>
+                                                </tr>
+                                                <tr class="tableTotalPedido">
+                                                    <th scope="row"></th>
+                                                    <td>Total</td>
+                                                    <td>R$ {valorTotalFrete}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a><button type="submit" class="btn-finalizar-compra col-12" onClick={this.getCliente}>Confirmar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>  
+                </section>
             </>
         )
     }

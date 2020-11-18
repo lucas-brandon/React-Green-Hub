@@ -1,3 +1,4 @@
+              //CPF//
 export const cpfMask = value => {
     return value
       .replace(/\D/g, '')
@@ -6,6 +7,7 @@ export const cpfMask = value => {
       .replace(/(\d{3})(\d{1,2})/, '$1-$2')
 }
 
+              //Telefone//              
 export const telMask = value => {
     return value
     .replace(/\D/g, "")
@@ -13,10 +15,17 @@ export const telMask = value => {
     .replace(/(\d)(\d{4})$/, "$1-$2")
 }
 
+              //CEP//
 export const cepMask = value => {
   return value
   .replace(/\D/g, '')
   .replace(/(\d{5})(\d{1,3})/, '$1-$2')
+}
+
+              //Numero Cartão//
+export const numMask = value => {
+  return value 
+  .replace(/\D/g, "")
 }
 
 
