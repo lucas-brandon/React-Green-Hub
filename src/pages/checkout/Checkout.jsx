@@ -389,9 +389,6 @@ export default class Checkout extends Component {
             self.postPedido();
         });
     }
-<<<<<<< HEAD
-    
-=======
     testaRandom = () => {
         let cond = true;
         let num;
@@ -410,7 +407,6 @@ export default class Checkout extends Component {
         }
         return num;
     }
->>>>>>> 66c1f0a308371d54a4622211d5e8c80671781d4e
     postPedido = () => {
 
         //console.log('configurando endereco cliente\n\n\n\n');     
