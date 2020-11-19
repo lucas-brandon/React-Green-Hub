@@ -26,7 +26,17 @@ export const cepMask = value => {
 export const numMask = value => {
   return value 
   .replace(/\D/g, "")
+  .replace(/^(\d{4})(\d)/g, "$1 $2")
+  .replace(/(\d{4})(\d)/, "$1 $2")
+  .replace(/(\d{4})(\d)/, "$1 $2")
 }
+
+              //Código Cartão//
+export const codMask = value => {
+  return value
+  .replace(/\D/g, "")
+}
+
 
 
 //export function validadata(){

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './checkout.css';
 import './checkout.js';
 import Titulo from '../../template/titulo/titulo';
-import {cepMask, numMask} from '../mask';
+import {cepMask, numMask, codMask} from '../mask';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
@@ -62,6 +62,7 @@ export default class Checkout extends Component {
             dt_expiracao: "",
             mascaraCEP: "",
             mascaraNumeros: "",
+            mascaraCodigo: "",
         }
     }
     //-----------Cliente-----------
@@ -145,6 +146,7 @@ export default class Checkout extends Component {
     }
 
     changeCdCartao = (event) => {
+        this.setState({mascaraCodigo: codMask(event.target.value)})
         this.setState({cd_seguranca: event.target.value})
     }
 
@@ -343,9 +345,6 @@ export default class Checkout extends Component {
         if (pagamento == 'Boleto'){
         self.postPedido();
         }  else if (pagamento == 'Cartao'){
-            //let maisUmTeste = document.getElementsByClassName("teste");
-            //console.log(maisUmTeste);
-            //maisUmTeste.style.display = "block";
             self.postCartao();
         }
     }
@@ -548,6 +547,7 @@ export default class Checkout extends Component {
         //Máscaras
         const {mascaraCEP} = this.state  
         const {mascaraNumeros} = this.state
+        const {mascaraCodigo} = this.state
         
         return (
             <>
@@ -676,8 +676,10 @@ export default class Checkout extends Component {
 
                             {/*Forma de pagamento*/}
                             <Titulo titulo="Forma de Pagamento"/>
+
                             <div class="container-fluid container-fluid-checkout">
                                 <div class="input-group payment">
+
                                     <div class="input-group-prepend itemRadio">
                                         <input type="radio" 
                                         aria-label="opção de boleto bancário" 
@@ -686,60 +688,63 @@ export default class Checkout extends Component {
                                         onFocus={() => this.setState({teste: false})}
                                         onClick={this.changeTipoPagamento}
                                         ></input>
-                                        {/*<img class="img-custom"src="images/boletos.png" alt="boleto  bancário"></img>*/}
-                                        <label>Boleto</label>
-                                        
+                                        <img class="img-custom dd"src="images/boletos.png" alt="boleto  bancário"></img>
                                     </div>
-                                    
-                                    {/*<img class="img-custom"src="images/cartao.png" alt="master  card"></img>*/}
-                    
+                                                        
                                     <div class="input-group-prepend itemRadio">
-                                        <div class="input-group">
-                                            <input type="radio" 
-                                            aria-label="opção de cartão master card" 
-                                            name="payOption" 
-                                            value="Cartao"
-                                            onFocus={() => this.setState({teste: true})}
-                                            onClick={this.changeTipoPagamento}
-                                            ></input>
-                                            <label>Cartão de Crédito</label>
-                                        </div>
+                                        <input type="radio" 
+                                        aria-label="opção de cartão master card" 
+                                        name="payOption" 
+                                        value="Cartao"
+                                        onFocus={() => this.setState({teste: true})}
+                                        onClick={this.changeTipoPagamento}
+                                        ></input>
+                                        <img class="img-custom imagemCartao"src="images/cartao-icon.png" alt="master  card"></img>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="container">
+                                <div class="row">
+                                    <div>
+                                        <label className="labelBoleto">Boleto</label>
+                                    </div>
+                                    <div>
+                                        <label className="labelCartao" >Cartão de Crédito</label>
                                     </div>
                                 </div>
                             </div>
                             { teste 
                                 ?<div>
-                                    <div class="form-group teste">
+                                    <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-12">
+                                            <div class="col-md-7 col-sm-12">
                                                 <label for="cardNumber">Número do cartão</label>
                                                 <input id="cardNumber" 
                                                 type="text" 
                                                 value={mascaraNumeros}
                                                 onChange={this.changeNrCartao} 
                                                 className="form-control nmrCartao" 
-                                                minLength="16" maxLength="16"></input>
+                                                minLength="18" maxLength="19"></input>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <label for="cvv">Código de segurança</label>
+                                                <input id="cvv" type="text" class="form-control"
+                                                value={mascaraCodigo}
+                                                maxLength="3" minLength="3"
+                                                onChange={this.changeCdCartao} ></input>
                                             </div>
                                         </div>
                                     </div>                     
-                                    <div class="form-group teste">
+                                    <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-12 col-md-7">
                                                 <label for="cardName">Nome no cartão</label>
                                                 <input id="cardName" type="text" 
                                                 onChange={this.changeNomeCartao}class="form-control"></input>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group teste">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <label for="cvv">Código de segurança</label>
-                                                <input id="cvv" type="text" onChange={this.changeCdCartao}  class="form-control" ></input>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
+                                            </div>                                        
+                                            <div class="col-md-5 col-sm-12">
                                                 <label for="expiryDate">Data de expiração</label>
-                                                <input id="expiryDate" type="date"  onChange={this.changeDtCartao} class="form-control" ></input>
+                                                <input id="expiryDate" type="month" onChange={this.changeDtCartao} class="form-control" ></input>
                                             </div>
                                         </div>
                                     </div>  
