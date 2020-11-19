@@ -4,11 +4,9 @@
     padding: 0px;
 }
 
-
 .row{
     justify-content: center;
 }
-
 
 /*-----Background da pagina-----*/
 .container-fluid-checkout{
@@ -26,8 +24,7 @@
 .itemRadio{
     align-self: center;
     align-items: center;
-    justify-content: center;
-    
+    justify-content: center;    
 }
 
 .input-group{
@@ -58,7 +55,6 @@
     border-radius: 25px;
     margin-bottom: 10px;
     cursor: pointer;
-
 }
 
 .btn-finalizar-compra:hover{
@@ -68,14 +64,12 @@
     border: 3px solid #208023;
     padding: 10px 60px;
     border-radius: 25px;
-
 }
 
 /*-----Resumo do Pedido-----*/
 .tableItemPedido{
     font-size: 14px;
     background-color:#edecd1;
-    
 }
 
 .table-checkout{
@@ -91,4 +85,29 @@
     font-size: 18px;
     font-weight: bold;
     background-color: #edecd1;
+}
+
+.opcoesPag{
+    padding: 10px;
+}
+
+.itemRadio{
+    padding: 20px;
+    margin-bottom: -35px;
+}
+
+.imagemCartao{
+    padding: 21px;
+    margin-top: -9px;
+}
+
+.labelCartao {
+    font-size: 16px;
+    margin-right: -163px;
+}
+
+
+.labelBoleto {
+    font-size: 16px;
+    margin-left: -127px;
 }

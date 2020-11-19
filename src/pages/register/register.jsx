@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './register.css';
 import Titulo from '../../template/titulo/titulo';
-import { cpfMask, telMask } from './mask';
+import { cpfMask, telMask } from '../mask';
 import axios from "axios";
 import { browserHistory } from 'react-router';
 
@@ -164,9 +164,9 @@ export default class Register extends Component {
                                                 <label>Data de Nascimento</label>
                                                 <input type="date" onChange={this.changeData} className="form-control data-nascimento" id="dt-nascimento" required/>
                                             </div>
-                                            <div class="alert alert-warning" id="aviso-data" style={{display:'none'}} role="alert">
+                                            {/*<div class="alert alert-warning" id="aviso-data" style={{display:'none'}} role="alert">
                                                 Desculpe, pessoas com menos de 18 anos não podem se cadastrar.
-                                            </div>
+                                            </div>*/}
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <div className="form-group">
@@ -211,8 +211,9 @@ export default class Register extends Component {
                                         
                                         <div className="col-12 col-md-12">
                                             <div className="form-group"> 
-                                            <a>
-                                                <button type="button submit" onClick={this.postCliente} className="btn-block botaoRegister">Cadastrar</button>
+                                            <a href="#/home">
+                                                <button type="button submit"
+                                                onClick={this.postCliente} className="btn-block botaoRegister">Cadastrar</button>
                                             </a>
                                             </div>
                                         </div>

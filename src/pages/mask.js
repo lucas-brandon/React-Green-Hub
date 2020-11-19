@@ -1,0 +1,64 @@
+              //CPF//
+export const cpfMask = value => {
+    return value
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d)/, '$1.$2') 
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+}
+
+              //Telefone//              
+export const telMask = value => {
+    return value
+    .replace(/\D/g, "")
+    .replace(/^(\d{2})(\d)/g, "($1) $2")
+    .replace(/(\d)(\d{4})$/, "$1-$2")
+}
+
+              //CEP//
+export const cepMask = value => {
+  return value
+  .replace(/\D/g, '')
+  .replace(/(\d{5})(\d{1,3})/, '$1-$2')
+}
+
+              //Numero Cartão//
+export const numMask = value => {
+  return value 
+  .replace(/\D/g, "")
+  .replace(/^(\d{4})(\d)/g, "$1 $2")
+  .replace(/(\d{4})(\d)/, "$1 $2")
+  .replace(/(\d{4})(\d)/, "$1 $2")
+}
+
+              //Código Cartão//
+export const codMask = value => {
+  return value
+  .replace(/\D/g, "")
+}
+
+
+
+//export function validadata(){
+//  var data = document.getElementById("dt-nascimento").value; // pega o valor do input
+//  data = data.replace(/\//g, "-"); // substitui eventuais barras
+//  var data_array = data.split("-"); // quebra a data em array
+
+//  if(data_array[0].length != 4){
+//     data = data_array[2]+"-"+data_array[1]+"-"+data_array[0];
+//  }
+
+//  var hoje = new Date();
+//  var nasc  = new Date(data);
+//  var idade = hoje.getFullYear() - nasc.getFullYear();
+//  var m = hoje.getMonth() - nasc.getMonth();
+//  if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
+
+//  if(idade < 18){
+//      document.getElementById("aviso-data").style.display = "block";
+//      data = null;
+//      return false;
+//  };
+
+//  document.getElementById("aviso-data").style.display = "none";
+//}  
