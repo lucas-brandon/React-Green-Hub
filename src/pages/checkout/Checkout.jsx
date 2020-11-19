@@ -59,7 +59,10 @@ export default class Checkout extends Component {
             nr_cartao: "",
             nome_cartao: "",
             cd_seguranca: "",
-            dt_expiracao: "",
+            //dt_expiracao: "",
+            mes_validade: "",
+            ano_validade: "",
+
             mascaraCEP: "",
             mascaraNumeros: "",
             mascaraCodigo: "",
@@ -150,8 +153,16 @@ export default class Checkout extends Component {
         this.setState({cd_seguranca: event.target.value})
     }
 
-    changeDtCartao = (event) => {
-        this.setState({dt_expiracao: event.target.value})
+    //changeDtCartao = (event) => {
+    //    this.setState({dt_expiracao: event.target.value})
+    //}
+
+    changeMes = (event) => {
+        this.setState({mes_validade: event.target.value})
+    }
+
+    changeAno = (event) => {
+        this.setState({ano_validade: event.target.value})
     }
 
     //-----------GET-----------
@@ -342,12 +353,33 @@ export default class Checkout extends Component {
         let self = this
         //console.log(this.state.tipo_pagamento)
         let pagamento = this.state.tipo_pagamento;
-        if (pagamento == 'Boleto'){
+        if ((pagamento == 'Boleto') || (pagamento == 'boleto')){
         self.postPedido();
-        }  else if (pagamento == 'Cartao'){
-            self.postCartao();
+        }  else if ((pagamento == 'Cartao') || (pagamento == 'cartao')){
+            self.confereData();
         }
     }
+
+
+    confereData = () => {
+        let self = this
+
+        let dataAtual = new Date;
+        let anoAtual = dataAtual.getFullYear();
+        let mesAtual = dataAtual.getMonth();
+        console.log(dataAtual);
+        console.log(anoAtual);
+        console.log(mesAtual + 1 );
+        //console.log(this.state.ano_validade)
+        let ano = this.state.ano_validade;
+        if (ano <= 2020){
+            alert("Digite um ano válido");
+        }  else{
+            self.postCartao()
+        }
+    }
+
+
 
     postCartao = () => {
         let self = this
@@ -365,7 +397,9 @@ export default class Checkout extends Component {
             nome: this.state.nome_cartao,
             //cd_seguranca: this.state.cd_seguranca,
             bandeira: this.state.tipo_pagamento,
-            validade: this.state.dt_expiracao
+            //validade: this.state.dt_expiracao
+            mes_validade: this.state.mes_validade,
+            ano_validade: this.state.ano_validade,
             //complemento: this.state.complemento,
         })
         .then(resp => {
@@ -377,10 +411,11 @@ export default class Checkout extends Component {
                 nome_cartao: this.state.nome_cartao,
                 bandeira: this.state.tipo_pagamento,
                 //cd_seguranca: this.state.cd_seguranca,
-                validade: this.state.dt_expiracao
+                //validade: this.state.dt_expiracao
+                mes_validade: this.state.mes_validade,
+                ano_validade: this.state.ano_validade,
             })
-
-
+    
             pedidoCart.cartao = (cartao);
 
             let submitCart = JSON.stringify(pedidoCart);
@@ -390,6 +425,7 @@ export default class Checkout extends Component {
             self.postPedido();
         });
     }
+    
     testaRandom = () => {
         let cond = true;
         let num;
@@ -512,11 +548,11 @@ export default class Checkout extends Component {
         return div;
     }
 
-    state = {teste: true};
+    state = {exibe: true};
 
     render() {
 
-        const {teste} = this.state;
+        const {exibe} = this.state;
 
         let pedidoCart = localStorage.getItem("produtos");
         pedidoCart = JSON.parse(pedidoCart);
@@ -685,7 +721,7 @@ export default class Checkout extends Component {
                                         aria-label="opção de boleto bancário" 
                                         name="payOption"
                                         value="Boleto"
-                                        onFocus={() => this.setState({teste: false})}
+                                        onFocus={() => this.setState({exibe: false})}
                                         onClick={this.changeTipoPagamento}
                                         ></input>
                                         <img class="img-custom dd"src="images/boletos.png" alt="boleto  bancário"></img>
@@ -696,7 +732,7 @@ export default class Checkout extends Component {
                                         aria-label="opção de cartão master card" 
                                         name="payOption" 
                                         value="Cartao"
-                                        onFocus={() => this.setState({teste: true})}
+                                        onFocus={() => this.setState({exibe: true})}
                                         onClick={this.changeTipoPagamento}
                                         ></input>
                                         <img class="img-custom imagemCartao"src="images/cartao-icon.png" alt="master  card"></img>
@@ -713,11 +749,20 @@ export default class Checkout extends Component {
                                     </div>
                                 </div>
                             </div>
-                            { teste 
+                            { exibe 
                                 ?<div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-7 col-sm-12">
+                                        <div class="col-sm-12 col-md-7">
+                                                <label for="cardName">Nome no cartão</label>
+                                                <input id="cardName" type="text" 
+                                                onChange={this.changeNomeCartao}class="form-control"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="row">
+                                            <div className="col-sm-12 col-md-7">
                                                 <label for="cardNumber">Número do cartão</label>
                                                 <input id="cardNumber" 
                                                 type="text" 
@@ -726,25 +771,42 @@ export default class Checkout extends Component {
                                                 className="form-control nmrCartao" 
                                                 minLength="18" maxLength="19"></input>
                                             </div>
-                                            <div class="col-md-5 col-sm-12">
+                                        </div>
+                                    </div>                   
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-12">
                                                 <label for="cvv">Código de segurança</label>
                                                 <input id="cvv" type="text" class="form-control"
                                                 value={mascaraCodigo}
                                                 maxLength="3" minLength="3"
                                                 onChange={this.changeCdCartao} ></input>
-                                            </div>
-                                        </div>
-                                    </div>                     
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-7">
-                                                <label for="cardName">Nome no cartão</label>
-                                                <input id="cardName" type="text" 
-                                                onChange={this.changeNomeCartao}class="form-control"></input>
-                                            </div>                                        
-                                            <div class="col-md-5 col-sm-12">
+                                            </div>                                  
+                                            <div class="col-md-4 col-sm-12">
                                                 <label for="expiryDate">Data de expiração</label>
-                                                <input id="expiryDate" type="month" onChange={this.changeDtCartao} class="form-control" ></input>
+                                                <div className="row">
+                                                    <div class="col-md-5">
+                                                        <select class="form-control" id="state" onChange={this.changeMes}required>    
+                                                            <option value="janeiro">Jan</option>
+                                                            <option value="fevereiro">Fev</option>
+                                                            <option value="março">Mar</option>
+                                                            <option value="abril">Abr</option>
+                                                            <option value="maio">Mai</option>
+                                                            <option value="junho">Jun</option>
+                                                            <option value="julho">Jul</option>
+                                                            <option value="agosto">Ago</option>
+                                                            <option value="setembro">Set</option>
+                                                            <option value="outubro">Out</option>
+                                                            <option value="novembro">Nov</option>
+                                                            <option value="dezembro">Dez</option>
+                                                        </select>
+                                                    </div>
+                                                        {/*<input type="number" onChange={this.changeMes} min="1" max="12" class="form-control expiryDate" placeholder="MM"></input>
+                                                    </div>*/}
+                                                    <div class="col-md-7">
+                                                        <input type="number" onChange={this.changeAno} class="form-control expiryDate" min="2020" max="2099" placeholder="AAAA" required></input> 
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>  
