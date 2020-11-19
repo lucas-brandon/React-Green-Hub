@@ -14,17 +14,19 @@ export default class FinalizarCompra extends Component {
 
   componentDidMount(){
 
-    setInterval(() => {
-      let produtos = localStorage.getItem('produtos');
-      produtos = JSON.parse(produtos);
-      
-      let total = 0;
-      produtos.forEach(produto => {
-        total += produto.total;
-      });
+    this.setState({ interval: 
+      setInterval(() => {
+        let produtos = localStorage.getItem('produtos');
+        produtos = JSON.parse(produtos);
+        
+        let total = 0;
+        produtos.forEach(produto => {
+          total += produto.total;
+        });
 
-      this.setState({total: total});
-    }, 100);
+        this.setState({total: total});
+      }, 100)
+    })
     //this.forceUpdate();
 
   }
@@ -32,6 +34,10 @@ export default class FinalizarCompra extends Component {
   componentWillUpdate(){
     //console.log("change no finalizar")
 
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.state.interval);
   }
 
   converteValor(){

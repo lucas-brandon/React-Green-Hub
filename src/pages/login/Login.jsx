@@ -88,7 +88,7 @@ export default class Login extends Component {
                         {/*
                         <span className="psw"><a href="#">Esqueci minha senha </a></span>
                         */}
-                
+                        <span className="psw"><a href="#">Esqueci minha senha </a></span>
                       
                     </form>
                     <button className="btn btn-lg btn-primary btn-block" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button><br></br>
