@@ -360,26 +360,20 @@ export default class Checkout extends Component {
         }
     }
 
-
     confereData = () => {
         let self = this
-
         let dataAtual = new Date;
         let anoAtual = dataAtual.getFullYear();
         let mesAtual = dataAtual.getMonth();
-        console.log(dataAtual);
-        console.log(anoAtual);
-        console.log(mesAtual + 1 );
-        //console.log(this.state.ano_validade)
+        mesAtual = mesAtual + 1;
         let ano = this.state.ano_validade;
-        if (ano <= 2020){
-            alert("Digite um ano válido");
+        let mes = this.state.mes_validade;
+        if (ano <= anoAtual && mes < mesAtual){
+            alert("Data de expiração inválida");
         }  else{
             self.postCartao()
         }
     }
-
-
 
     postCartao = () => {
         let self = this
@@ -396,7 +390,7 @@ export default class Checkout extends Component {
             nr_cartao: this.state.nr_cartao,
             nome: this.state.nome_cartao,
             //cd_seguranca: this.state.cd_seguranca,
-            bandeira: this.state.tipo_pagamento,
+            bandeira: "Bandeira",
             //validade: this.state.dt_expiracao
             mes_validade: this.state.mes_validade,
             ano_validade: this.state.ano_validade,
@@ -409,7 +403,7 @@ export default class Checkout extends Component {
                 cliente_id: pedidoCart.cliente_id,
                 nr_cartao: this.state.nr_cartao,
                 nome_cartao: this.state.nome_cartao,
-                bandeira: this.state.tipo_pagamento,
+                bandeira: "Bandeira",
                 //cd_seguranca: this.state.cd_seguranca,
                 //validade: this.state.dt_expiracao
                 mes_validade: this.state.mes_validade,
@@ -787,18 +781,18 @@ export default class Checkout extends Component {
                                                 <div className="row">
                                                     <div class="col-md-5">
                                                         <select class="form-control" id="state" onChange={this.changeMes}required>    
-                                                            <option value="janeiro">Jan</option>
-                                                            <option value="fevereiro">Fev</option>
-                                                            <option value="março">Mar</option>
-                                                            <option value="abril">Abr</option>
-                                                            <option value="maio">Mai</option>
-                                                            <option value="junho">Jun</option>
-                                                            <option value="julho">Jul</option>
-                                                            <option value="agosto">Ago</option>
-                                                            <option value="setembro">Set</option>
-                                                            <option value="outubro">Out</option>
-                                                            <option value="novembro">Nov</option>
-                                                            <option value="dezembro">Dez</option>
+                                                            <option value="1">Jan</option>
+                                                            <option value="2">Fev</option>
+                                                            <option value="3">Mar</option>
+                                                            <option value="4">Abr</option>
+                                                            <option value="5">Mai</option>
+                                                            <option value="6">Jun</option>
+                                                            <option value="7">Jul</option>
+                                                            <option value="8">Ago</option>
+                                                            <option value="9">Set</option>
+                                                            <option value="10">Out</option>
+                                                            <option value="11">Nov</option>
+                                                            <option value="12">Dez</option>
                                                         </select>
                                                     </div>
                                                         {/*<input type="number" onChange={this.changeMes} min="1" max="12" class="form-control expiryDate" placeholder="MM"></input>
