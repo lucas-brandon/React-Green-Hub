@@ -13,6 +13,7 @@ import Register from '../pages/register/register';
 import DetalhesProduto from '../pages/detalhesProduto/detalhesProduto';
 import Profile from '../pages/profile/profile';
 import Pedidos from '../pages/pedidos/Pedidos';
+import Password from '../pages/password/Password';
 //import About from '../about/About';
 
 export default props => (
@@ -28,6 +29,7 @@ export default props => (
         <Route path='/profile' component={Profile}></Route>
         <Route path='/orders' component={Pedidos}></Route>
         <Route path='/login' component={Login}></Route>
+        <Route path='/password' component={Password}></Route>
         <Redirect from='*' to='/home'></Redirect>
     </Router>
 )
