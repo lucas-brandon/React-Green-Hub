@@ -59,7 +59,6 @@ export default class Checkout extends Component {
             nr_cartao: "",
             nome_cartao: "",
             cd_seguranca: "",
-            //dt_expiracao: "",
             mes_validade: "",
             ano_validade: "",
 
