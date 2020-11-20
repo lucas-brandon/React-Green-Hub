@@ -55,24 +55,6 @@ export default class Login extends Component {
             
     }
 
-    toggleM = (msg) => {
-        //let msg = document.getElementsByClassName("mensagem");
-        console.log("toggleeeeee")
-        console.log(msg)
-        if(msg){
-            if(msg.classList.contains("show")){
-                console.log("show pra hide")
-                msg.classList.replace("show", "hide");
-            }
-            else{
-                console.log("hide pra show")
-                msg.classList.replace("hide", "show");
-            }
-        }
-        
-        
-    }
-
     render () {
         return (
             <>

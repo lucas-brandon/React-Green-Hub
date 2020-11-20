@@ -116,7 +116,7 @@ export default class Header extends Component {
                 </div>
             )
         }
-        let msgLogin = (<Msg msg={this.state.msg}></Msg>)
+        let msgLogin = (<Msg msg={this.state.msg} id="msgHeader"></Msg>)
         return (
             <>
             <header className="container-fluid headerCustom" onClick={this.testeF}>

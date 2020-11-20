@@ -44,9 +44,10 @@ export default class Password extends Component {
             .then(resp => {
                 console.log(resp.data)
                 if(resp.data){
-                    this.setState({msg: "Uma mensagem com a sua nova senha foi enviada para o e-mail informado", verificado: 1, cliente_id: resp.data});
+                    this.setState({msg: "Informações validadas com sucesso!", verificado: 1, cliente_id: resp.data});
                 }
                 else {
+                    console.log("resp data = 0")
                     this.setState({msg: "Informações inválidas"});
                 }
                 
@@ -60,30 +61,15 @@ export default class Password extends Component {
             //window.location.href = '#/home';
             
     }
-
+    clearStateMsg = () => {
+        this.setState({msg: ""})
+    }
     goBack = () => {
         //browserHistory.goBack()
         browserHistory.push('#/login/#header');
         document.location.reload(true); 
       }
 
-    toggleM = (msg) => {
-        //let msg = document.getElementsByClassName("mensagem");
-        console.log("toggleeeeee")
-        console.log(msg)
-        if(msg){
-            if(msg.classList.contains("show")){
-                console.log("show pra hide")
-                msg.classList.replace("show", "hide");
-            }
-            else{
-                console.log("hide pra show")
-                msg.classList.replace("hide", "show");
-            }
-        }
-        
-        
-    }
 
     updateCliente = () => {
         axios.put(`${URL_UPDATE_CLIENTE}` + this.state.cliente_id, {
@@ -112,8 +98,17 @@ export default class Password extends Component {
             //document.getElementById("verificar").onclick = function() { this.verific; }
             let btn = document.getElementById("verificar");
             btn.onclick = this.updateCliente;
-            btn.innerText = "Alterar Senha"
+            btn.innerText = "Confirmar"
         }
+
+        let msgLogin ;
+        console.log("estado msg: "+this.state.msg)
+        if(this.state.msg != undefined){
+            msgLogin = (<Msg msg={this.state.msg} id="msgPassword" clear={this.clearStateMsg}></Msg>)
+        }
+        else {
+            msgLogin = (<Msg msg="" id="msgPassword" clear={this.clearStateMsg}></Msg>)
+        } 
         
         return (
             <>
@@ -135,6 +130,8 @@ export default class Password extends Component {
                         {/*
                         <span className="psw"><a href="#">Esqueci minha senha </a></span>
                         */}
+                        
+                        {msgLogin}
                         <br></br>
                         {div}
                         <br></br>
