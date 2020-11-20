@@ -55,31 +55,14 @@ export default class Login extends Component {
             
     }
 
-    toggleM = (msg) => {
-        //let msg = document.getElementsByClassName("mensagem");
-        console.log("toggleeeeee")
-        console.log(msg)
-        if(msg){
-            if(msg.classList.contains("show")){
-                console.log("show pra hide")
-                msg.classList.replace("show", "hide");
-            }
-            else{
-                console.log("hide pra show")
-                msg.classList.replace("hide", "show");
-            }
-        }
-        
-        
-    }
-
     render () {
         return (
             <>
+            <a name="teste"></a> 
             <Titulo titulo="Login"></Titulo>
             <div className='row'> 
-                <div className="login-container " id="box">
-                    <form className="form-signin">
+                <div className="login-container col-6" id="box">
+                    <form className="form-signin col-8">
                         <h1 className="h3 mb-3 font-weight-normal titulo-login">Entre na sua conta</h1>
                         <label htmlFor="inputEmail" className="sr-only">exemplo@email.com</label>
                         <input type="email" id="email" className="form-control" placeholder="exemplo@email.com" value={this.email} onChange={this.changeEmail} required/>
@@ -88,13 +71,14 @@ export default class Login extends Component {
                         {/*
                         <span className="psw"><a href="#">Esqueci minha senha </a></span>
                         */}
-                
-                      
+                        <span className="psw"><a href="#/password" className="esqueci-senha">Esqueci minha senha </a></span>
+                        <br></br>
+                        <br></br>
+                        <button className="btn btn-primary" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button><br></br>
+                        <a href='#/register'>
+                            <button className="btn btn-primary" type="submit" id="Cadastrar">Cadastre-se aqui.</button>
+                        </a>
                     </form>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button><br></br>
-                    <a href='#/register'>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit" id="Cadastrar">Cadastre-se aqui.</button>
-                    </a>
                 </div>
             </div>
             </> 

@@ -111,6 +111,7 @@ export default class Checkout extends Component {
         this.setState({telefone: event.target.value})
     }
 
+
     changeNumEndereco = (event) => {
         this.setState({numero: event.target.value})
     }
