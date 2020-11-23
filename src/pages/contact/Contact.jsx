@@ -4,9 +4,9 @@ import Titulo from '../../template/titulo/titulo';
 import axios from "axios";
 import { browserHistory } from 'react-router';
 
-//const URL_CONTATOS_GET = 'http://modelagem.test/api/contato/listarContatos/'
+const URL_CONTATOS_GET = 'http://modelagem.test/api/contato/listarContatos/'
 
-//const URL_CLIENTE_GET = 'http://modelagem.test/api/clientes/buscarNome/';
+const URL_CLIENTE_GET = 'http://modelagem.test/api/clientes/buscarNome/';
 
 const URL_MENSAGEM_POST = 'http://modelagem.test/api/clientes/enviarMensagem';
 
@@ -57,7 +57,6 @@ export default class Contact extends Component {
     }
 
     postEmail = () => {
-     
         axios.post(URL_MENSAGEM_POST, { 
             name: this.state.nome,
             email: "green.hub.suplementos@gmail.com",
@@ -65,62 +64,77 @@ export default class Contact extends Component {
             assunto: this.state.assunto,
         })
         .then(resp => {
-            console.log(resp)
-            //localStorage.setItem('msg', "Testes");
             browserHistory.push('#/home');
             document.location.reload(true); 
         })
-        alert("Mensagem enviada com sucesso");
+        alert("Sua mensagem foi enviada com sucesso");
     }
 
-    //getContatos = () => {
-    //    let self = this
-    //    let cliente = localStorage.getItem('Cliente');
-    //    cliente = JSON.parse(cliente);
+    componentDidMount(){
+        let cliente = localStorage.getItem('Cliente');
+        cliente = JSON.parse(cliente);
 
-    //    if(cliente == null || cliente == undefined){
-    //        browserHistory.push('#/login');
-    //        document.location.reload(true); 
-    //    }
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        }
 
-    //    axios.get(`${URL_CONTATOS_GET}`+cliente.id)
-    //    .then(resp => {
-    //        this.setState({contatosCliente: resp.data});
-    //        let listEmail = [];
-    //        let listTel = [];
-    //        resp.data.forEach(contato => {
-    //            if(contato.tipo == 'email'){
-    //                listEmail.push(contato);
-    //            }
-    //            else if(contato.tipo == 'telefone'){
-    //                listTel.push(contato);
-    //            }
-    //        });
-    //        this.setState({listEmail: listEmail, listTel: listTel});
-    //    });
-    //}
+        this.getContatos();
 
-    //listarEmail(){
-    //    let div = [];
-    //    if(this.state.listEmail){            
-    //        this.state.listEmail.forEach((email, index) => {
-    //            div.push(<option value={email.ds_contato}>{email.ds_contato}</option>)
-    //        });
-    //    }
-    //    return div;
-    //}
+    }
 
+    getContatos = () => {
+        let self = this
+        let cliente = localStorage.getItem('Cliente');
+        cliente = JSON.parse(cliente);
 
-    //listarTel(){
-    //    let div = [];
-    //    if(this.state.listTel){            
-    //        this.state.listTel.forEach((tel, index) => {
-    //            div.push(<option value={tel.ds_contato}>{tel.ds_contato}</option>)
-    //        });
-    //    }
-    //    return div;
-    //}
-    
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        }
+
+        axios.get(`${URL_CONTATOS_GET}`+cliente.id)
+        .then(resp => {
+            this.setState({contatosCliente: resp.data});
+            let listEmail = [];
+            let listTel = [];
+            resp.data.forEach(contato => {
+                if(contato.tipo == 'email'){
+                    listEmail.push(contato);
+                }
+                else if(contato.tipo == 'telefone'){
+                    listTel.push(contato);
+                }
+            });
+            this.setState({listEmail: listEmail, listTel: listTel});
+        });
+    }
+
+    listarEmail(){
+        let div = [];
+        if(this.state.listEmail){            
+            this.state.listEmail.forEach((email, index) => {
+                div.push(<option value={email.ds_contato}>{email.ds_contato}</option>)
+            });
+        }
+        return div;
+    }
+
+    listarTel(){
+        let div = [];
+        if(this.state.listTel){            
+            this.state.listTel.forEach((tel, index) => {
+                //if(index == 0){
+                    //div.push(<option selected></option>)
+                //}
+                //else {
+                    div.push(<option value={tel.ds_contato}>{tel.ds_contato}</option>)
+                //}
+            });
+        }
+        return div;
+    }
+
     render() {
         return (
             <>
@@ -151,8 +165,12 @@ export default class Contact extends Component {
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Email*</label>
-                                                <input class="form-control" id="email" onChange={this.changeEmail} required>
-                                                </input>
+                                                <select class="form-control" id="email" onChange={this.changeEmail} required>
+                                                    <option selected></option>
+                                                    {this.listarEmail()}
+                                                </select>
+                                                {/*<input class="form-control" id="email" onChange={this.changeEmail} required>
+                                                </input>*/}
                                             </div>
                                         </div>
                                     </div>
@@ -166,19 +184,15 @@ export default class Contact extends Component {
                                         {/*textos*/}
                                         <div class="col-12 col-md-12">
                                             <div class= "form-group">
-                                                <label>Telefone</label>
-                                                <input class="form-control" id="email" onChange={this.changeTel} required>
-                                                </input>
+                                                <label>Telefone</label>                                          
+                                                <select class="form-control" id="telefone" onChange={this.changeTel} required>
+                                                    <option selected></option>
+                                                    {this.listarTel()}
+                                                </select>
+                                                {/*<input class="form-control" id="telefone" onChange={this.changeTel} required>
+                                                </input>*/}
                                             </div>
                                         </div>
-                                        {/*
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Celular</label>
-                                                <input type="text" class="form-control celContact" placeholder="DDD + Telefone"></input>
-                                            </div>
-                                        </div>
-                                        */}
                                         <div class="col-12 col-md-12">
                                             <label for="state">Estado*</label>
                                             <select class="form-control" id="state" onChange={this.changeUF}required>    
@@ -210,12 +224,6 @@ export default class Contact extends Component {
                                                 <option value="TO">TO</option>
                                                 <option value="DF">DF</option>
                                             </select>
-                                            {/*
-                                            <div class="form-group">
-                                                <label>Estado*</label>
-                                                <input type="text" class="form-control estadoContact" required></input>
-                                            </div>
-                                            */}
                                         </div>
                                         <div class="col-12 col-md-12">
                                             <div class="form-group">
