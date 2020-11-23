@@ -59,7 +59,7 @@ export default class Contact extends Component {
     postEmail = () => {
      
         axios.post(URL_MENSAGEM_POST, { 
-            name: this.state.mensagem.nome,
+            name: this.state.nome,
             email: "green.hub.suplementos@gmail.com",
             msg: this.state.mensagem,
             assunto: this.state.assunto,
