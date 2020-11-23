@@ -4,9 +4,9 @@ import Titulo from '../../template/titulo/titulo';
 import axios from "axios";
 import { browserHistory } from 'react-router';
 
-const URL_CONTATOS_GET = 'http://modelagem.test/api/contato/listarContatos/'
+//const URL_CONTATOS_GET = 'http://modelagem.test/api/contato/listarContatos/'
 
-const URL_CLIENTE_GET = 'http://modelagem.test/api/clientes/buscarNome/';
+//const URL_CLIENTE_GET = 'http://modelagem.test/api/clientes/buscarNome/';
 
 const URL_MENSAGEM_POST = 'http://modelagem.test/api/clientes/enviarMensagem';
 
@@ -56,31 +56,21 @@ export default class Contact extends Component {
         console.log(this.state.mensagem)
     }
 
-    componentDidMount(){
-        let cliente = localStorage.getItem('Cliente');
-        cliente = JSON.parse(cliente);
-
-        if(cliente == null || cliente == undefined){
-            browserHistory.push('#/login');
-            document.location.reload(true); 
-        }
-            this.postEmail();
-    }
-
-    postEmail(){
+    postEmail = () => {
      
         axios.post(URL_MENSAGEM_POST, { 
-            name: "teste",
+            name: this.state.mensagem.nome,
             email: "green.hub.suplementos@gmail.com",
             msg: this.state.mensagem,
             assunto: this.state.assunto,
         })
         .then(resp => {
             console.log(resp)
-            localStorage.setItem('msg', "Testes");
+            //localStorage.setItem('msg', "Testes");
             browserHistory.push('#/home');
             document.location.reload(true); 
         })
+        alert("Mensagem enviada com sucesso");
     }
 
     //getContatos = () => {
