@@ -54,7 +54,7 @@ export default class Password extends Component {
                 
             })
             .catch(err => {
-                console.log(err.response)
+                console.log(err)
                 localStorage.setItem('msg', "Ocorreu um erro interno. Tente novamente mais tarde.");
                 //document.location.reload(true); 
             })
@@ -78,8 +78,8 @@ export default class Password extends Component {
         .then(resp => {
             console.log(resp)
             localStorage.setItem('msg', "Senha alterada com sucesso.");
-            browserHistory.push('#/login');
-            document.location.reload(true); 
+            //browserHistory.push('#/login');
+            //document.location.reload(true); 
         })
     }
 
