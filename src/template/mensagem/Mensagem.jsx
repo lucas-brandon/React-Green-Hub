@@ -68,9 +68,12 @@ export default class Mensagem extends Component {
         else {
             div = (
                 <div className="mensagem hide" id={this.props.id}>
+                    {/*
                     <span>{this.props.msg+"   "}</span>
                     <button className="btn-msg" onClick={this.click}>Ok</button>
+                    */}
                 </div>
+                
             )
         }
 

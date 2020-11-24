@@ -41,18 +41,25 @@ export default class Login extends Component {
                 }
                 else {
                     localStorage.setItem('msg', "Login não realizado. Usuário ou senha incorreta!");
-                    //browserHistory.push('#/login');
-                    //document.location.reload(true); 
+                    
                 }
                 
             })
             .catch(err => {
                 console.log(err.response)
                 localStorage.setItem('msg', "Login não realizado. Usuário ou senha incorreta!");
-                document.location.reload(true); 
+                //document.location.reload(true); 
             })
             //window.location.href = '#/home';
             
+    }
+
+    goPassword = () => {
+        
+        //localStorage.setItem('msg', "teste");
+        //browserHistory.push('#/password');
+        //document.location.reload(true); 
+
     }
 
     render () {
@@ -65,13 +72,13 @@ export default class Login extends Component {
                     <form className="form-signin col-8">
                         <h1 className="h3 mb-3 font-weight-normal titulo-login">Entre na sua conta</h1>
                         <label htmlFor="inputEmail" className="sr-only">exemplo@email.com</label>
-                        <input type="email" id="email" className="form-control" placeholder="exemplo@email.com" value={this.email} onChange={this.changeEmail} required/>
+                        <input type="email" id="email" className="form-control" placeholder="exemplo@email.com" value={this.email} onChange={this.changeEmail} />
                         <label htmlFor="inputPassword" className="sr-only">Senha</label>
-                        <input type="password" id="senha" className="form-control" placeholder="Senha" value={this.senha} onChange={this.changeSenha} required/>
+                        <input type="password" id="senha" className="form-control" placeholder="Senha" value={this.senha} onChange={this.changeSenha} />
                         {/*
                         <span className="psw"><a href="#">Esqueci minha senha </a></span>
                         */}
-                        <span className="psw"><a href="#/password" className="esqueci-senha">Esqueci minha senha </a></span>
+                        <a href='#/password' className="esqueci-senha" onClick={this.goPassword}>Esqueci minha senha </a>
                         <br></br>
                         <br></br>
                         <button className="btn btn-primary" type="submit" id="Entrar" onClick={this.setCliente}>Entrar</button><br></br>

@@ -40,6 +40,7 @@ export default class Password extends Component {
     }
 
     verificarSenha = () => {
+        
             axios.get(`${URL_VERIFICAR}` + this.state.cpf + '/' + this.state.email)
             .then(resp => {
                 console.log(resp.data)
@@ -55,37 +56,48 @@ export default class Password extends Component {
             })
             .catch(err => {
                 console.log(err)
-                localStorage.setItem('msg', "Ocorreu um erro interno. Tente novamente mais tarde.");
-                //document.location.reload(true); 
+                localStorage.setItem('msg', "Ocorreu um erro interno. Tente novamente mais tarde."); 
             })
-            //window.location.href = '#/home';
             
     }
     clearStateMsg = () => {
         this.setState({msg: ""})
     }
     goBack = () => {
-        //browserHistory.goBack()
+        browserHistory.goBack()
         browserHistory.push('#/login/#header');
         document.location.reload(true); 
       }
 
 
     updateCliente = () => {
+        
+        console.log("aquiii update cliente")
+        //localStorage.setItem('msg', "teste update cliente."); 
+
+        localStorage.setItem('msg', "Aguarde um momento.");
+        
         axios.put(`${URL_UPDATE_CLIENTE}` + this.state.cliente_id, {
             senha: this.state.senha,
         })
         .then(resp => {
             console.log(resp)
             localStorage.setItem('msg', "Senha alterada com sucesso.");
-            //browserHistory.push('#/login');
-            //document.location.reload(true); 
-        })
+            this.setState({msg: "Senha alterada com sucesso."});
+            browserHistory.push('#/login');
+            document.location.reload(true); 
+        });
+
+        this.setState({msg: "Aguarde um momento."});
+        
     }
 
     render () {
         const {mascaraCPF} = this.state;
         let div;
+
+        console.log("verificado: ");
+        console.log(this.state.verificado);
 
         if(this.state.verificado){
             div = (
@@ -137,9 +149,9 @@ export default class Password extends Component {
                         <br></br>
                         <div className="col-12" style={{paddingLeft: "0px", paddingRight: "0px"}}>
                             <div className="row" style={{justifyContent: "space-between"}}>
-                                <button className="btn btn-primary col-4" id="voltar" onClick={this.goBack}>Voltar</button>
+                                <span className="btn btn-primary col-4" id="voltar" onClick={this.goBack}>Voltar</span>
                                 
-                                <button className="btn btn-primary col-4" id="verificar" onClick={this.verificarSenha}>Verificar</button>
+                                <span className="btn btn-primary col-4" id="verificar" onClick={this.verificarSenha}>Verificar</span>
                                 
 
                             </div>
