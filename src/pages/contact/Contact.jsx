@@ -96,7 +96,7 @@ export default class Contact extends Component {
 
             let listNome;
                 if(cliente.nome == cliente.nome){
-                    listNome = cliente.nome;
+                    listNome = cliente.nome + " " + cliente.sobrenome;
                 }
             this.setState({listNome: listNome});
     }
@@ -150,12 +150,7 @@ export default class Contact extends Component {
         let div = [];
         if(this.state.listTel){            
             this.state.listTel.forEach((tel, index) => {
-                //if(index == 0){
-                    //div.push(<option selected></option>)
-                //}
-                //else {
-                    div.push(<option value={tel.ds_contato}>{tel.ds_contato}</option>)
-                //}
+                div.push(<option value={tel.ds_contato}>{tel.ds_contato}</option>)
             });
         }
         return div;

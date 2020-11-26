@@ -5,6 +5,7 @@ import Titulo from '../../template/titulo/titulo';
 import {cepMask, numMask, codMask} from '../mask';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+import { showAlert, hideAlert } from './checkout.js';
 
 const URL_CLIENTE_GET = 'http://modelagem.test/api/clientes/buscarNome/';
 
@@ -356,22 +357,48 @@ export default class Checkout extends Component {
         if ((pagamento == 'Boleto') || (pagamento == 'boleto')){
         self.postPedido();
         }  else if ((pagamento == 'Cartao') || (pagamento == 'cartao')){
+            self.confereNrCartao();
+        }
+    }
+
+    confereNrCartao = () => {
+        let self = this;
+        let numero = this.state.nr_cartao;
+        let alertaNrCartao = document.getElementById("alerta-nr-cartao");
+        if (numero.length < 18){
+            showAlert(alertaNrCartao);
+        } else {
+            hideAlert(alertaNrCartao);
+            self.confereCdSeguranca();
+        }
+    }
+
+    confereCdSeguranca = () => {
+        let self = this;
+        let codigo = this.state.cd_seguranca;
+        let alertaCd = document.getElementById("alerta-cd-cartao");
+        if (codigo.length < 3){
+            showAlert(alertaCd);
+        } else {
+            hideAlert(alertaCd)
             self.confereData();
         }
     }
 
     confereData = () => {
-        let self = this
+        let self = this;
         let dataAtual = new Date;
         let anoAtual = dataAtual.getFullYear();
         let mesAtual = dataAtual.getMonth();
         mesAtual = mesAtual + 1;
         let ano = this.state.ano_validade;
         let mes = this.state.mes_validade;
+        let alertaDtCartao = document.getElementById("alerta-dt-cartao");
         if (ano <= anoAtual && mes < mesAtual){
-            alert("Data de expiração inválida");
+            showAlert(alertaDtCartao);
         }  else{
-            self.postCartao()
+            hideAlert(alertaDtCartao);
+            self.postCartao();
         }
     }
 
@@ -719,8 +746,7 @@ export default class Checkout extends Component {
                                         onClick={this.changeTipoPagamento}
                                         ></input>
                                         <img class="img-custom dd"src="images/boletos.png" alt="boleto  bancário"></img>
-                                    </div>
-                                                        
+                                    </div>                                                        
                                     <div class="input-group-prepend itemRadio">
                                         <input type="radio" 
                                         aria-label="opção de cartão master card" 
@@ -764,9 +790,12 @@ export default class Checkout extends Component {
                                                 onChange={this.changeNrCartao} 
                                                 className="form-control nmrCartao" 
                                                 minLength="18" maxLength="19"></input>
+                                                 <div class="alert alert-danger alerta" role="alert" id="alerta-nr-cartao">
+                                                    Por favor, digite um número válido.
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>                   
+                                    </div>                  
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-3 col-sm-12">
@@ -775,6 +804,9 @@ export default class Checkout extends Component {
                                                 value={mascaraCodigo}
                                                 maxLength="3" minLength="3"
                                                 onChange={this.changeCdCartao} ></input>
+                                                <div class="alert alert-danger alerta" role="alert" id="alerta-cd-cartao">
+                                                    Por favor, digite um código de segurança válido.
+                                                </div>
                                             </div>                                  
                                             <div class="col-md-4 col-sm-12">
                                                 <label for="expiryDate">Data de expiração</label>
@@ -795,10 +827,11 @@ export default class Checkout extends Component {
                                                             <option value="12">Dez</option>
                                                         </select>
                                                     </div>
-                                                        {/*<input type="number" onChange={this.changeMes} min="1" max="12" class="form-control expiryDate" placeholder="MM"></input>
-                                                    </div>*/}
                                                     <div class="col-md-7">
                                                         <input type="number" onChange={this.changeAno} class="form-control expiryDate" min="2020" max="2099" placeholder="AAAA" required></input> 
+                                                    </div>
+                                                    <div class="alert alert-danger alerta" role="alert" id="alerta-dt-cartao">
+                                                    Por favor, digite uma data válida.
                                                     </div>
                                                 </div>
                                             </div>
