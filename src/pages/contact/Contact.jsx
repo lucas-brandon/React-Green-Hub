@@ -80,8 +80,27 @@ export default class Contact extends Component {
         }
 
         this.getContatos();
-
     }
+
+    getCliente = () => {
+        let self = this
+        let cliente = localStorage.getItem('Cliente');
+        cliente = JSON.parse(cliente);
+
+        if(cliente == null || cliente == undefined){
+            browserHistory.push('#/login');
+            document.location.reload(true);
+        }
+
+        axios.get(`${URL_CLIENTE_GET}`+cliente.nome)
+
+            let listNome;
+                if(cliente.nome == cliente.nome){
+                    listNome = cliente.nome;
+                }
+            this.setState({listNome: listNome});
+    }
+
 
     getContatos = () => {
         let self = this
@@ -108,6 +127,13 @@ export default class Contact extends Component {
             });
             this.setState({listEmail: listEmail, listTel: listTel});
         });
+        this.getCliente();
+    }
+
+    listarCliente(){
+        let div = [];
+            div.push(<option>{this.state.listNome}</option>)
+        return div;
     }
 
     listarEmail(){
@@ -159,7 +185,11 @@ export default class Contact extends Component {
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Nome*</label>
-                                                <input type="text" class="form-control nomeContact" onChange={this.changeNome}required></input>
+                                                <select className="form-control" id="nome" onChange={this.changeNome} required>
+                                                    <option selected></option>
+                                                    {this.listarCliente()}
+                                                </select>
+                                                {/*<input type="text" class="form-control nomeContact" onChange={this.changeNome}required></input>*/}
                                             </div>
                                         </div>
                                         <div class="col-12">
