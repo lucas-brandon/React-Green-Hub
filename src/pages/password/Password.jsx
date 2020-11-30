@@ -58,6 +58,11 @@ export default class Password extends Component {
                 console.log(err)
                 localStorage.setItem('msg', "Ocorreu um erro interno. Tente novamente mais tarde."); 
             })
+            .then(resp => {
+                //this.setState({msg: ""}) 
+                
+                
+            })
             
     }
     clearStateMsg = () => {
@@ -73,7 +78,8 @@ export default class Password extends Component {
     updateCliente = () => {
         
         console.log("aquiii update cliente")
-        //localStorage.setItem('msg', "teste update cliente."); 
+        //localStorage.setItem('msg', "teste update cliente.");
+        this.setState({msg: "Aguarde um momento."}); 
 
         localStorage.setItem('msg', "Aguarde um momento.");
         
@@ -88,7 +94,7 @@ export default class Password extends Component {
             document.location.reload(true); 
         });
 
-        this.setState({msg: "Aguarde um momento."});
+        //this.setState({msg: "Aguarde um momento."});
         
     }
 
@@ -115,8 +121,8 @@ export default class Password extends Component {
 
         let msgLogin ;
         console.log("estado msg: "+this.state.msg)
-        if(this.state.msg != undefined){
-            msgLogin = (<Msg msg={this.state.msg} id="msgPassword" clear={this.clearStateMsg}></Msg>)
+        if(this.state.msg != undefined && this.state.msg != ""){
+            msgLogin = (<Msg msg={this.state.msg} id="msgPassword"></Msg>)
         }
         else {
             msgLogin = (<Msg msg="" id="msgPassword" clear={this.clearStateMsg}></Msg>)
