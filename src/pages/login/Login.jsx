@@ -46,7 +46,7 @@ export default class Login extends Component {
                 
             })
             .catch(err => {
-                console.log(err.response)
+                console.log(err)
                 localStorage.setItem('msg', "Login não realizado. Usuário ou senha incorreta!");
                 //document.location.reload(true); 
             })
